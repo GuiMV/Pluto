@@ -1,0 +1,7 @@
+CREATE TABLE "USUARIO"
+(
+    "ID" bigint NOT NULL,
+    "USER" text  NOT NULL,
+    "PASSWORD" text NOT NULL,
+    CONSTRAINT "USUARIO_PK" PRIMARY KEY ("ID")
+)
