@@ -1,6 +1,0 @@
-com\vieira\pluto\exception\CustomExceptionHandler.class
-com\vieira\pluto\filter\PersistenceFilter.class
-com\vieira\pluto\exception\CustomExceptionHandlerFactory.class
-com\vieira\pluto\persistence\PersistenceUtil.class
-com\vieira\pluto\util\PersistenceUtil.class
-com\vieira\pluto\persistence\GenericDao.class
