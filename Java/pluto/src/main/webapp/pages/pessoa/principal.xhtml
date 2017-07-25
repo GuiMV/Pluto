@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui">
+    <div class="row">
+        <div class="col-xs-12 col-md-2  go-top">
+            <h:inputText required="true" 
+                         id="cpfCnpj"
+                         class="col-xs-12" 
+                         converter="converter.CpfConverter"
+                         value="#{mbPessoa.pessoa.cpfCnpj}"/>
+            <label>CPF</label>
+        </div>
+        <div class="col-xs-12 col-md-4  go-top">
+            <h:inputText required="true" 
+                         class="col-xs-12"
+                         onblur="if ($('#apelido').val() == '') {
+                                     $('#apelido').val(this.value);
+                                 }"
+                         value="#{mbPessoa.pessoa.razaoSocial}"/>
+            <label>Nome</label>
+        </div>
+        <div class="col-xs-12 col-md-4 go-top">
+            <h:inputText required="true" 
+                         id="apelido"
+                         class="col-xs-12"
+                         value="#{mbPessoa.pessoa.nomeFantasia}"/>
+            <label>Apelido</label>
+        </div>
+        <div class="col-xs-12 col-md-2 go-top">
+            <h:inputText class="col-xs-12"
+                         value="#{mbPessoa.pessoa.rgIe}"/>
+            <label>RG</label>
+        </div>
+        <div class="col-xs-12 col-md-2 go-top">
+            <h:inputText required="true" 
+                         id="dataNascimento"
+                         class="col-xs-12"
+                         value="#{mbPessoa.pessoa.dataNascimento}">
+                <f:convertDateTime pattern="dd/MM/yyyy" />
+            </h:inputText>
+            <label>Data de Nascimento</label>
+            <script>
+                $(document).ready(function () {
+                    criarCalendario($('#dataNascimento'));
+                });
+            </script>  
+        </div>
+        <div class="col-xs-12 col-md-2 go-top">
+            <h:selectOneMenu required="true" 
+                             class="col-xs-12"
+                             converter="omnifaces.SelectItemsConverter"
+                             value="#{mbPessoa.pessoa.sexo}">
+                <f:selectItems value="#{mbPessoa.sexos}"
+                               var="sexo"
+                               itemValue="#{sexo}"
+                               itemLabel="#{sexo.nome}"/>
+            </h:selectOneMenu>
+            <label>Sexo</label>
+        </div>
+        <div class="col-xs-12 col-md-2 go-top">
+            <h:selectOneMenu class="col-xs-12"
+                             converter="omnifaces.SelectItemsConverter"
+                             value="#{mbPessoa.pessoa.estadoCivil}">
+                <f:selectItems value="#{mbPessoa.estadosCivis}"
+                               var="estadoCivil"
+                               itemValue="#{estadoCivil}"
+                               itemLabel="#{estadoCivil.nome}"/>
+            </h:selectOneMenu>
+            <label>Estado Civil</label>
+        </div>
+    </div>
+</ui:composition>

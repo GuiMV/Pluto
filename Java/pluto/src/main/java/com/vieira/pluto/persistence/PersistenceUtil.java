@@ -6,7 +6,7 @@ import javax.persistence.Persistence;
 
 public final class PersistenceUtil {
     
-    private static final String UNIT_NAME = "ies-saiPU";
+    private static final String UNIT_NAME = "plutoPU";
     public static final ThreadLocal<EntityManager> SESSION = new ThreadLocal<>();  
     protected static EntityManagerFactory emf;
     protected static PersistenceUtil instance; 

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui">
+    <f:validateBean disabled="true">
+    <h:panelGroup layout="block" id="endereco"> 
+        <div class="row">
+            <div class="col-xs-8 col-md-2 col-lg-2 go-top">
+                <h:inputText class="col-xs-12" id="cep" value="#{mbPessoa.endereco.cep}" converter="converter.CepConverter"/>
+                <label>CEP</label>
+            </div>
+            <div class="col-xs-4 col-md-2 col-lg-2">
+                <h:commandButton value="Buscar"
+                                 actionListener="#{mbPessoa.buscarCep()}"
+                                 class="btn btn-primary"
+                                 style="margin-top: 8px;">
+                    <f:ajax execute="endereco" render="endereco messages"/>
+                </h:commandButton>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-2 col-lg-2 go-top">
+                <h:selectOneMenu class="col-xs-12" 
+                                 id="uf"
+                                 value="#{mbPessoa.idUf}">
+                    <f:selectItems value="#{mbPessoa.ufs}"
+                                   var="uf"
+                                   itemLabel="#{uf.abreviacao}"
+                                   itemValue="#{uf.id}"/>
+                    <f:ajax execute="uf" render="municipio" listener="#{mbPessoa.alterarMunicipios()}"/>
+                </h:selectOneMenu>
+                <label>UF</label>
+            </div>
+            <div class="col-xs-12 col-md-2 col-lg-5 go-top">
+                <h:selectOneMenu class="col-xs-12" 
+                                 id="municipio"
+                                 value="#{mbPessoa.endereco.municipio}"
+                                 converter="omnifaces.SelectItemsConverter">
+                    <f:selectItems value="#{mbPessoa.municipios}"
+                                   var="municipio"
+                                   itemLabel="#{municipio.nome}"
+                                   itemValue="#{municipio}"/>
+                </h:selectOneMenu>
+                <label>Municipio</label>
+            </div>
+            <div class="col-xs-12 col-md-2 col-lg-5 go-top">
+                <h:inputText class="col-xs-12" value="#{mbPessoa.endereco.bairro}"/>
+                <label>Bairro</label>
+            </div>
+            <div class="col-xs-12 col-md-2 col-lg-7 go-top">
+                <h:inputText class="col-xs-12" value="#{mbPessoa.endereco.logradouro}"/>
+                <label>Logradouro</label>
+            </div>
+            <div class="col-xs-12 col-md-2 go-top">
+                <h:inputText class="col-xs-12" value="#{mbPessoa.endereco.numero}"/>
+                <label>Numero</label>
+            </div>
+            <div class="col-xs-12 col-md-3 go-top">
+                <h:inputText class="col-xs-12" value="#{mbPessoa.endereco.complemento}"/>
+                <label>Complemento</label>
+            </div>
+            <div class="col-xs-12 col-md-2 col-lg-7 go-top">
+                <h:inputText class="col-xs-12" value="#{mbPessoa.endereco.referencia}"/>
+                <label>Referência</label>
+            </div>
+            <div class="col-xs-12 col-md-2 col-lg-2 go-top">
+                <h:selectOneMenu class="col-xs-12"
+                                 value="#{mbPessoa.enderecoPrincipal}">
+                    <f:selectItems value="#{mbPessoa.simNao}"
+                                   var="simNao"
+                                   itemValue="#{simNao.value}"
+                                   itemLabel="#{simNao.label}"/>
+                </h:selectOneMenu>
+                <label>Principal</label>
+            </div>
+            <div class="col-xs-12 col-md-2 col-lg-3 go-top">
+                <h:selectOneMenu class="col-xs-12"
+                                 converter="omnifaces.SelectItemsConverter"
+                                 value="#{mbPessoa.endereco.tipoEndereco}">
+                    <f:selectItems value="#{mbPessoa.tiposEndereco}"
+                                   var="tipoEndereco"
+                                   itemValue="#{tipoEndereco}"
+                                   itemLabel="#{tipoEndereco.nome}"/>
+                </h:selectOneMenu>
+                <label>Tipo de Endereço</label>
+            </div>
+        </div>
+    </h:panelGroup>
+    <div class="row">
+        <div class="col-xs-12" style="text-align: center;">
+            <h:commandButton value="Salvar"
+                             action="#{mbPessoa.salvarEndereco()}"
+                             class="btn btn-primary"
+                             style="margin-bottom: 10px;">
+                <f:ajax execute="endereco" render="endereco enderecos messages"/>
+            </h:commandButton>
+        </div>
+    </div>
+    <p:dataTable value="#{mbPessoa.enderecos}" 
+                 id="enderecos"
+                 paginator="true"
+                 scrollable="false"
+                 paginatorAlwaysVisible="true"
+                 paginatorPosition="bottom"
+                 rows="10"
+                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                 rowsPerPageTemplate="10,25,50,100"
+                 emptyMessage="Nenhum registro encontrado"
+                 var="endereco">
+        <f:facet name="header">
+            Endereços
+        </f:facet>
+        <p:column headerText="CEP">
+            <h:outputText value="#{endereco.cep}" converter="converter.CepConverter"/>   
+
+        </p:column>
+        <p:column headerText="Logradouro">
+            #{endereco.logradouro}
+        </p:column>
+        <p:column headerText="Numero">
+            #{endereco.numero}
+        </p:column>
+        <p:column headerText="Referência">
+            #{endereco.referencia}
+        </p:column>
+        <p:column headerText="Principal">
+            #{mbPessoa.isEnderecoPrincipal(endereco) ? "Sim" : "Não"}
+        </p:column>
+        <p:column headerText="Ações">
+            <h:commandLink action="#{mbPessoa.editarEndereco(endereco)}">
+                <f:ajax execute="@this" render="endereco messages"/>
+                <i class="fa fa-pencil-square-o"></i>
+            </h:commandLink>  
+            <h:commandLink action="#{mbPessoa.excluirEndereco(endereco)}">
+                <f:ajax execute="@this" render="enderecos messages"/>
+                <i class="fa fa-times-circle-o"></i>
+            </h:commandLink>  
+        </p:column>
+    </p:dataTable>
+        </f:validateBean>
+</ui:composition>

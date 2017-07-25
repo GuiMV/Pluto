@@ -1,6 +1,6 @@
 package com.vieira.pluto.filter;
 
-import com.vieira.pluto.util.PersistenceUtil;
+import com.vieira.pluto.persistence.PersistenceUtil;
 import java.io.IOException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;

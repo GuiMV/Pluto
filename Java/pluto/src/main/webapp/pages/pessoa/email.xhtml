@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui">
+    <f:validateBean disabled="true">
+        <h:panelGroup layout="block" id="email"> 
+            <div class="row">
+                <div class="col-xs-12 col-md-2  go-top">
+                    <h:inputText class="col-xs-12"
+                                 value="#{mbPessoa.email.endereco}"/>
+                    <label>Email</label>
+                </div>
+                <div class="col-xs-12 col-md-2  go-top">
+                    <h:selectOneMenu class="col-xs-12"
+                                     value="#{mbPessoa.emailPrincipal}">
+                        <f:selectItems value="#{mbPessoa.simNao}"
+                                       var="simNao"
+                                       itemValue="#{simNao.value}"
+                                       itemLabel="#{simNao.label}"/>
+                    </h:selectOneMenu>
+                    <label>Principal</label>
+                </div>
+            </div>
+        </h:panelGroup>
+        <div class="row">
+            <div class="col-xs-12" style="text-align: center;">
+                <h:commandButton value="Salvar"
+                                 action="#{mbPessoa.salvarEmail()}"
+                                 class="btn btn-primary"
+                                 style="margin-bottom: 10px;">
+                    <f:ajax execute="email" render="email emails messages"/>
+                </h:commandButton>
+            </div>
+        </div>
+        <p:dataTable value="#{mbPessoa.emails}" 
+                     id="emails"
+                     paginator="true"
+                     scrollable="false"
+                     paginatorAlwaysVisible="true"
+                     paginatorPosition="bottom"
+                     rows="10"
+                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     rowsPerPageTemplate="10,25,50,100"
+                     emptyMessage="Nenhum registro encontrado"
+                     var="email">
+            <f:facet name="header">
+                Emails
+            </f:facet>
+            <p:column headerText="Email">
+                #{email.endereco}
+            </p:column>
+            <p:column headerText="Principal">
+                #{mbPessoa.isEmailPrincipal(email) ? "Sim" : "Não"}
+            </p:column>>
+            <p:column headerText="Ações">
+                <h:commandLink action="#{mbPessoa.editarEmail(email)}">
+                    <f:ajax execute="@this" render="email messages"/>
+                    <i class="fa fa-pencil-square-o"></i>
+                </h:commandLink>  
+                <h:commandLink action="#{mbPessoa.excluirEmail(email)}">
+                    <f:ajax execute="@this" render="emails messages"/>
+                    <i class="fa fa-times-circle-o"></i>
+                </h:commandLink>  
+            </p:column>
+        </p:dataTable>
+    </f:validateBean>
+</ui:composition>

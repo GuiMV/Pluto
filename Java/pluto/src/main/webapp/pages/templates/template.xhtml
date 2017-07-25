@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-    
+
     <h:head>
 
         <meta charset="utf-8"/>
@@ -15,117 +15,67 @@
         <title>Pluto</title>
 
         <!-- Bootstrap Core CSS -->
-        <h:outputStylesheet name="css/bootstrap.min.css"/>
-
-        <!-- Custom CSS -->
-        <h:outputStylesheet name="css/template.css"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <h:outputStylesheet name="css/noty.css"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
 
         <!-- Custom Fonts -->
         <link href="#{facesContext.externalContext.requestContextPath}/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 
+        <!-- Custom CSS -->
+        <h:outputStylesheet name="css/template.css"/>
+
     </h:head>
 
-    <body>
+    <h:body>
 
         <div class="wrapper">
 
             <!-- Navigation -->
             <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
+                <div>
                     <a href="#menu-toggle" class="navbar-brand"  id="menu-toggle" onclick="event.preventDefault();$('.wrapper').toggleClass('toggled');">
                         <i class="fa fa-bars" aria-hidden="true"></i>
                     </a>
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="index.html">Pluto</a>
+                    <a class="navbar-brand" href="/pluto/pages/templates/template.xhtml">Pluto</a>
                 </div>
+
+                <h:form>
+                    <ul class="nav navbar-right top-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding: 15px;"><i class="fa fa-user"></i> Guilherme <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <h:commandLink action="#{mbLogin.logout()}"><i class="fa fa-fw fa-power-off"></i> Log Out</h:commandLink>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </h:form>
                 <!-- Top Menu Items -->
-                <ul class="nav navbar-right top-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Guilherme <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
                 <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
                 <div id="sidebar-wrapper">
                     <ul class="nav navbar-nav side-nav">
                         <li class="active">
-                            <a href="index.html"><i class="fa fa-fw fa-home"></i> Home</a>
+                            <a href="/pluto/pages/templates/template.xhtml"><i class="fa fa-fw fa-home"></i> Home</a>
                         </li>
                         <li>
-                            <a href="javascript:;"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
-                        </li>
-                        <li>
-                            <a href="javascript:;"><i class="fa fa-fw fa-table"></i> Tables</a>
-                        </li>
-                        <li>
-                            <a href="javascript:;"><i class="fa fa-fw fa-edit"></i> Forms</a>
-                        </li>
-                        <li>
-                            <a href="javascript:;"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
-                        </li>
-                        <li>
-                            <a href="javascript:;"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
-                        </li>
-                        <li>
-                            <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
-                            <ul id="demo" class="collapse">
+                            <a href="javascript:;" data-toggle="collapse" data-target="#cadastroUsuario"><i class="fa fa-fw fa-edit"></i> Cadastro <i class="fa fa-fw fa-caret-down"></i></a>
+                            <ul id="cadastroUsuario" class="collapse">
                                 <li>
-                                    <a href="#"><i class="fa fa-fw fa-desktop"></i> Dropdown Item</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-fw fa-desktop"></i> Dropdown Item</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;" data-toggle="collapse" data-target="#demo2"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
-                                    <ul id="demo2" class="collapse">
-                                        <li>
-                                            <a href="#"><i class="fa fa-fw fa-desktop"></i> Dropdown Item</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><i class="fa fa-fw fa-desktop"></i> Dropdown Item</a>
-                                        </li>
-                                    </ul>
+                                    <a href="/pluto/pages/usuario/cadastro/cadastroUsuario.xhtml"><i class="fa fa-fw fa-user"></i> Usuário</a>
                                 </li>
                             </ul>
-                        </li>
+                        </li>  
                         <li>
-                            <a href="javascript:;"><i class="fa fa-fw fa-file"></i> Blank Page</a>
-                        </li>
-                        <li>
-                            <a href="javascript:;"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="javascript:;" data-toggle="collapse" data-target="#demo3"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
-                            <ul id="demo3" class="collapse">
+                            <a href="javascript:;" data-toggle="collapse" data-target="#consultaUsuario"><i class="fa fa-fw fa-table"></i> Consulta <i class="fa fa-fw fa-caret-down"></i></a>
+                            <ul id="consultaUsuario" class="collapse">
                                 <li>
-                                    <a href="#"><i class="fa fa-fw fa-desktop"></i> Dropdown Item</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-fw fa-desktop"></i> Dropdown Item</a>
+                                    <a href="/pluto/pages/usuario/consulta/consultaUsuario.xhtml"><i class="fa fa-fw fa-user"></i> Usuário</a>
                                 </li>
                             </ul>
-                        </li>
-                        <li>
-                            <a href="javascript:;" data-toggle="collapse" data-target="#demo4"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
-                            <ul id="demo4" class="collapse">
-                                <li>
-                                    <a href="#"><i class="fa fa-fw fa-desktop"></i> Dropdown Item</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-fw fa-desktop"></i> Dropdown Item</a>
-                                </li>
-                            </ul>
-                        </li>
+                        </li>                       
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -133,7 +83,11 @@
 
             <div class="page-wrapper">
 
-                <ui:insert name="conteudo"/>
+                <h:form id="form" prependId="false">
+                    <ui:insert name="conteudo" >
+                        <h1>Bem Vindo! </h1>
+                    </ui:insert>
+                </h:form>
 
             </div>
             <!-- /#page-wrapper -->
@@ -143,8 +97,74 @@
 
         <!-- jQuery -->
         <h:outputScript name="js/jquery.js"/>
+        <h:outputScript name="js/jquery-ui.js"/>
+        <h:outputScript name="js/jquery.blockUI.js"/>
+        <h:outputScript name="js/noty.min.js"/>
 
         <!-- Bootstrap Core JavaScript -->
         <h:outputScript name="js/bootstrap.min.js"/>
-    </body>
+        <h:outputScript name="js/jquery.bootstrap.wizard.min.js"/>
+        <script>
+            $(document).ready(function () {
+                $('[data-wizard]').bootstrapWizard();
+                criarCalendarios();
+            });
+
+            function criarCalendarios() {
+                $('.date-picker').datepicker({
+                    dateFormat: 'dd/mm/yy',
+                    dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                    dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+                    dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+                    monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                    monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                    nextText: 'Próximo',
+                    prevText: 'Anterior'
+                });
+            }
+
+            function criarCalendario(selector) {
+                selector.datepicker({
+                    dateFormat: 'dd/mm/yy',
+                    dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                    dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+                    dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+                    monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                    monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                    nextText: 'Próximo',
+                    prevText: 'Anterior'
+                });
+            }
+
+            function showMessage(message, type) {
+                Noty.closeAll();
+                new Noty({
+                    type: type,
+                    layout: 'topRight',
+                    text: message,
+                    closeWith: ['click'],
+//                    theme: 'relax',
+                    modal: false
+                }).show();
+            }
+            if (typeof jsf !== 'undefined') {
+                jsf.ajax.addOnEvent(function (data) {
+                    var status = data.status;
+                    switch (status) {
+                        case "begin":
+                            $.blockUI();
+                            break;
+                        case "complete":
+                            $.unblockUI();
+                            break;
+                    }
+                });
+            }
+            $.blockUI.defaults.message = '<h1>Processando</h1>';
+            $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+        </script>
+        <ui:insert name="scripts"/>
+
+        <h:messages id="messages"/>
+    </h:body>
 </html>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui">
+    <f:validateBean disabled="true">
+        <h:panelGroup layout="block" id="telefone"> 
+            <div class="row">
+                <div class="col-xs-12 col-md-2  go-top">
+                    <h:inputText value="#{mbPessoa.telefone.numero}"
+                                 converter="converter.TelefoneConverter"
+                                 class="col-xs-12"/>
+                    <label>Telefone</label>
+                </div>
+                <div class="col-xs-12 col-md-2 col-lg-2 go-top">
+                    <h:selectOneMenu class="col-xs-12"
+                                     converter="omnifaces.SelectItemsConverter"
+                                     value="#{mbPessoa.telefone.tipoTelefone}">
+                        <f:selectItems value="#{mbPessoa.tiposTelefone}"
+                                       var="tipoTelefone"
+                                       itemValue="#{tipoTelefone}"
+                                       itemLabel="#{tipoTelefone.nome}"/>
+                    </h:selectOneMenu>
+                    <label>Tipo de Telefone</label>
+                </div>
+                <div class="col-xs-12 col-md-2  go-top">
+                    <h:selectOneMenu class="col-xs-12"
+                                     value="#{mbPessoa.telefonePrincipal}">
+                        <f:selectItems value="#{mbPessoa.simNao}"
+                                       var="simNao"
+                                       itemValue="#{simNao.value}"
+                                       itemLabel="#{simNao.label}"/>
+                    </h:selectOneMenu>
+                    <label>Principal</label>
+                </div>
+            </div>
+        </h:panelGroup>
+        <div class="row">
+            <div class="col-xs-12" style="text-align: center;">
+                <h:commandButton value="Salvar"
+                                 action="#{mbPessoa.salvarTelefone()}"
+                                 class="btn btn-primary"
+                                 style="margin-bottom: 10px;">
+                    <f:ajax execute="telefone" render="telefone telefones messages"/>
+                </h:commandButton>
+            </div>
+        </div>
+        <p:dataTable value="#{mbPessoa.telefones}" 
+                     id="telefones"
+                     paginator="true"
+                     scrollable="false"
+                     paginatorAlwaysVisible="true"
+                     paginatorPosition="bottom"
+                     rows="10"
+                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     rowsPerPageTemplate="10,25,50,100"
+                     emptyMessage="Nenhum registro encontrado"
+                     var="telefone">
+            <f:facet name="header">
+                Telefones
+            </f:facet>
+            <p:column headerText="Telefone">
+                <h:outputText value="#{telefone.numero}" converter="converter.TelefoneConverter"/>                                    
+            </p:column>
+            <p:column headerText="Principal">
+                #{mbPessoa.isTelefonePrincipal(telefone) ? "Sim" : "Não"}
+            </p:column>>
+            <p:column headerText="Ações">
+                <h:commandLink action="#{mbPessoa.editarTelefone(telefone)}">
+                    <f:ajax execute="@this" render="telefone messages"/>
+                    <i class="fa fa-pencil-square-o"></i>
+                </h:commandLink>  
+                <h:commandLink action="#{mbPessoa.excluirTelefone(telefone)}">
+                    <f:ajax execute="@this" render="telefones messages"/>
+                    <i class="fa fa-times-circle-o"></i>
+                </h:commandLink>  
+            </p:column>
+        </p:dataTable>
+    </f:validateBean>
+</ui:composition>

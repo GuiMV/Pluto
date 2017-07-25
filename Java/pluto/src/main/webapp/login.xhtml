@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+
+        <title>Pluto</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <h:outputStylesheet name="css/noty.css"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+
+        <!-- Custom Fonts -->
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+        <!-- Custom CSS -->
+        <h:outputStylesheet name="css/template.css"/>
+
+    </h:head>
+
+    <body>
+
+        <div class="wrapper" style="display: table">
+
+            <!-- Navigation -->
+            <nav class="navbar navbar-inverse navbar-fixed-top">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div>
+                    <span class="navbar-brand">Pluto</span>
+                </div>
+            </nav>
+
+            <div class="page-wrapper">
+                <h:form id="form" prependId="false">
+
+                    <div class="box col-xs-12 col-sm-3" style="margin: auto; float: none;"> 
+                        <div class="row">
+                            <div class="box-header">
+                                <div class="box-left"><i class="fa fa-user"></i></div><label>Login</label>
+                            </div>
+                            <div class="box-content">
+                                <div class="row">                                
+                                    <div class="col-xs-12  go-top">
+                                        <h:inputText required="true"
+                                                     value="#{mbLogin.usuario.user}"
+                                                     class="col-xs-12" >
+                                            <f:validateLength minimum="1"/>
+                                        </h:inputText>
+                                        <label>Usuário</label>
+                                    </div>                          
+                                    <div class="col-xs-12  go-top">
+                                        <h:inputText required="true"
+                                                     value="#{mbLogin.usuario.password}"
+                                                     class="col-xs-12" >
+                                            <f:validateLength minimum="1"/>
+                                        </h:inputText>
+                                        <label>Senha</label>
+                                    </div>
+                                </div>  
+                            </div>
+                            <div class="box-footer">
+                                <h:commandButton value="Entrar"
+                                                 action="#{mbLogin.logon()}"
+                                                 class="btn btn-primary">
+                                    <f:ajax execute="form" render="form messages"/>
+                                </h:commandButton>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+
+            </div>
+            <!-- /#page-wrapper -->
+
+        </div>
+        <!-- /#wrapper -->
+
+        <!-- jQuery -->
+        <h:outputScript name="js/jquery.js"/>
+        <h:outputScript name="js/jquery-ui.js"/>
+        <h:outputScript name="js/jquery.blockUI.js"/>
+        <h:outputScript name="js/noty.min.js"/>
+
+        <!-- Bootstrap Core JavaScript -->
+        <h:outputScript name="js/bootstrap.min.js"/>
+        <h:outputScript name="js/jquery.bootstrap.wizard.min.js"/>
+        <script>
+
+            function showMessage(message, type) {
+                Noty.closeAll();
+                new Noty({
+                    type: type,
+                    layout: 'topRight',
+                    text: message,
+                    closeWith: ['click'],
+//                    theme: 'relax',
+                    modal: false
+                }).show();
+            }
+            if (typeof jsf !== 'undefined') {
+                jsf.ajax.addOnEvent(function (data) {
+                    var status = data.status;
+                    switch (status) {
+                        case "begin":
+                            $.blockUI();
+                            break;
+                        case "complete":
+                            $.unblockUI();
+                            break;
+                    }
+                });
+            }
+            $.blockUI.defaults.message = '<h1>Processando</h1>';
+            $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+        </script>
+
+        <h:messages id="messages"/>
+    </body>
+</html>

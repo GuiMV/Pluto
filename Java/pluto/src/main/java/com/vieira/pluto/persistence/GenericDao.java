@@ -1,17 +1,24 @@
 package com.vieira.pluto.persistence;
 
+import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-public abstract class GenericDao<Entity> {
+public abstract class GenericDao<Entity>  implements Serializable{
     
     private final EntityManager em;
-    private Class<Entity> entityClass = ((Class<Entity>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]);
+    private final Class<Entity> entityClass;
 
+    @SuppressWarnings("unchecked")
     public GenericDao() {
         this.em = PersistenceUtil.getEntityManager();
+        final Type genericSuperclass = getClass().getGenericSuperclass();
+        final ParameterizedType param = ParameterizedType.class.cast(genericSuperclass);
+        final Type typeParam = param.getActualTypeArguments()[0];
+        entityClass = Class.class.cast(typeParam);
     }
     
     public GenericDao(Class<Entity> entityClass) {
@@ -19,10 +26,11 @@ public abstract class GenericDao<Entity> {
         this.entityClass = entityClass;
     }
     
-    public Entity get(Object primatyKey){
-        return em.find(entityClass, primatyKey);
+    public Entity get(Object primaryKey){
+        return em.find(entityClass, primaryKey);
     }
     
+    @SuppressWarnings("unchecked")
     public List<Entity> getAll(){
         String sql = String.format("FROM %s", entityClass.getSimpleName());
         Query query = em.createQuery(sql);
@@ -31,7 +39,6 @@ public abstract class GenericDao<Entity> {
     
     public void add(Entity entity){
         em.persist(entity);
-        em.flush();
     }
     
     public void addAll(List<Entity> entities){
@@ -42,7 +49,6 @@ public abstract class GenericDao<Entity> {
     
     public void edit(Entity entity){
         em.merge(entity);
-        em.flush();
     }
     
     public void editAll(List<Entity> entities){
