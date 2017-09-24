@@ -106,6 +106,7 @@ public class NotyMessagesRenderer extends MessagesRenderer {
         if (severityMessages.size() > 0) {
             encodeSeverityMessages(context, messages, FacesMessage.SEVERITY_INFO, severityMessages);
         }
+        super.encodeEnd(context,component);
     }
 
     private void encodeSeverityMessages(FacesContext facesContext, UIMessages uiMessages, Severity severity, List<FacesMessage> messages) throws IOException {

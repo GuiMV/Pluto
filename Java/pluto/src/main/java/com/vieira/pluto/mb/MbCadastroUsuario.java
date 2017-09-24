@@ -6,6 +6,7 @@
 package com.vieira.pluto.mb;
 
 import com.vieira.pluto.dao.UsuarioDao;
+import com.vieira.pluto.entity.TipoPessoa;
 import com.vieira.pluto.entity.Usuario;
 import java.io.Serializable;
 import java.util.Objects;
@@ -30,6 +31,7 @@ public class MbCadastroUsuario extends BasicMb implements Serializable{
     @PostConstruct
     public void init() {
         usuarioDao = new UsuarioDao();
+        mbPessoa.setTipoPessoa(new TipoPessoa(1L));
         usuario = getOnSession("usuarioEditar", Usuario.class);
         if (Objects.isNull(usuario)) {
            novoUsuario(); 

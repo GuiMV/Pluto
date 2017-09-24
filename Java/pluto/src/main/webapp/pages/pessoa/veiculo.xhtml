@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui">
+    <f:validateBean disabled="true">
+    <h:panelGroup layout="block" id="veiculo">
+        <div class="row">
+            <div class="col-xs-12 col-md-2 col-lg-2 go-top">
+                <h:selectOneMenu class="col-xs-12" 
+                                 id="fabricante"
+                                 value="#{mbPessoa.idFabricante}">
+                    <f:selectItems value="#{mbPessoa.fabricantes}"
+                                   var="fabricante"
+                                   itemLabel="#{fabricante.pessoa.nomeFantasia}"
+                                   itemValue="#{fabricante.id}"/>
+                    <f:ajax execute="fabricante" render="modelo" listener="#{mbPessoa.alterarModelosVeiculo()}"/>
+                </h:selectOneMenu>
+                <label>Fabricante</label>
+            </div>
+            <div class="col-xs-12 col-md-2 col-lg-5 go-top">
+                <h:selectOneMenu class="col-xs-12" 
+                                 id="modelo"
+                                 value="#{mbPessoa.pessoaVeiculo.modeloVeiculo}"
+                                 converter="omnifaces.SelectItemsConverter">
+                    <f:selectItems value="#{mbPessoa.modelosVeiculo}"
+                                   var="modelo"
+                                   itemLabel="#{modelo.nome}"
+                                   itemValue="#{modelo}"/>
+                </h:selectOneMenu>
+                <label>Modelo</label>
+            </div>
+            <div class="col-xs-12 col-md-2 col-lg-2 go-top">
+                <h:selectOneMenu class="col-xs-12"
+                                 converter="omnifaces.SelectItemsConverter"
+                                 value="#{mbPessoa.pessoaVeiculo.cor}">
+                    <f:selectItems value="#{mbPessoa.cores}"
+                                   var="cor"
+                                   itemValue="#{cor}"
+                                   itemLabel="#{cor.nome}"/>
+                </h:selectOneMenu>
+                <label>Cor</label>
+            </div>
+            <div class="col-xs-12 col-md-2 col-lg-2 go-top">
+                <h:inputText class="col-xs-12" value="#{mbPessoa.pessoaVeiculo.placa}"/>
+                <label>Placa</label>
+            </div>
+        </div>
+    </h:panelGroup>
+    <div class="row">
+        <div class="col-xs-12" style="text-align: center;">
+            <h:commandButton value="Salvar"
+                             action="#{mbPessoa.salvarPessoaVeiculo()}"
+                             class="btn btn-primary"
+                             style="margin-bottom: 10px;">
+                <f:ajax execute="veiculo" render="veiculo veiculos messages"/>
+            </h:commandButton>
+        </div>
+    </div>
+    <p:dataTable value="#{mbPessoa.pessoaVeiculos}"
+                 id="veiculos"
+                 paginator="true"
+                 scrollable="false"
+                 paginatorAlwaysVisible="true"
+                 paginatorPosition="bottom"
+                 rows="10"
+                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                 rowsPerPageTemplate="10,25,50,100"
+                 emptyMessage="Nenhum registro encontrado"
+                 var="veiculo">
+        <f:facet name="header">
+            Veiculos
+        </f:facet>
+        <p:column headerText="Fabricante">
+            #{veiculo.modeloVeiculo.fabricante.pessoa.nomeFantasia}
+        </p:column>
+        <p:column headerText="Modelo">
+            #{veiculo.modeloVeiculo.nome}
+        </p:column>
+        <p:column headerText="Cor">
+            #{veiculo.cor.nome}
+        </p:column>
+        <p:column headerText="Placa">
+            #{veiculo.placa}
+        </p:column>
+        <p:column headerText="Ações">
+            <h:commandLink action="#{mbPessoa.editarPessoaVeiculo(veiculo)}">
+                <f:ajax execute="@this" render="veiculo messages"/>
+                <i class="fa fa-pencil-square-o"></i>
+            </h:commandLink>  
+            <h:commandLink action="#{mbPessoa.excluirPessoaVeiculo(veiculo)}">
+                <f:ajax execute="@this" render="veiculos messages"/>
+                <i class="fa fa-times-circle-o"></i>
+            </h:commandLink>  
+        </p:column>
+    </p:dataTable>
+        </f:validateBean>
+</ui:composition>

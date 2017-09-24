@@ -27,7 +27,7 @@ public class MbConsultaUsuario extends BasicMb{
     @PostConstruct
     public void init(){
         usuarioDao = new UsuarioDao();
-        usuarios = usuarioDao.getAll();
+        usuarios = usuarioDao.getAllAtivos();
     }
 
     public List<Usuario> getUsuarios() {

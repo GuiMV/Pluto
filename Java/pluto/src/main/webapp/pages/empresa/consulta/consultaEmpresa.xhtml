@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                template="/pages/templates/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="conteudo">
+        <div class="box"> 
+            <div class="box-header">
+                <div class="box-left"><i class="fa fa-edit"></i></div><label>Empresas</label>
+                <div class="pull-right">
+                    <div class="box-right">
+                        <h:outputLink value="/pluto/pages/empresa/cadastro/cadastroEmpresa.xhtml"><i class="fa fa-plus"></i></h:outputLink>
+                    </div>
+                </div>
+            </div>
+            <div class="box-content">
+                <p:dataTable value="#{mbConsultaEmpresa.empresas}"
+                             id="empresas"
+                             paginator="true"
+                             scrollable="false"
+                             paginatorAlwaysVisible="true"
+                             paginatorPosition="bottom"
+                             rows="10"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="10,25,50,100"
+                             emptyMessage="Nenhum registro encontrado"
+                             var="empresa">
+                    <p:column headerText="CNPJ">
+                        #{empresa.pessoa.cpfCnpj}
+                    </p:column>
+                    <p:column headerText="Pessoa">
+                        #{empresa.pessoa.nomeFantasia}
+                    </p:column>
+                    <p:column headerText="Ações">
+                        <h:commandLink action="#{mbConsultaEmpresa.editar(empresa)}">
+                            <f:ajax execute="@this" render="messages"/>
+                            <i class="fa fa-pencil-square-o"></i>
+                        </h:commandLink>  
+                        <h:commandLink action="#{mbConsultaEmpresa.excluir(empresa)}">
+                            <f:ajax execute="@this" render="empresas messages"/>
+                            <i class="fa fa-times-circle-o"></i>
+                        </h:commandLink>  
+                    </p:column>
+                </p:dataTable>
+            </div>
+            <div class="box-footer">
+            </div>
+        </div>
+    </ui:define>
+    <ui:define name="scripts">       
+    </ui:define>
+</ui:composition>

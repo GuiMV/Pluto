@@ -76,7 +76,12 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
             <version>4.3.10.Final</version>
-        </dependency> 
+        </dependency>
+        <dependency>
+            <groupId>org.jinq</groupId>
+            <artifactId>jinq-jpa-scala</artifactId>
+            <version>1.8.21</version>
+        </dependency>
         <dependency>
             <groupId>postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -163,6 +168,7 @@
                     <url>jdbc:postgresql://localhost:5432/Pluto</url>
                     <user>postgres</user>
                     <password>123</password>
+                    <initVersion>0.0.0</initVersion>
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -171,6 +177,11 @@
                         <version>9.1-901-1.jdbc4</version>
                     </dependency>
                 </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
             </plugin>
         </plugins>
     </build>

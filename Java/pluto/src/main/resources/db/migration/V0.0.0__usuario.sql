@@ -4,7 +4,7 @@
 
 CREATE TABLE email (
     id bigint NOT NULL,
-    endereco character varying(256) NOT NULL
+    endereco varchar(256) NOT NULL
 );
 
 
@@ -15,12 +15,12 @@ CREATE TABLE email (
 
 CREATE TABLE endereco (
     id bigint NOT NULL,
-    cep character varying(8) NOT NULL,
-    logradouro character varying(256),
-    numero character varying(32),
-    complemento character varying(64),
-    referencia character varying(256),
-    bairro character varying(256),
+    cep varchar(8) NOT NULL,
+    logradouro varchar(256),
+    numero varchar(32),
+    complemento varchar(64),
+    referencia varchar(256),
+    bairro varchar(256),
     id_municipio bigint NOT NULL,
     id_tipo_endereco bigint NOT NULL
 );
@@ -33,7 +33,7 @@ CREATE TABLE endereco (
 
 CREATE TABLE estado_civil (
     id bigint NOT NULL,
-    nome character varying(32) NOT NULL
+    nome varchar(32) NOT NULL
 );
 
 
@@ -44,7 +44,7 @@ CREATE TABLE estado_civil (
 
 CREATE TABLE municipio (
     id bigint NOT NULL,
-    nome character varying(256) NOT NULL,
+    nome varchar(256) NOT NULL,
     id_uf bigint NOT NULL
 );
 
@@ -56,11 +56,11 @@ CREATE TABLE municipio (
 
 CREATE TABLE pessoa (
     id bigint NOT NULL,
-    razao_social character varying(256) NOT NULL,
-    nome_fantasia character varying(256) NOT NULL,
+    razao_social varchar(256) NOT NULL,
+    nome_fantasia varchar(256) NOT NULL,
     data_nascimento date,
-    cpf_cnpj character varying(14) NOT NULL,
-    rg_ie character varying(16),
+    cpf_cnpj varchar(14) NOT NULL,
+    rg_ie varchar(16),
     id_sexo bigint,
     id_estado_civil bigint,
     id_endereco bigint NOT NULL,
@@ -108,7 +108,7 @@ CREATE TABLE pessoa_telefone (
 
 CREATE TABLE sexo (
     id bigint NOT NULL,
-    nome character varying(32) NOT NULL
+    nome varchar(32) NOT NULL
 );
 
 
@@ -119,7 +119,7 @@ CREATE TABLE sexo (
 
 CREATE TABLE telefone (
     id bigint NOT NULL,
-    numero character varying(16) NOT NULL,
+    numero varchar(16) NOT NULL,
     id_tipo_telefone bigint NOT NULL
 );
 
@@ -142,7 +142,7 @@ CREATE TABLE tipo_endereco (
 
 CREATE TABLE tipo_pessoa (
     id bigint NOT NULL,
-    nome character varying(32) NOT NULL
+    nome varchar(32) NOT NULL
 );
 
 
@@ -153,7 +153,7 @@ CREATE TABLE tipo_pessoa (
 
 CREATE TABLE tipo_telefone (
     id bigint NOT NULL,
-    nome character varying(64) NOT NULL
+    nome varchar(64) NOT NULL
 );
 
 
@@ -164,8 +164,8 @@ CREATE TABLE tipo_telefone (
 
 CREATE TABLE uf (
     id bigint NOT NULL,
-    abreviacao character varying(2) NOT NULL,
-    nome character varying(128) NOT NULL
+    abreviacao varchar(2) NOT NULL,
+    nome varchar(128) NOT NULL
 );
 
 
@@ -176,8 +176,8 @@ CREATE TABLE uf (
 
 CREATE TABLE usuario (
     id bigint NOT NULL,
-    username character varying(64) NOT NULL,
-    password character varying(64) NOT NULL,
+    username varchar(64) NOT NULL,
+    password varchar(64) NOT NULL,
     id_pessoa bigint NOT NULL,
     data_exclusao timestamp with time zone
 );

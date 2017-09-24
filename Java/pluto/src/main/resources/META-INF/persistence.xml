@@ -15,6 +15,12 @@
     <class>com.vieira.pluto.entity.Municipio</class>
     <class>com.vieira.pluto.entity.EstadoCivil</class>
     <class>com.vieira.pluto.entity.Email</class>
+    <class>com.vieira.pluto.entity.Cliente</class>
+    <class>com.vieira.pluto.entity.Empresa</class>
+    <class>com.vieira.pluto.entity.ModeloVeiculo</class>
+    <class>com.vieira.pluto.entity.Cor</class>
+    <class>com.vieira.pluto.entity.PessoaVeiculo</class>
+    <class>com.vieira.pluto.entity.Fabricante</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <shared-cache-mode>NONE</shared-cache-mode>
     <properties>

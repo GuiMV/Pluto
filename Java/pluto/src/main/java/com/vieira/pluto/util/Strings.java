@@ -40,6 +40,25 @@ public class Strings {
         return string.replaceAll("(\\d{3})(\\d{3})(\\d{3})(\\d+)", "$1.$2.$3-$4");
     }
 
+    public static String formatarCnpj(String string) {
+        if(Objects.isNull(string)){
+            return null;
+        }
+        string = apenasNumeros(string);
+        return string.replaceAll("(\\d{2})(\\d{3})(\\d{3})(\\d{4})(\\d+)", "$1.$2.$3/$4-$5");
+    }
+
+    public static String formatarCpfCnpj(String string) {
+        if(Objects.isNull(string)){
+            return null;
+        }
+        string = apenasNumeros(string);
+        if (string.length() == 11){
+            return formatarCpf(string);
+        }
+        return formatarCnpj(string);
+    }
+
     public static String formatarTelefone(String string) {
         if(Objects.isNull(string)){
             return null;

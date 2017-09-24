@@ -28,9 +28,9 @@
                                  id="uf"
                                  value="#{mbPessoa.idUf}">
                     <f:selectItems value="#{mbPessoa.ufs}"
-                                   var="uf"
-                                   itemLabel="#{uf.abreviacao}"
-                                   itemValue="#{uf.id}"/>
+                                   var="fabricante"
+                                   itemLabel="#{fabricante.abreviacao}"
+                                   itemValue="#{fabricante.id}"/>
                     <f:ajax execute="uf" render="municipio" listener="#{mbPessoa.alterarMunicipios()}"/>
                 </h:selectOneMenu>
                 <label>UF</label>
@@ -41,9 +41,9 @@
                                  value="#{mbPessoa.endereco.municipio}"
                                  converter="omnifaces.SelectItemsConverter">
                     <f:selectItems value="#{mbPessoa.municipios}"
-                                   var="municipio"
-                                   itemLabel="#{municipio.nome}"
-                                   itemValue="#{municipio}"/>
+                                   var="fabricante"
+                                   itemLabel="#{fabricante.nome}"
+                                   itemValue="#{fabricante}"/>
                 </h:selectOneMenu>
                 <label>Municipio</label>
             </div>
@@ -71,9 +71,9 @@
                 <h:selectOneMenu class="col-xs-12"
                                  value="#{mbPessoa.enderecoPrincipal}">
                     <f:selectItems value="#{mbPessoa.simNao}"
-                                   var="simNao"
-                                   itemValue="#{simNao.value}"
-                                   itemLabel="#{simNao.label}"/>
+                                   var="cor"
+                                   itemValue="#{cor.value}"
+                                   itemLabel="#{cor.label}"/>
                 </h:selectOneMenu>
                 <label>Principal</label>
             </div>

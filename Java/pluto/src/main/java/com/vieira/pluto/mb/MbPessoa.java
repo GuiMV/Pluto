@@ -6,34 +6,25 @@
 package com.vieira.pluto.mb;
 
 import com.vieira.pluto.business.NgEndereco;
-import com.vieira.pluto.dao.EstadoCivilDao;
-import com.vieira.pluto.dao.MunicipioDao;
-import com.vieira.pluto.dao.SexoDao;
-import com.vieira.pluto.dao.TipoEnderecoDao;
-import com.vieira.pluto.dao.TipoTelefoneDao;
-import com.vieira.pluto.dao.UfDao;
-import com.vieira.pluto.entity.Email;
-import com.vieira.pluto.entity.Endereco;
-import com.vieira.pluto.entity.EstadoCivil;
-import com.vieira.pluto.entity.Municipio;
-import com.vieira.pluto.entity.Pessoa;
-import com.vieira.pluto.entity.Sexo;
-import com.vieira.pluto.entity.Telefone;
-import com.vieira.pluto.entity.TipoEndereco;
-import com.vieira.pluto.entity.TipoPessoa;
-import com.vieira.pluto.entity.TipoTelefone;
-import com.vieira.pluto.entity.Uf;
+import com.vieira.pluto.dao.*;
+import com.vieira.pluto.entity.*;
 import com.vieira.pluto.enums.SimNao;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
+
+import com.vieira.pluto.util.Strings;
 import org.omnifaces.cdi.ViewScoped;
 
+import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
+
 /**
- *
  * @author Guilherme
  */
 @Named
@@ -44,7 +35,9 @@ public class MbPessoa extends BasicMb implements Serializable {
     private Endereco endereco;
     private Email email;
     private Telefone telefone;
+    private PessoaVeiculo pessoaVeiculo;
     private Long idUf;
+    private Long idFabricante;
     private Long decremental;
     private Boolean enderecoPrincipal;
     private Boolean emailPrincipal;
@@ -58,14 +51,26 @@ public class MbPessoa extends BasicMb implements Serializable {
     private List<EstadoCivil> estadosCivis;
     private List<TipoEndereco> tiposEndereco;
     private List<TipoTelefone> tiposTelefone;
+    private List<TipoPessoa> tiposPessoa;
+    private List<Fabricante> fabricantes;
+    private List<ModeloVeiculo> modelosVeiculo;
+    private List<Cor> cores;
+    private List<PessoaVeiculo> pessoaVeiculos;
     private SimNao[] simNao;
     private NgEndereco ngEndereco;
     private UfDao ufDao;
+    private FabricanteDao fabricanteDao;
+    private ModeloVeiculoDao modeloVeiculoDao;
+    private CorDao corDao;
     private MunicipioDao municipioDao;
     private SexoDao sexoDao;
     private EstadoCivilDao estadoCivilDao;
     private TipoEnderecoDao tipoEnderecoDao;
     private TipoTelefoneDao tipoTelefoneDao;
+    private TipoPessoaDao tipoPessoaDao;
+    private PessoaDao pessoaDao;
+    private TipoPessoa tipoPessoa;
+    private Boolean renderTipoPessoa;
 
     @PostConstruct
     public void init() {
@@ -76,27 +81,50 @@ public class MbPessoa extends BasicMb implements Serializable {
         estadoCivilDao = new EstadoCivilDao();
         tipoEnderecoDao = new TipoEnderecoDao();
         tipoTelefoneDao = new TipoTelefoneDao();
+        tipoPessoaDao = new TipoPessoaDao();
+        pessoaDao = new PessoaDao();
+        fabricanteDao = new FabricanteDao();
+        modeloVeiculoDao = new ModeloVeiculoDao();
+        corDao = new CorDao();
         idUf = 42L;
         decremental = 0L;
+        renderTipoPessoa = true;
+        tipoPessoa = new TipoPessoa(1L);
         ufs = ufDao.getAll();
         sexos = sexoDao.getAll();
         estadosCivis = estadoCivilDao.getAll();
         tiposEndereco = tipoEnderecoDao.getAll();
         tiposTelefone = tipoTelefoneDao.getAll();
+        tiposPessoa = tipoPessoaDao.getAll();
+        fabricantes = fabricanteDao.getAllAtivos();
+        cores = corDao.getAll();
         simNao = SimNao.values();
+        if (!fabricantes.isEmpty()){
+            idFabricante = fabricantes.get(0).getId();
+        } else {
+            idFabricante = null;
+        }
         novaPessoa();
     }
 
     public void novaPessoa() {
         pessoa = new Pessoa();
-        pessoa.setTipoPessoa(new TipoPessoa(1L));
+        pessoa.setTipoPessoa(tipoPessoa);
         enderecos = new ArrayList<>();
         emails = new ArrayList<>();
         telefones = new ArrayList<>();
+        pessoaVeiculos = new ArrayList<>();
         novoEndereco();
         alterarMunicipios();
         novoEmail();
         novoTelefone();
+        novaPessoaVeiculo();
+        alterarModelosVeiculo();
+    }
+
+    private void novaPessoaVeiculo() {
+        pessoaVeiculo = new PessoaVeiculo(--decremental);
+        pessoaVeiculo.setModeloVeiculo(new ModeloVeiculo());
     }
 
     private void novoTelefone() {
@@ -119,9 +147,29 @@ public class MbPessoa extends BasicMb implements Serializable {
 
     public void alterarMunicipios() {
         municipios = municipioDao.getByIdUf(idUf);
-        if (Objects.nonNull(endereco.getMunicipio().getId()) && !municipios.contains(endereco.getMunicipio())) {
+        if (nonNull(endereco.getMunicipio().getId()) && !municipios.contains(endereco.getMunicipio())) {
             municipios.add(endereco.getMunicipio());
         }
+    }
+
+    public void alterarModelosVeiculo() {
+        modelosVeiculo = modeloVeiculoDao.getByIdFabricante(idFabricante);
+        if (nonNull(pessoaVeiculo.getModeloVeiculo().getId()) && !modelosVeiculo.contains(pessoaVeiculo.getModeloVeiculo())) {
+            modelosVeiculo.add(pessoaVeiculo.getModeloVeiculo());
+        }
+    }
+
+    public void buscarCpfCnpj() {
+        String cpfCnpj = Strings.apenasNumeros(pessoa.getCpfCnpj());
+        if (pessoa.getTipoPessoa().equals(new TipoPessoa(1L)) && cpfCnpj.length() != 11) {
+            pessoa.setCpfCnpj("");
+            return;
+        } else if (pessoa.getTipoPessoa().equals(new TipoPessoa(2L)) && cpfCnpj.length() != 14) {
+            pessoa.setCpfCnpj("");
+            return;
+        }
+        setPessoaCompleta(pessoaDao.getByCpfCnpj(pessoa));
+        alterarMunicipios();
     }
 
     public void buscarCep() {
@@ -187,10 +235,25 @@ public class MbPessoa extends BasicMb implements Serializable {
         novoTelefone();
     }
 
+    public void editarPessoaVeiculo(PessoaVeiculo pessoaVeiculo) {
+        setPessoaVeiculo(pessoaVeiculo);
+    }
+
+    public void excluirPessoaVeiculo(PessoaVeiculo pessoaVeiculo) {
+        pessoaVeiculos.remove(pessoaVeiculo);
+    }
+
+    public void salvarPessoaVeiculo() {
+        pessoaVeiculos.remove(pessoaVeiculo);
+        pessoaVeiculos.add(pessoaVeiculo);
+        novaPessoaVeiculo();
+    }
+
     public Pessoa getPessoaCompleta() {
         pessoa.setEnderecoList(enderecos);
         pessoa.setEmailList(emails);
         pessoa.setTelefoneList(telefones);
+        pessoa.setPessoaVeiculos(pessoaVeiculos);
         return pessoa;
     }
 
@@ -199,6 +262,39 @@ public class MbPessoa extends BasicMb implements Serializable {
         this.enderecos = pessoa.getEnderecoList();
         this.telefones = pessoa.getTelefoneList();
         this.emails = pessoa.getEmailList();
+        this.pessoaVeiculos = pessoa.getPessoaVeiculos();
+    }
+
+    public void setTipoPessoa(TipoPessoa tipoPessoa) {
+        this.tipoPessoa = tipoPessoa;
+        if (nonNull(pessoa)) {
+            pessoa.setTipoPessoa(tipoPessoa);
+        }
+        renderTipoPessoa = false;
+    }
+
+    public Boolean getRenderCpf() {
+        return pessoa.getTipoPessoa().equals(new TipoPessoa(1L));
+    }
+
+    public Boolean getRenderCnpj() {
+        return pessoa.getTipoPessoa().equals(new TipoPessoa(2L));
+    }
+
+    public Boolean getRenderTipoPessoa() {
+        return renderTipoPessoa;
+    }
+
+    public void setRenderTipoPessoa(Boolean renderTipoPessoa) {
+        this.renderTipoPessoa = renderTipoPessoa;
+    }
+
+    public List<TipoPessoa> getTiposPessoa() {
+        return tiposPessoa;
+    }
+
+    public void setTiposPessoa(List<TipoPessoa> tiposPessoa) {
+        this.tiposPessoa = tiposPessoa;
     }
 
     public Boolean isEnderecoPrincipal(Endereco endereco) {
@@ -243,6 +339,22 @@ public class MbPessoa extends BasicMb implements Serializable {
 
     public void setTelefone(Telefone telefone) {
         this.telefone = telefone;
+    }
+
+    public PessoaVeiculo getPessoaVeiculo() {
+        return pessoaVeiculo;
+    }
+
+    public void setPessoaVeiculo(PessoaVeiculo pessoaVeiculo) {
+        this.pessoaVeiculo = pessoaVeiculo;
+    }
+
+    public Long getIdFabricante() {
+        return idFabricante;
+    }
+
+    public void setIdFabricante(Long idFabricante) {
+        this.idFabricante = idFabricante;
     }
 
     public Long getIdUf() {
@@ -347,6 +459,38 @@ public class MbPessoa extends BasicMb implements Serializable {
 
     public void setTiposTelefone(List<TipoTelefone> tiposTelefone) {
         this.tiposTelefone = tiposTelefone;
+    }
+
+    public List<Fabricante> getFabricantes() {
+        return fabricantes;
+    }
+
+    public void setFabricantes(List<Fabricante> fabricantes) {
+        this.fabricantes = fabricantes;
+    }
+
+    public List<ModeloVeiculo> getModelosVeiculo() {
+        return modelosVeiculo;
+    }
+
+    public void setModelosVeiculo(List<ModeloVeiculo> modelosVeiculo) {
+        this.modelosVeiculo = modelosVeiculo;
+    }
+
+    public List<Cor> getCores() {
+        return cores;
+    }
+
+    public void setCores(List<Cor> cores) {
+        this.cores = cores;
+    }
+
+    public List<PessoaVeiculo> getPessoaVeiculos() {
+        return pessoaVeiculos;
+    }
+
+    public void setPessoaVeiculos(List<PessoaVeiculo> pessoaVeiculos) {
+        this.pessoaVeiculos = pessoaVeiculos;
     }
 
     public SimNao[] getSimNao() {

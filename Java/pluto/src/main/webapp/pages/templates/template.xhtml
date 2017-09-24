@@ -44,7 +44,7 @@
                 <h:form>
                     <ul class="nav navbar-right top-nav">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding: 15px;"><i class="fa fa-user"></i> Guilherme <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding: 15px;"><i class="fa fa-user"></i> #{mbLogin.usuario.pessoa.nomeFantasia} <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
                                     <h:commandLink action="#{mbLogin.logout()}"><i class="fa fa-fw fa-power-off"></i> Log Out</h:commandLink>
@@ -61,18 +61,54 @@
                             <a href="/pluto/pages/templates/template.xhtml"><i class="fa fa-fw fa-home"></i> Home</a>
                         </li>
                         <li>
-                            <a href="javascript:;" data-toggle="collapse" data-target="#cadastroUsuario"><i class="fa fa-fw fa-edit"></i> Cadastro <i class="fa fa-fw fa-caret-down"></i></a>
-                            <ul id="cadastroUsuario" class="collapse">
+                            <a href="javascript:;" data-toggle="collapse" data-target="#cadastro"><i class="fa fa-fw fa-edit"></i> Cadastro <i class="fa fa-fw fa-caret-down"></i></a>
+                            <ul id="cadastro" class="collapse">
                                 <li>
                                     <a href="/pluto/pages/usuario/cadastro/cadastroUsuario.xhtml"><i class="fa fa-fw fa-user"></i> Usuário</a>
+                                </li>
+                                <li>
+                                    <a href="/pluto/pages/cliente/cadastro/cadastroCliente.xhtml"><i class="fa fa-fw fa-user"></i> Cliente</a>
+                                </li>
+                                <li>
+                                    <a href="/pluto/pages/empresa/cadastro/cadastroEmpresa.xhtml"><i class="fa fa-fw fa-user"></i> Empresa</a>
+                                </li>
+                                <li>
+                                    <a href="/pluto/pages/funcionario/cadastro/cadastroFuncionario.xhtml"><i class="fa fa-fw fa-user"></i> Funcionario</a>
+                                </li>
+                                <li>
+                                    <a href="/pluto/pages/fabricante/cadastro/cadastroFabricante.xhtml"><i class="fa fa-fw fa-user"></i> Fabricante</a>
+                                </li>
+                                <li>
+                                    <a href="/pluto/pages/modeloVeiculo/cadastro/cadastroModeloVeiculo.xhtml"><i class="fa fa-fw fa-car"></i> Modelo de Veiculo</a>
+                                </li>
+                                <li>
+                                    <a href="/pluto/pages/cor/cadastro/cadastroCor.xhtml"><i class="fa fa-fw fa-paint-brush"></i> Cor</a>
                                 </li>
                             </ul>
                         </li>  
                         <li>
-                            <a href="javascript:;" data-toggle="collapse" data-target="#consultaUsuario"><i class="fa fa-fw fa-table"></i> Consulta <i class="fa fa-fw fa-caret-down"></i></a>
-                            <ul id="consultaUsuario" class="collapse">
+                            <a href="javascript:;" data-toggle="collapse" data-target="#consulta"><i class="fa fa-fw fa-table"></i> Consulta <i class="fa fa-fw fa-caret-down"></i></a>
+                            <ul id="consulta" class="collapse">
                                 <li>
-                                    <a href="/pluto/pages/usuario/consulta/consultaUsuario.xhtml"><i class="fa fa-fw fa-user"></i> Usuário</a>
+                                    <a href="/pluto/pages/usuario/consulta/consultaUsuario.xhtml"><i class="fa fa-fw fa-users"></i> Usuário</a>
+                                </li>
+                                <li>
+                                    <a href="/pluto/pages/cliente/consulta/consultaCliente.xhtml"><i class="fa fa-fw fa-users"></i> Clientes</a>
+                                </li>
+                                <li>
+                                    <a href="/pluto/pages/empresa/consulta/consultaEmpresa.xhtml"><i class="fa fa-fw fa-users"></i> Empresas</a>
+                                </li>
+                                <li>
+                                    <a href="/pluto/pages/funcionario/consulta/consultaFuncionario.xhtml"><i class="fa fa-fw fa-users"></i> Funcionarios</a>
+                                </li>
+                                <li>
+                                    <a href="/pluto/pages/fabricante/consulta/consultaFabricante.xhtml"><i class="fa fa-fw fa-users"></i> Fabricante</a>
+                                </li>
+                                <li>
+                                    <a href="/pluto/pages/modeloVeiculo/consulta/consultaModeloVeiculo.xhtml"><i class="fa fa-fw fa-car"></i> Modelo de Veiculo</a>
+                                </li>
+                                <li>
+                                    <a href="/pluto/pages/cor/consulta/consultaCor.xhtml"><i class="fa fa-fw fa-paint-brush"></i> Cor</a>
                                 </li>
                             </ul>
                         </li>                       

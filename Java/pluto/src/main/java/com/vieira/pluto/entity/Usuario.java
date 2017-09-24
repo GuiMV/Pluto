@@ -49,7 +49,7 @@ public class Usuario implements Serializable {
     private String password;
     @Column(name = "data_exclusao")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dataExclusao;
+    protected Date dataExclusao;
     @JoinColumn(name = "id_pessoa", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Pessoa pessoa;

@@ -6,6 +6,7 @@
 package com.vieira.pluto.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -41,7 +42,6 @@ public class Pessoa implements Serializable {
     @Id
     @GenericGenerator(name = "increment_Pessoa", strategy = "increment")
     @GeneratedValue(generator = "increment_Pessoa")
-    @Basic(optional = false)
     @NotNull
     private Long id;
     @Basic(optional = false)
@@ -61,7 +61,7 @@ public class Pessoa implements Serializable {
     @NotNull
     @Size(min = 1, max = 14)
     @Column(name = "cpf_cnpj")
-    private String cpfCnpj;
+    protected String cpfCnpj;
     @Basic(optional = false)
     @Size(min = 0, max = 16)
     @Column(name = "rg_ie")
@@ -83,6 +83,8 @@ public class Pessoa implements Serializable {
     private List<Email> emailList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoa", fetch = FetchType.LAZY)
     private List<Usuario> usuarioList;
+    @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY)
+    private List<PessoaVeiculo> pessoaVeiculos;
     @JoinColumn(name = "id_tipo_pessoa", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private TipoPessoa tipoPessoa;
@@ -103,10 +105,29 @@ public class Pessoa implements Serializable {
     private Email email;
 
     public Pessoa() {
+        enderecoList = new ArrayList<>();
+        emailList = new ArrayList<>();
+        telefoneList = new ArrayList<>();
+        pessoaVeiculos = new ArrayList<>();
     }
 
     public Pessoa(Long id) {
         this.id = id;
+    }
+
+    public Pessoa(String cpfCnpj) {
+        this.cpfCnpj = cpfCnpj;
+        enderecoList = new ArrayList<>();
+        emailList = new ArrayList<>();
+        telefoneList = new ArrayList<>();
+    }
+
+    public Pessoa(String cpfCnpj, TipoPessoa tipoPessoa) {
+        this.cpfCnpj = cpfCnpj;
+        this.tipoPessoa = tipoPessoa;
+        enderecoList = new ArrayList<>();
+        emailList = new ArrayList<>();
+        telefoneList = new ArrayList<>();
     }
 
     public Pessoa(Long id, String razaoSocial, String nomeFantasia, String cpfCnpj, String rgIe) {
@@ -195,6 +216,14 @@ public class Pessoa implements Serializable {
 
     public void setUsuarioList(List<Usuario> usuarioList) {
         this.usuarioList = usuarioList;
+    }
+
+    public List<PessoaVeiculo> getPessoaVeiculos() {
+        return pessoaVeiculos;
+    }
+
+    public void setPessoaVeiculos(List<PessoaVeiculo> pessoaVeiculos) {
+        this.pessoaVeiculos = pessoaVeiculos;
     }
 
     public TipoPessoa getTipoPessoa() {

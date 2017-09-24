@@ -1,0 +1,54 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                template="/pages/templates/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="conteudo">
+        <div class="box"> 
+            <div class="box-header">
+                <div class="box-left"><i class="fa fa-edit"></i></div><label>Clientes</label>
+                <div class="pull-right">
+                    <div class="box-right">
+                        <h:outputLink value="/pluto/pages/cliente/cadastro/cadastroCliente.xhtml"><i class="fa fa-plus"></i></h:outputLink>                      
+                    </div>
+                </div>
+            </div>
+            <div class="box-content">
+                <p:dataTable value="#{mbConsultaCliente.clientes}" 
+                             id="clientes"
+                             paginator="true"
+                             scrollable="false"
+                             paginatorAlwaysVisible="true"
+                             paginatorPosition="bottom"
+                             rows="10"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="10,25,50,100"
+                             emptyMessage="Nenhum registro encontrado"
+                             var="cliente">
+                    <p:column headerText="CPF">
+                        #{cliente.pessoa.cpfCnpj}
+                    </p:column>
+                    <p:column headerText="Pessoa">
+                        #{cliente.pessoa.nomeFantasia}
+                    </p:column>
+                    <p:column headerText="Ações">
+                        <h:commandLink action="#{mbConsultaCliente.editar(cliente)}">
+                            <f:ajax execute="@this" render="messages"/>
+                            <i class="fa fa-pencil-square-o"></i>
+                        </h:commandLink>  
+                        <h:commandLink action="#{mbConsultaCliente.excluir(cliente)}">
+                            <f:ajax execute="@this" render="clientes messages"/>
+                            <i class="fa fa-times-circle-o"></i>
+                        </h:commandLink>  
+                    </p:column>
+                </p:dataTable>
+            </div>
+            <div class="box-footer">
+            </div>
+        </div>
+    </ui:define>
+    <ui:define name="scripts">       
+    </ui:define>
+</ui:composition>
