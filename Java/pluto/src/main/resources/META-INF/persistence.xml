@@ -21,10 +21,16 @@
     <class>com.vieira.pluto.entity.Cor</class>
     <class>com.vieira.pluto.entity.PessoaVeiculo</class>
     <class>com.vieira.pluto.entity.Fabricante</class>
+    <class>com.vieira.pluto.entity.TipoItemComercializavel</class>
+    <class>com.vieira.pluto.entity.ItemComercializavel</class>
+    <class>com.vieira.pluto.entity.FormaPagamento</class>
+    <class>com.vieira.pluto.entity.StatusOrcamento</class>
+    <class>com.vieira.pluto.entity.VeiculoOrcamento</class>
+    <class>com.vieira.pluto.entity.Orcamento</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <shared-cache-mode>NONE</shared-cache-mode>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/Pluto"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/pluto"/>
       <property name="javax.persistence.jdbc.password" value="123"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>

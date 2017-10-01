@@ -165,7 +165,7 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>2.2.1</version>
                 <configuration>
-                    <url>jdbc:postgresql://localhost:5432/Pluto</url>
+                    <url>jdbc:postgresql://localhost:5432/pluto</url>
                     <user>postgres</user>
                     <password>123</password>
                     <initVersion>0.0.0</initVersion>
