@@ -29,7 +29,7 @@
                                     <h:inputText required="true" 
                                                  id="login"
                                                  class="col-xs-12"
-                                                 value="#{mbCadastroUsuario.usuario.user}" 
+                                                 value="#{mbCadastroUsuario.usuario.userName}"
                                                  disabled="true"/>
                                     <label>Usuário</label>
                                 </div>
@@ -55,7 +55,7 @@
                         </div>
                     </div>
                 </div>
-                <script>
+                <script type="text/javascript">
                     $(document).ready(function () {
                         $('#wizard').bootstrapWizard();
                     });

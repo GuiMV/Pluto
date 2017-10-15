@@ -27,7 +27,7 @@ public class InitializerListener implements ServletContextListener {
             Flyway flyway = new Flyway();
 
             // Point it to the database
-            flyway.setDataSource("jdbc:postgresql://localhost:5432/Pluto", "postgres", "123");
+            flyway.setDataSource("jdbc:postgresql://localhost:5432/pluto", "postgres", "123");
 
             // Start the migration
             flyway.migrate();

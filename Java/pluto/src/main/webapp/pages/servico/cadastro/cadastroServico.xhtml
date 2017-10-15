@@ -1,0 +1,39 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                template="/pages/templates/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:define name="conteudo">
+        <div class="box"> 
+            <div class="box-header">
+                <div class="box-left"><i class="fa fa-edit"></i></div><label>Cadastro de Serviço</label>
+            </div>
+            <div class="box-content">
+                <div class="row">
+                    <div class="col-xs-12 col-md-2  go-top">
+                        <h:inputText class="col-xs-12"
+                                     value="#{mbCadastroServico.servico.nome}"/>
+                        <label>Nome</label>
+                    </div>
+                    <div class="col-xs-12 col-md-2  go-top">
+                        <h:inputText class="col-xs-12"
+                                     value="#{mbCadastroServico.servico.apresentacao}"/>
+                        <label>Apresentação</label>
+                    </div>
+                    <div class="col-xs-12 col-md-2  go-top">
+                        <h:inputText class="col-xs-12"
+                                     value="#{mbCadastroServico.servico.valorVenda}"/>
+                        <label>Valor de Venda</label>
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                <h:commandButton value="Salvar"
+                                 action="#{mbCadastroServico.salvar()}"
+                                 class="btn btn-primary">
+                    <f:ajax execute="form" render="form messages"/>
+                </h:commandButton>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

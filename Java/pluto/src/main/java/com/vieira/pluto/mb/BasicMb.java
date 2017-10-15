@@ -1,5 +1,7 @@
 package com.vieira.pluto.mb;
 
+import com.vieira.pluto.entity.Usuario;
+
 import java.io.IOException;
 import java.io.Serializable;
 import javax.faces.application.FacesMessage;
@@ -62,6 +64,10 @@ public abstract class BasicMb implements Serializable {
     public void redirectOnContextPath(String url) {
         FacesContext context = FacesContext.getCurrentInstance();
         redirect(context.getExternalContext().getRequestContextPath() + url);
+    }
+
+    public Usuario getUsuarioLogado() {
+        return getOnSession("usuarioLogado", Usuario.class);
     }
 
 }

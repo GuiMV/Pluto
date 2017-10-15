@@ -1,0 +1,170 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                template="/pages/templates/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:define name="conteudo">
+        <div class="box"> 
+            <div class="box-header">
+                <div class="box-left"><i class="fa fa-edit"></i></div><label>Cadastro de Orçamento</label>
+            </div>
+            <div class="box-content">
+                <div id="wizard">
+                    <ul class="wizard">
+                        <li><a href="#tab1" data-toggle="tab" class="tab-header">Dados Gerais</a></li>
+                        <li><a href="#tab2" data-toggle="tab" class="tab-header">Itens</a></li>
+                        <li class="next"><a href="#"><i class="fa fa-arrow-right"/></a></li>
+                        <li class="previous"><a href="#"><i class="fa fa-arrow-left"/></a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane" id="tab1">
+                            <h:panelGroup layout="block" id="dadosPessoais">
+                                <div class="row">
+                                    <h:panelGroup layout="block" class="col-xs-12 col-md-2 go-top">
+                                        <h:selectOneMenu required="true"
+                                                         class="col-xs-12"
+                                                         converter="omnifaces.SelectItemsConverter"
+                                                         value="#{mbCadastroOrcamento.orcamento.cliente}">
+                                            <f:selectItems value="#{mbCadastroOrcamento.clientes}"
+                                                           var="cliente"
+                                                           itemValue="#{cliente}"
+                                                           itemLabel="#{cliente.pessoa.nomeFantasia}"/>
+                                            <f:ajax execute="@this" render="veiculo"/>
+                                        </h:selectOneMenu>
+                                        <label>Cliente</label>
+                                    </h:panelGroup>
+                                    <h:panelGroup layout="block" class="col-xs-12 col-md-2 go-top" id="veiculo">
+                                        <h:selectOneMenu required="true"
+                                                         class="col-xs-12"
+                                                         converter="omnifaces.SelectItemsConverter"
+                                                         value="#{mbCadastroOrcamento.pessoaVeiculo}">
+                                            <f:selectItems value="#{mbCadastroOrcamento.pessoaVeiculos}"
+                                                           var="pessoaVeiculo"
+                                                           itemValue="#{pessoaVeiculo}"
+                                                           itemLabel="#{pessoaVeiculo.modeloVeiculo.nome} - #{pessoaVeiculo.placa}"/>
+                                        </h:selectOneMenu>
+                                        <label>Veículo</label>
+                                    </h:panelGroup>
+                                    <h:panelGroup layout="block" class="col-xs-12 col-md-2 go-top">
+                                        <h:selectOneMenu required="true"
+                                                         class="col-xs-12"
+                                                         converter="omnifaces.SelectItemsConverter"
+                                                         value="#{mbCadastroOrcamento.orcamento.formaPagamento}">
+                                            <f:selectItems value="#{mbCadastroOrcamento.formasPagamento}"
+                                                           var="formaPagamento"
+                                                           itemValue="#{formaPagamento}"
+                                                           itemLabel="#{formaPagamento.nome}"/>
+                                        </h:selectOneMenu>
+                                        <label>Forma de Pagamento</label>
+                                    </h:panelGroup>
+                                    <h:panelGroup layout="block" class="col-xs-12 col-md-12  go-top">
+                                        <h:inputText required="true"
+                                                     requiredMessage="Descrição obrigatória"
+                                                     id="descricao"
+                                                     class="col-xs-12"
+                                                     value="#{mbCadastroOrcamento.orcamento.descricao}">
+                                        </h:inputText>
+                                        <h:outputLabel value="Descrição"/>
+                                    </h:panelGroup>
+                                </div>
+                            </h:panelGroup>
+                        </div>
+                        <h:panelGroup layout="block" class="tab-pane" id="tab2">
+                            <f:validateBean disabled="true">
+                                <h:panelGroup layout="block" id="itemOrcamento">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-2 col-lg-2 go-top">
+                                            <h:selectOneMenu class="col-xs-12"
+                                                             converter="omnifaces.SelectItemsConverter"
+                                                             value="#{mbCadastroOrcamento.tipoItemComercializavel}">
+                                                <f:selectItems value="#{mbCadastroOrcamento.tiposItemComercializaveis}"
+                                                               var="tipoItem"
+                                                               itemValue="#{tipoItem}"
+                                                               itemLabel="#{tipoItem.nome}"/>
+                                            </h:selectOneMenu>
+                                            <label>Tipo</label>
+                                        </div>
+                                        <div class="col-xs-12 col-md-2  go-top">
+                                            <h:selectOneMenu class="col-xs-12"
+                                                             converter="omnifaces.SelectItemsConverter"
+                                                             value="#{mbCadastroOrcamento.itemOrcamento.itemComercializavel}">
+                                                <f:selectItems value="#{mbCadastroOrcamento.itensComercializaveis}"
+                                                               var="itemComercializavel"
+                                                               itemValue="#{itemComercializavel}"
+                                                               itemLabel="#{itemComercializavel.nomeCompleto} - #{itemComercializavel.valorVenda}"/>
+                                            </h:selectOneMenu>
+                                            <label>Item</label>
+                                        </div>
+                                        <div class="col-xs-12 col-md-2  go-top">
+                                            <h:inputText value="#{mbCadastroOrcamento.itemOrcamento.quantidade}"
+                                                         converter="javax.faces.Double"
+                                                         class="col-xs-12"/>
+                                            <label>Quantidade</label>
+                                        </div>
+                                    </div>
+                                </h:panelGroup>
+                                <div class="row">
+                                    <div class="col-xs-12" style="text-align: center;">
+                                        <h:commandButton value="Salvar"
+                                                         action="#{mbCadastroOrcamento.adicionarItem()}"
+                                                         class="btn btn-primary"
+                                                         style="margin-bottom: 10px;">
+                                            <f:ajax execute="itemOrcamento" render="itemOrcamento itensOrcamento messages"/>
+                                        </h:commandButton>
+                                    </div>
+                                </div>
+                                <p:dataTable value="#{mbCadastroOrcamento.orcamento.itemOrcamentoList}"
+                                             id="itensOrcamento"
+                                             paginator="true"
+                                             scrollable="false"
+                                             paginatorAlwaysVisible="true"
+                                             paginatorPosition="bottom"
+                                             rows="10"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="10,25,50,100"
+                                             emptyMessage="Nenhum registro encontrado"
+                                             var="itemOrcamento">
+                                    <f:facet name="header">
+                                        Itens
+                                    </f:facet>
+                                    <p:column headerText="Item">
+                                        #{itemOrcamento.itemComercializavel.nome}
+                                    </p:column>
+                                    <p:column headerText="Tipo">
+                                        #{itemOrcamento.itemComercializavel.tipoItemComercializavel.nome}
+                                    </p:column>
+                                    <p:column headerText="Quantidade">
+                                        #{itemOrcamento.quantidade}
+                                    </p:column>
+                                    <p:column headerText="Valor Total">
+                                        #{itemOrcamento.valorTotal}
+                                    </p:column>
+                                    <p:column headerText="Ações">
+                                        <h:commandLink action="#{mbCadastroOrcamento.excluirItem(itemOrcamento)}">
+                                            <f:ajax execute="@this" render="itensOrcamento messages"/>
+                                            <i class="fa fa-times-circle-o"></i>
+                                        </h:commandLink>
+                                    </p:column>
+                                </p:dataTable>
+                            </f:validateBean>
+                        </h:panelGroup>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $('#wizard').bootstrapWizard();
+                    });
+
+                </script>   
+            </div>
+            <div class="box-footer">
+                <h:commandButton value="Salvar"
+                                 action="#{mbCadastroOrcamento.salvar()}"
+                                 class="btn btn-primary">
+                    <f:ajax execute="form" render="form messages"/>
+                </h:commandButton>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

@@ -21,15 +21,15 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 import org.hibernate.annotations.GenericGenerator;
 
 /**
- *
  * @author Guilherme
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")})
+        @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,7 +42,7 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 64)
-    private String username;
+    private String userName;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 64)
@@ -61,9 +61,9 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
-    public Usuario(Long id, String user, String password) {
+    public Usuario(Long id, String userName, String password) {
         this.id = id;
-        this.username = user;
+        this.userName = userName;
         this.password = password;
     }
 
@@ -75,12 +75,12 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
-    public String getUser() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUser(String user) {
-        this.username = user;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -108,28 +108,22 @@ public class Usuario implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Usuario usuario = (Usuario) o;
+
+        return id != null ? id.equals(usuario.id) : usuario.id == null;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Usuario)) {
-            return false;
-        }
-        Usuario other = (Usuario) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 
     @Override
     public String toString() {
-        return "com.vieira.pluto.entity.Usuario[ id=" + id + " ]";
+        return "Usuario{" + "id=" + id + '}';
     }
-    
 }

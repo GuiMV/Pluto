@@ -1,11 +1,9 @@
 package com.vieira.pluto.dao;
 
 import com.vieira.pluto.entity.PessoaVeiculo;
-import com.vieira.pluto.entity.Telefone;
 import com.vieira.pluto.persistence.GenericDao;
 
 import javax.persistence.Query;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -35,5 +33,9 @@ public class PessoaVeiculoDao extends GenericDao<PessoaVeiculo> {
         }
         Query query = getEntityManager().createQuery(sb.toString());
         query.executeUpdate();
+    }
+
+    public List<PessoaVeiculo> getPessoaVeiculos(Long idCPessoa){
+        return getEntities().where(obj -> obj.getPessoa().getId() == idCPessoa).toList();
     }
 }

@@ -47,7 +47,7 @@ public class MbCadastroUsuario extends BasicMb implements Serializable{
     
     public void salvar(){
         usuario.setPessoa(mbPessoa.getPessoaCompleta());
-        usuario.setUser(usuario.getPessoa().getCpfCnpj());
+        usuario.setUserName(usuario.getPessoa().getCpfCnpj());
         usuarioDao.save(usuario);
         novoUsuario();
         mbPessoa.novaPessoa();

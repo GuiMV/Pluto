@@ -1,6 +1,5 @@
 package com.vieira.pluto.persistence;
 
-import org.jinq.jpa.JinqJPAStreamProvider;
 import org.jinq.orm.stream.JinqStream;
 
 import java.io.Serializable;
@@ -8,22 +7,18 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaQuery;
 
 import static java.util.Objects.isNull;
 
 public abstract class GenericDao<Entity>  implements Serializable{
     
     private final EntityManager em;
-    private final JinqJPAStreamProvider streams;
     protected final Class<Entity> entityClass;
     private JinqStream<Entity> entities;
 
     @SuppressWarnings("unchecked")
     public GenericDao() {
         this.em = PersistenceUtil.getEntityManager();
-        this.streams = PersistenceUtil.getJinqHibernateStreamProvider();
         final Type genericSuperclass = getClass().getGenericSuperclass();
         final ParameterizedType param = ParameterizedType.class.cast(genericSuperclass);
         final Type typeParam = param.getActualTypeArguments()[0];
@@ -32,7 +27,6 @@ public abstract class GenericDao<Entity>  implements Serializable{
     
     public GenericDao(Class<Entity> entityClass) {
         this.em = PersistenceUtil.getEntityManager();
-        this.streams = PersistenceUtil.getJinqHibernateStreamProvider();
         this.entityClass = entityClass;
     }
     
@@ -42,10 +36,7 @@ public abstract class GenericDao<Entity>  implements Serializable{
     
     @SuppressWarnings("unchecked")
     public List<Entity> getAll(){
-        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        cq.select(cq.from(entityClass));
-        Query query = em.createQuery(cq);
-        return query.getResultList();
+        return getEntities().toList();
     }
     
     public void add(Entity entity){
@@ -58,8 +49,8 @@ public abstract class GenericDao<Entity>  implements Serializable{
         }
     }
     
-    public void edit(Entity entity){
-        em.merge(entity);
+    public Entity edit(Entity entity){
+        return em.merge(entity);
     }
     
     public void editAll(List<Entity> entities){

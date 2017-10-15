@@ -31,7 +31,6 @@ public class MbCadastroCliente extends BasicMb implements Serializable{
     @PostConstruct
     public void init() {
         clienteDao = new ClienteDao();
-        mbPessoa.setTipoPessoa(new TipoPessoa(1L));
         cliente = getOnSession("clienteEditar", Cliente.class);
         if (Objects.isNull(cliente)) {
            novoCliente(); 

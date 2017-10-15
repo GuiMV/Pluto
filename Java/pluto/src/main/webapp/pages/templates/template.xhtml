@@ -25,6 +25,9 @@
         <!-- Custom CSS -->
         <h:outputStylesheet name="css/template.css"/>
 
+        <!-- jQuery -->
+        <h:outputScript name="js/jquery.js"/>
+
     </h:head>
 
     <h:body>
@@ -64,6 +67,12 @@
                             <a href="javascript:;" data-toggle="collapse" data-target="#cadastro"><i class="fa fa-fw fa-edit"></i> Cadastro <i class="fa fa-fw fa-caret-down"></i></a>
                             <ul id="cadastro" class="collapse">
                                 <li>
+                                    <a href="/pluto/pages/produto/cadastro/cadastroProduto.xhtml"><i class="fa fa-fw fa-archive"></i> Produto</a>
+                                </li>
+                                <li>
+                                    <a href="/pluto/pages/servico/cadastro/cadastroServico.xhtml"><i class="fa fa-fw fa-gavel"></i> Serviço</a>
+                                </li>
+                                <li>
                                     <a href="/pluto/pages/usuario/cadastro/cadastroUsuario.xhtml"><i class="fa fa-fw fa-user"></i> Usuário</a>
                                 </li>
                                 <li>
@@ -76,6 +85,9 @@
                                     <a href="/pluto/pages/funcionario/cadastro/cadastroFuncionario.xhtml"><i class="fa fa-fw fa-user"></i> Funcionario</a>
                                 </li>
                                 <li>
+                                    <a href="/pluto/pages/estabelecimento/cadastro/cadastroEstabelecimento.xhtml"><i class="fa fa-fw fa-user"></i> Estabelecimento</a>
+                                </li>
+                                <li>
                                     <a href="/pluto/pages/fabricante/cadastro/cadastroFabricante.xhtml"><i class="fa fa-fw fa-user"></i> Fabricante</a>
                                 </li>
                                 <li>
@@ -84,13 +96,25 @@
                                 <li>
                                     <a href="/pluto/pages/cor/cadastro/cadastroCor.xhtml"><i class="fa fa-fw fa-paint-brush"></i> Cor</a>
                                 </li>
+                                <li>
+                                    <a href="/pluto/pages/orcamento/cadastro/cadastroOrcamento.xhtml"><i class="fa fa-fw fa-file-text-o"></i> Orçamento</a>
+                                </li>
+                                <li>
+                                    <a href="/pluto/pages/formaPagamento/cadastro/cadastroFormaPagamento.xhtml"><i class="fa fa-fw fa-money"></i> Forma de Pagamento</a>
+                                </li>
                             </ul>
                         </li>  
                         <li>
                             <a href="javascript:;" data-toggle="collapse" data-target="#consulta"><i class="fa fa-fw fa-table"></i> Consulta <i class="fa fa-fw fa-caret-down"></i></a>
                             <ul id="consulta" class="collapse">
                                 <li>
-                                    <a href="/pluto/pages/usuario/consulta/consultaUsuario.xhtml"><i class="fa fa-fw fa-users"></i> Usuário</a>
+                                    <a href="/pluto/pages/produto/consulta/consultaProduto.xhtml"><i class="fa fa-fw fa-archive"></i> Produtos</a>
+                                </li>
+                                <li>
+                                    <a href="/pluto/pages/servico/consulta/consultaServico.xhtml"><i class="fa fa-fw fa-gavel"></i> Serviços</a>
+                                </li>
+                                <li>
+                                    <a href="/pluto/pages/usuario/consulta/consultaUsuario.xhtml"><i class="fa fa-fw fa-users"></i> Usuários</a>
                                 </li>
                                 <li>
                                     <a href="/pluto/pages/cliente/consulta/consultaCliente.xhtml"><i class="fa fa-fw fa-users"></i> Clientes</a>
@@ -102,13 +126,19 @@
                                     <a href="/pluto/pages/funcionario/consulta/consultaFuncionario.xhtml"><i class="fa fa-fw fa-users"></i> Funcionarios</a>
                                 </li>
                                 <li>
-                                    <a href="/pluto/pages/fabricante/consulta/consultaFabricante.xhtml"><i class="fa fa-fw fa-users"></i> Fabricante</a>
+                                    <a href="/pluto/pages/fabricante/consulta/consultaFabricante.xhtml"><i class="fa fa-fw fa-users"></i> Fabricantes</a>
                                 </li>
                                 <li>
-                                    <a href="/pluto/pages/modeloVeiculo/consulta/consultaModeloVeiculo.xhtml"><i class="fa fa-fw fa-car"></i> Modelo de Veiculo</a>
+                                    <a href="/pluto/pages/modeloVeiculo/consulta/consultaModeloVeiculo.xhtml"><i class="fa fa-fw fa-car"></i> Modelos de Veiculo</a>
                                 </li>
                                 <li>
-                                    <a href="/pluto/pages/cor/consulta/consultaCor.xhtml"><i class="fa fa-fw fa-paint-brush"></i> Cor</a>
+                                    <a href="/pluto/pages/cor/consulta/consultaCor.xhtml"><i class="fa fa-fw fa-paint-brush"></i> Cores</a>
+                                </li>
+                                <li>
+                                    <a href="/pluto/pages/orcamento/consulta/consultaOrcamento.xhtml"><i class="fa fa-fw fa-file-text-o"></i> Orçamentos</a>
+                                </li>
+                                <li>
+                                    <a href="/pluto/pages/formaPagamento/consulta/consultaFormaPagamento.xhtml"><i class="fa fa-fw fa-money"></i> Formas de Pagamento</a>
                                 </li>
                             </ul>
                         </li>                       
@@ -132,7 +162,6 @@
         <!-- /#wrapper -->
 
         <!-- jQuery -->
-        <h:outputScript name="js/jquery.js"/>
         <h:outputScript name="js/jquery-ui.js"/>
         <h:outputScript name="js/jquery.blockUI.js"/>
         <h:outputScript name="js/noty.min.js"/>
@@ -140,7 +169,7 @@
         <!-- Bootstrap Core JavaScript -->
         <h:outputScript name="js/bootstrap.min.js"/>
         <h:outputScript name="js/jquery.bootstrap.wizard.min.js"/>
-        <script>
+        <script type="text/javascript">
             $(document).ready(function () {
                 $('[data-wizard]').bootstrapWizard();
                 criarCalendarios();

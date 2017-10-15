@@ -8,12 +8,10 @@ package com.vieira.pluto.dao;
 import com.vieira.pluto.entity.Pessoa;
 import com.vieira.pluto.entity.Usuario;
 import com.vieira.pluto.persistence.GenericDao;
+import org.jinq.orm.stream.JinqStream;
+
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
 /**
  *
@@ -33,23 +31,18 @@ public class UsuarioDao extends GenericDao<Usuario> {
     }
 
     public Usuario logon(Usuario usuario) {
-        StringBuilder sb = new StringBuilder("FROM Usuario WHERE username = '");
-        sb.append(usuario.getUser().trim());
-        sb.append("' AND password = '");
-        sb.append(usuario.getPassword().trim());
-        sb.append("'");
-        Query query = getEntityManager().createQuery(sb.toString());
-        return Usuario.class.cast(query.getSingleResult());
+        String password = usuario.getPassword().trim();
+        String user = usuario.getUserName().trim();
+        JinqStream<Usuario> select = getEntities().where(usuarioDb -> {
+            return usuarioDb.getDataExclusao() == null && usuarioDb.getPassword().equals(password)&& usuarioDb.getUserName().equals(user);
+
+        });
+        return select.getOnlyValue();
     }
 
     @SuppressWarnings("unchecked")
     public List<Usuario> getAllAtivos() {
-        CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
-        CriteriaQuery cq = cb.createQuery();
-        Root<Usuario> usuario = cq.from(Usuario.class);
-        cq.select(cq.from(entityClass));
-        cq.where(usuario.get("dataExclusao").isNull());
-        Query query = getEntityManager().createQuery(cq);
-        return query.getResultList();
+        JinqStream<Usuario> select = getEntities().where(usuario -> usuario.getDataExclusao() == null);
+        return select.toList();
     }
 }

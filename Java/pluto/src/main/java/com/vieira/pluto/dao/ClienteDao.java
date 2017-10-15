@@ -8,6 +8,8 @@ package com.vieira.pluto.dao;
 import com.vieira.pluto.entity.Cliente;
 import com.vieira.pluto.entity.Pessoa;
 import com.vieira.pluto.persistence.GenericDao;
+import org.jinq.orm.stream.JinqStream;
+
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Query;
@@ -16,7 +18,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 /**
- *
  * @author Guilherme
  */
 public class ClienteDao extends GenericDao<Cliente> {
@@ -34,12 +35,8 @@ public class ClienteDao extends GenericDao<Cliente> {
 
     @SuppressWarnings("unchecked")
     public List<Cliente> getAllAtivos() {
-        CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
-        CriteriaQuery cq = cb.createQuery();
-        Root<Cliente> cliente = cq.from(Cliente.class);
-        cq.select(cq.from(entityClass));
-        cq.where(cliente.get("dataExclusao").isNull());
-        Query query = getEntityManager().createQuery(cq);
-        return query.getResultList();
+        JinqStream<Cliente> query = getEntities().where(cliente -> cliente.getDataExclusao() == null);
+        query = query.sortedBy(cliente -> cliente.getPessoa().getNomeFantasia());
+        return query.toList();
     }
 }
