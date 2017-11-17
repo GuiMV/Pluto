@@ -42,6 +42,7 @@ INSERT INTO status_orcamento (id, nome) VALUES (1, 'Aberto');
 INSERT INTO status_orcamento (id, nome) VALUES (2, 'Cancelado');
 INSERT INTO status_orcamento (id, nome) VALUES (3, 'Liberado');
 INSERT INTO status_orcamento (id, nome) VALUES (4, 'Concluído');
+INSERT INTO status_orcamento (id, nome) VALUES (5, 'Expirado');
 
 
 --

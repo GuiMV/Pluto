@@ -10,23 +10,26 @@ import com.vieira.pluto.entity.Usuario;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.inject.Named;
+
+import com.vieira.pluto.enums.PROPERTY;
+import org.omnifaces.cdi.ViewScoped;
+import javax.inject.Inject;
 
 /**
  *
  * @author Guilherme
  */
-@ManagedBean
+@Named
 @ViewScoped
 public class MbConsultaUsuario extends BasicMb{
-    
-    private List<Usuario> usuarios;
+
+    @Inject
     private UsuarioDao usuarioDao;
+    private List<Usuario> usuarios;
     
     @PostConstruct
     public void init(){
-        usuarioDao = new UsuarioDao();
         usuarios = usuarioDao.getAllAtivos();
     }
 
@@ -39,7 +42,7 @@ public class MbConsultaUsuario extends BasicMb{
     }
     
     public void editar(Usuario usuario){
-        putOnSession("usuarioEditar", usuario);
+        putOnSession(PROPERTY.USUARIO_EDITAR.name(), usuario.getId());
         redirectOnContextPath("/pages/usuario/cadastro/cadastroUsuario.xhtml");
     }
     

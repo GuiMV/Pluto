@@ -1,9 +1,12 @@
 package com.vieira.pluto.mb;
 
 import com.vieira.pluto.entity.Usuario;
+import com.vieira.pluto.exception.HandledException;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Map;
+import java.util.Set;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -33,23 +36,37 @@ public abstract class BasicMb implements Serializable {
         context.addMessage(null, facesMessage);
     }
 
-    public void putOnSession(String key, Object value) {
+    public static void putOnSession(String key, Object value) {
         FacesContext context = FacesContext.getCurrentInstance();
         context.getExternalContext().getSessionMap().put(key, value);
     }
 
-    public void removeFromSession(String key) {
+    public static void removeFromSession(String key) {
         FacesContext context = FacesContext.getCurrentInstance();
         context.getExternalContext().getSessionMap().remove(key);
     }
 
-    public Object getOnSession(String key) {
+    public static Object getOnSession(String key) {
         FacesContext context = FacesContext.getCurrentInstance();
         return context.getExternalContext().getSessionMap().get(key);
     }
-    
-    public <T> T getOnSession(String key, Class<T> classe) {
+
+    public static <T> T getOnSession(String key, Class<T> classe) {
         return classe.cast(getOnSession(key));
+    }
+
+    public static void putOnFlash(String key, Object value) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getExternalContext().getFlash().put(key, value);
+    }
+
+    public static Object getOnFlash(String key) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        return context.getExternalContext().getFlash().get(key);
+    }
+
+    public static  <T> T getOnFlash(String key, Class<T> classe) {
+        return classe.cast(getOnFlash(key));
     }
 
     public void redirect(String url) {
@@ -57,13 +74,21 @@ public abstract class BasicMb implements Serializable {
             FacesContext context = FacesContext.getCurrentInstance();
             context.getExternalContext().redirect(url);
         } catch (IOException ex) {
-            addErrorMessage("Erro ao redirecionar Pagina!");
+            throw new HandledException("Erro ao redirecionar Pagina!", ex);
         }
     }
 
     public void redirectOnContextPath(String url) {
         FacesContext context = FacesContext.getCurrentInstance();
         redirect(context.getExternalContext().getRequestContextPath() + url);
+    }
+
+    public void showModal(String name) {
+        FacesContext.getCurrentInstance().getPartialViewContext().getEvalScripts().add("$('#" + name + "').modal('show');");
+    }
+
+    public void hideModal(String name) {
+        FacesContext.getCurrentInstance().getPartialViewContext().getEvalScripts().add("$('#" + name + "').modal('hide');");
     }
 
     public Usuario getUsuarioLogado() {

@@ -12,6 +12,7 @@ import org.jinq.orm.stream.JinqStream;
 
 import java.util.List;
 import java.util.Objects;
+import javax.inject.Inject;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -22,8 +23,10 @@ import javax.persistence.criteria.Root;
  */
 public class ClienteDao extends GenericDao<Cliente> {
 
+    @Inject
+    private PessoaDao pessoaDao;
+
     public void save(Cliente cliente) {
-        PessoaDao pessoaDao = new PessoaDao();
         Pessoa pessoa = cliente.getPessoa();
         pessoaDao.save(pessoa);
         if (Objects.isNull(cliente.getId())) {
@@ -38,5 +41,15 @@ public class ClienteDao extends GenericDao<Cliente> {
         JinqStream<Cliente> query = getEntities().where(cliente -> cliente.getDataExclusao() == null);
         query = query.sortedBy(cliente -> cliente.getPessoa().getNomeFantasia());
         return query.toList();
+    }
+
+    public Cliente getByCpfCnpj(String cpfCnpj){
+        return getEntities().where(obj -> obj.getPessoa().getCpfCnpj().equals(cpfCnpj)).findFirst().orElse(null);
+    }
+
+    public void removerClassificacao(){
+        String sql = "UPDATE Cliente SET idClassificacao = 1";
+        Query query = getEntityManager().createQuery(sql);
+        query.executeUpdate();
     }
 }

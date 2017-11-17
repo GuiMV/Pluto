@@ -35,7 +35,6 @@ CREATE TABLE item_comercializavel (
     nome varchar(128) NOT NULL,
     apresentacao varchar(128) NOT NULL,
     nome_completo varchar(256) NOT NULL,
-    margem_lucro double precision NOT NULL,
     valor_venda double precision NOT NULL,
     id_tipo_item_comercializavel bigint NOT NULL,
     id_fabricante bigint,

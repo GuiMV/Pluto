@@ -35,7 +35,6 @@ public class Orcamento implements Serializable {
     @Id
     @GenericGenerator(name = "increment_Orcamento", strategy = "increment")
     @GeneratedValue(generator = "increment_Orcamento")
-    @Basic(optional = false)
     @NotNull
     @Column(name = "id")
     private Long id;
@@ -54,19 +53,19 @@ public class Orcamento implements Serializable {
     @Column(name = "valor_total")
     private double valorTotal;
     @JoinColumn(name = "id_status_orcamento", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private StatusOrcamento statusOrcamento;
     @JoinColumn(name = "id_usuario", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Usuario usuario;
     @JoinColumn(name = "id_cliente", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Cliente cliente;
     @JoinColumn(name = "id_veiculo_orcamento", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private VeiculoOrcamento veiculoOrcamento;
     @JoinColumn(name = "id_forma_pagamento", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private FormaPagamento formaPagamento;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orcamento", fetch = FetchType.LAZY)
     private List<ItemOrcamento> itemOrcamentoList;

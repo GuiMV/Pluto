@@ -1,0 +1,242 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                template="/pages/templates/template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="conteudo">
+        <div class="box">
+            <div class="box-header">
+                <div class="box-left"><i class="fa fa-edit"></i></div>
+                <label>Contas a Receber</label>
+                <div class="pull-right">
+                    <div class="box-right">
+                        <h:outputLink value="#" onclick="$('#filtroModal').modal('show');"><i
+                                class="fa fa-search"></i></h:outputLink>
+                    </div>
+                    <div class="box-right">
+                        <h:outputLink value="/pluto/pages/conta/receber/cadastro/cadastroContaReceber.xhtml">
+                            <i class="fa fa-plus"></i>
+                        </h:outputLink>
+                    </div>
+                </div>
+            </div>
+            <div class="box-content">
+                <p:dataTable value="#{mbConsultaContaReceber.contasReceber}"
+                             id="contas"
+                             paginator="true"
+                             scrollable="false"
+                             paginatorAlwaysVisible="true"
+                             paginatorPosition="bottom"
+                             rows="10"
+                             currentPageReportTemplate="{currentPage} de {totalPages}"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="10,25,50,100"
+                             emptyMessage="Nenhum registro encontrado"
+                             var="conta">
+                    <p:column headerText="Nome">
+                        #{conta.cliente.pessoa.nomeFantasia}
+                    </p:column>
+                    <p:column headerText="Data">
+                        <h:outputText value="#{conta.data}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+
+                        <f:facet name="footer">
+                            <span style="float: right;">Total:</span>
+                        </f:facet>
+                    </p:column>
+                    <p:column headerText="Valor">
+                        <h:outputText value="#{conta.valorTotal}">
+                            <f:convertNumber pattern="#,##0.00" minFractionDigits="2"/>
+                        </h:outputText>
+
+                        <f:facet name="footer">
+                            <h:outputText
+                                    style="float: left;"
+                                    value="#{mbConsultaContaReceber.contasReceber.stream().map(conta->conta.valorTotal).sum()}">
+                                <f:convertNumber pattern="#,##0.00" minFractionDigits="2"/>
+                            </h:outputText>
+                        </f:facet>
+                    </p:column>
+                    <p:column headerText="Quitado">
+                        #{conta.dataQuitacao == null ? "Não" : "Sim"}
+                    </p:column>
+                    <p:column headerText="Ações" width="60" style="text-align: center;">
+                        <h:commandLink action="#{mbConsultaContaReceber.quitar(conta)}" rendered="#{conta.dataQuitacao == null}">
+                            <f:ajax execute="@this" render="parcelas messages"/>
+                            <i class="fa fa-check-circle-o"></i>
+                        </h:commandLink>
+                        <h:commandLink action="#{mbConsultaContaReceber.cancelar(conta)}">
+                            <f:ajax execute="@this" render="contas messages"/>
+                            <i class="fa fa-times-circle-o"></i>
+                        </h:commandLink>
+                    </p:column>
+                </p:dataTable>
+            </div>
+            <div class="box-footer">
+            </div>
+
+        </div>
+    </ui:define>
+    <ui:define name="modals">
+        <!-- Modal -->
+        <div class="modal fade" id="parcelasModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="box-header">
+                        <div class="box-left"><i class="fa fa-edit"></i></div>
+                        <label>Parcelas</label>
+                    </div>
+                    <h:panelGroup layout="block" class="box-content" id="parcelas">
+                        <div class="row">
+                            <h:panelGroup layout="block" class="col-xs-12 go-top" id="classificacao">
+                                <h:inputText disabled="true"
+                                             value="#{mbConsultaContaReceber.contaReceber.cliente.classificacao.nome}"
+                                             class="col-xs-12"/>
+                                <label>Classificação</label>
+                            </h:panelGroup>
+                            <h:panelGroup layout="block" class="col-xs-12 col-md-6 go-top">
+                                <h:selectOneMenu required="true"
+                                                 requiredMessage="Campo Forma de Pagamento é obrigatório"
+                                                 pt:placeholder="Obrigatório"
+                                                 class="col-xs-12"
+                                                 id="formaPagamento"
+                                                 value="#{mbConsultaContaReceber.idFormaPagamento}">
+                                    <f:selectItems value="#{mbConsultaContaReceber.formasPagamento}"
+                                                   var="formaPagamento"
+                                                   itemValue="#{formaPagamento.id}"
+                                                   itemLabel="#{formaPagamento.nome}"/>
+                                </h:selectOneMenu>
+                                <label>Forma de Pagamento</label>
+                            </h:panelGroup>
+                            <h:panelGroup layout="block" class="col-xs-12 col-md-6  go-top">
+                                <h:inputText required="true"
+                                             requiredMessage="Campo Desconto é obrigatório"
+                                             pt:placeholder="Obrigatório"
+                                             value="#{mbConsultaContaReceber.descontoParcela}"
+                                             class="col-xs-12"
+                                             converterMessage="Desconto deve ser no formato 0,00">
+                                    <f:convertNumber pattern="#,##0.00" minFractionDigits="2"/>
+                                </h:inputText>
+                                <h:outputLabel>Desconto</h:outputLabel>
+                            </h:panelGroup>
+                        </div>
+                        <p:dataTable value="#{mbConsultaContaReceber.parcelasQuitar}"
+                                     id="parcelasQuitar"
+                                     paginator="true"
+                                     scrollable="false"
+                                     paginatorAlwaysVisible="true"
+                                     paginatorPosition="bottom"
+                                     rows="10"
+                                     currentPageReportTemplate="{currentPage} de {totalPages}"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="10,25,50,100"
+                                     emptyMessage="Nenhum registro encontrado"
+                                     var="parcela">
+                            <p:column headerText="Data Vencimento">
+                                <h:outputText value="#{parcela.dataVencimento}">
+                                    <f:convertDateTime type="localDate" pattern="dd/MM/yyyy"/>
+                                </h:outputText>
+                            </p:column>
+                            <p:column headerText="Valor">
+                                <h:outputText value="#{parcela.valor}">
+                                    <f:convertNumber pattern="#,##0.00" minFractionDigits="2"/>
+                                </h:outputText>
+                            </p:column>
+                            <p:column headerText="Quitado">
+                                #{parcela.dataQuitacao == null ? "Não" : "Sim"}
+                            </p:column>
+                            <p:column headerText="Ações" width="60" style="text-align: center;">
+                                <h:commandLink action="#{mbConsultaContaReceber.quitar(parcela)}"
+                                               rendered="#{parcela.dataQuitacao == null}">
+                                    <f:ajax execute="@this formaPagamento" render="contas messages"/>
+                                    <i class="fa fa-check-circle-o"></i>
+                                </h:commandLink>
+                            </p:column>
+                        </p:dataTable>
+                    </h:panelGroup>
+                    <div class="box-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="filtroModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="box-header">
+                        <div class="box-left"><i class="fa fa-edit"></i></div>
+                        <label>Filtro</label>
+                    </div>
+                    <h:panelGroup layout="block" class="box-content" id="filtro">
+                        <div class="row">
+                            <h:panelGroup layout="block" class="col-xs-12 col-md-6 go-top">
+                                <h:selectOneMenu class="col-xs-12"
+                                                 value="#{mbConsultaContaReceber.consultaContaReceberDto.idCliente}">
+                                    <f:selectItem/>
+                                    <f:selectItems value="#{mbConsultaContaReceber.clientes}"
+                                                   var="cliente"
+                                                   itemValue="#{cliente.id}"
+                                                   itemLabel="#{cliente.pessoa.nomeFantasia}"/>
+                                </h:selectOneMenu>
+                                <label>Cliente</label>
+                            </h:panelGroup>
+                        </div>
+                        <div class="row">
+                            <h:panelGroup layout="block" class="col-xs-12 col-md-6 go-top">
+                                <h:inputText id="dataInicio"
+                                             class="col-xs-12"
+                                             value="#{mbConsultaContaReceber.consultaContaReceberDto.dataInicio}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </h:inputText>
+                                <label>Data Inicio</label>
+                                <script>
+                                    $(document).ready(function () {
+                                        criarCalendario($('#dataInicio'));
+                                    });
+                                </script>
+                            </h:panelGroup>
+                        </div>
+                        <div class="row">
+                            <h:panelGroup layout="block" class="col-xs-12 col-md-6 go-top">
+                                <h:inputText id="dataFim"
+                                             class="col-xs-12"
+                                             value="#{mbConsultaContaReceber.consultaContaReceberDto.dataFim}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </h:inputText>
+                                <label>Data Fim</label>
+                                <script>
+                                    $(document).ready(function () {
+                                        criarCalendario($('#dataFim'));
+                                    });
+                                </script>
+                            </h:panelGroup>
+                        </div>
+                    </h:panelGroup>
+                    <div class="box-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+                        <h:commandButton value="Filtrar"
+                                         action="#{mbConsultaContaReceber.filtrar()}"
+                                         class="btn btn-primary">
+                            <f:ajax execute="filtro" render="contas messages"/>
+                        </h:commandButton>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </ui:define>
+    <ui:define name="scripts">
+    </ui:define>
+</ui:composition>

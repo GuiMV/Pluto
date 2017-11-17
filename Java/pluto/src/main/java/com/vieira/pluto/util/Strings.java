@@ -7,6 +7,9 @@ package com.vieira.pluto.util;
 
 import java.util.Objects;
 
+import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
+
 /**
  *
  * @author Guilherme
@@ -18,14 +21,14 @@ public class Strings {
     }
 
     public static String apenasNumeros(String string) {
-        if(Objects.isNull(string)){
+        if(isNull(string)){
             return null;
         }
         return string.replaceAll("\\D", "");
     }
 
     public static String formatarCep(String string) {
-        if(Objects.isNull(string)){
+        if(isNull(string)){
             return null;
         }
         string = apenasNumeros(string);
@@ -33,7 +36,7 @@ public class Strings {
     }
 
     public static String formatarCpf(String string) {
-        if(Objects.isNull(string)){
+        if(isNull(string)){
             return null;
         }
         string = apenasNumeros(string);
@@ -41,7 +44,7 @@ public class Strings {
     }
 
     public static String formatarCnpj(String string) {
-        if(Objects.isNull(string)){
+        if(isNull(string)){
             return null;
         }
         string = apenasNumeros(string);
@@ -49,7 +52,7 @@ public class Strings {
     }
 
     public static String formatarCpfCnpj(String string) {
-        if(Objects.isNull(string)){
+        if(isNull(string)){
             return null;
         }
         string = apenasNumeros(string);
@@ -60,7 +63,7 @@ public class Strings {
     }
 
     public static String formatarTelefone(String string) {
-        if(Objects.isNull(string)){
+        if(isNull(string)){
             return null;
         }
         string = apenasNumeros(string);
@@ -68,5 +71,13 @@ public class Strings {
         return string.replaceAll("(\\d+)(\\d{4})", "$1-$2");            
         }
         return string.replaceAll("(\\d{2})(\\d+)(\\d{4})", "($1) $2-$3");
+    }
+
+    public static boolean isNullOrEmpty(String string){
+        return  isNull(string) || string.trim().isEmpty();
+    }
+
+    public static boolean IsNonNullAndNonEmpty(String string){
+        return  nonNull(string) && !string.trim().isEmpty();
     }
 }

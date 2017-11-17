@@ -2,40 +2,64 @@ package com.vieira.pluto.mb;
 
 import com.vieira.pluto.dao.FabricanteDao;
 import com.vieira.pluto.dao.ItemComercializavelDao;
-import com.vieira.pluto.dao.ModeloVeiculoDao;
 import com.vieira.pluto.entity.Fabricante;
 import com.vieira.pluto.entity.ItemComercializavel;
-import com.vieira.pluto.entity.ModeloVeiculo;
 import com.vieira.pluto.entity.TipoItemComercializavel;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.inject.Named;
+
+import com.vieira.pluto.enums.PROPERTY;
+import org.hibernate.Hibernate;
+import org.omnifaces.cdi.ViewScoped;
+import javax.inject.Inject;
 import java.util.List;
 
-@ManagedBean
+import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
+
+@Named
 @ViewScoped
 public class MbCadastroProduto extends BasicMb {
 
+    @Inject
+    private FabricanteDao fabricanteDao;
+    @Inject
+    private ItemComercializavelDao itemComercializavelDao;
     private ItemComercializavel produto;
     private List<Fabricante> fabricantes;
 
     @PostConstruct
     public void init(){
-        novoProduto();
-        FabricanteDao fabricanteDao = new FabricanteDao();
+        Long idProduto = getOnFlash(PROPERTY.PRODUTO_EDITAR.name(), Long.class);
+        if(isNull(idProduto)){
+            novoProduto();
+        } else {
+            produto = itemComercializavelDao.get(idProduto);
+        }
         fabricantes = fabricanteDao.getAllAtivos();
     }
 
     private void novoProduto() {
         produto = new ItemComercializavel();
         produto.setTipoItemComercializavel(new TipoItemComercializavel(1L));
-        produto.setMargemLucro(0.0);
+    }
+
+    public void buscarCean(){
+        ItemComercializavel produtoDb = itemComercializavelDao.getByCean(produto.getCean());
+        if (nonNull(produtoDb)) {
+            produto = ItemComercializavel.class.cast(Hibernate.unproxy(produtoDb));
+            if (nonNull(produto.getDataExclusao())){
+                addWarnMessage("Produto inativado com este CEAN, ao salvar ele será ativado");
+            } else {
+                addInfoMessage("Produto já cadastrado com este CEAN, será realizada a edição");
+            }
+        }
     }
 
     public void salvar(){
-        ItemComercializavelDao modeloVeiculoDao = new ItemComercializavelDao();
-        modeloVeiculoDao.save(produto);
+        produto.setDataExclusao(null);
+        itemComercializavelDao.save(produto);
         novoProduto();
         addInfoMessage("Produto salvo com sucesso!");
     }

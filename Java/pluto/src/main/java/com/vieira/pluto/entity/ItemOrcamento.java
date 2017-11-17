@@ -52,6 +52,9 @@ public class ItemOrcamento implements Serializable {
     @JoinColumn(name = "id_item_comercializavel", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private ItemComercializavel itemComercializavel;
+    @JoinColumn(name = "id_funcionario", referencedColumnName = "id")
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    private Funcionario funcionario;
 
     public ItemOrcamento() {
     }
@@ -112,6 +115,14 @@ public class ItemOrcamento implements Serializable {
 
     public void setItemComercializavel(ItemComercializavel itemComercializavel) {
         this.itemComercializavel = itemComercializavel;
+    }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
     }
 
     @Override

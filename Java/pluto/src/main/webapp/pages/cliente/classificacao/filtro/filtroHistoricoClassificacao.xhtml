@@ -1,0 +1,67 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                template="/pages/templates/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:define name="conteudo">
+        <div class="box">
+            <div class="box-header">
+                <div class="box-left"><i class="fa fa-edit"></i></div><label>Filtro de Histórico de Classificação</label>
+            </div>
+            <div class="box-content">
+                <div class="row">
+                    <h:panelGroup layout="block" class="col-xs-12 col-md-2 go-top">
+                        <h:selectOneMenu class="col-xs-12"
+                                         value="#{mbFiltroHistoricoClassificacao.consultaHistoricoClassificacaoDto.mesInicio}">
+                            <f:selectItem/>
+                            <f:selectItems value="#{mbFiltroHistoricoClassificacao.meses}"
+                                           var="mes"
+                                           itemValue="#{mes.value}"
+                                           itemLabel="#{mes.label}"/>
+                        </h:selectOneMenu>
+                        <label>Mês Inicio</label>
+                    </h:panelGroup>
+                    <h:panelGroup layout="block" class="col-xs-12 col-md-2 go-top">
+                        <h:inputText class="col-xs-12"
+                                     value="#{mbFiltroHistoricoClassificacao.consultaHistoricoClassificacaoDto.anoInicio}"/>
+                        <label>Ano Inicio</label>
+                    </h:panelGroup>
+                    <h:panelGroup layout="block" class="col-xs-12 col-md-2 go-top">
+                        <h:selectOneMenu class="col-xs-12"
+                                         value="#{mbFiltroHistoricoClassificacao.consultaHistoricoClassificacaoDto.mesFim}">
+                            <f:selectItem/>
+                            <f:selectItems value="#{mbFiltroHistoricoClassificacao.meses}"
+                                           var="mes"
+                                           itemValue="#{mes.value}"
+                                           itemLabel="#{mes.label}"/>
+                        </h:selectOneMenu>
+                        <label>Mês Fim</label>
+                    </h:panelGroup>
+                    <h:panelGroup layout="block" class="col-xs-12 col-md-2 go-top">
+                        <h:inputText class="col-xs-12"
+                                         value="#{mbFiltroHistoricoClassificacao.consultaHistoricoClassificacaoDto.anoFim}"/>
+                        <label>Ano Fim</label>
+                    </h:panelGroup>
+                    <h:panelGroup layout="block"
+                                  class="col-xs-12 col-md-2 col-lg-2 go-top">
+                        <h:selectOneMenu class="col-xs-12"
+                                         value="#{mbFiltroHistoricoClassificacao.consultaHistoricoClassificacaoDto.idCliente}">
+                            <f:selectItems value="#{mbFiltroHistoricoClassificacao.clientes}"
+                                           var="cliente"
+                                           itemValue="#{cliente.id}"
+                                           itemLabel="#{cliente.pessoa.razaoSocial}"/>
+                        </h:selectOneMenu>
+                        <label>Cliente</label>
+                    </h:panelGroup>
+                </div>
+            </div>
+            <div class="box-footer">
+                <h:commandButton value="Filtrar"
+                                 action="#{mbFiltroHistoricoClassificacao.pesquisasr()}"
+                                 class="btn btn-primary">
+                    <f:ajax execute="form" render="form messages"/>
+                </h:commandButton>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

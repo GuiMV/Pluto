@@ -36,7 +36,6 @@ public class Usuario implements Serializable {
     @Id
     @GenericGenerator(name = "increment_Usuario", strategy = "increment")
     @GeneratedValue(generator = "increment_Usuario")
-    @Basic(optional = false)
     @NotNull
     private Long id;
     @Basic(optional = false)
@@ -51,7 +50,7 @@ public class Usuario implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     protected Date dataExclusao;
     @JoinColumn(name = "id_pessoa", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Pessoa pessoa;
 
     public Usuario() {

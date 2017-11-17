@@ -1,0 +1,3 @@
+ALTER TABLE configuracao_classificacao ADD COLUMN ultimo_mes_historico integer;
+
+ALTER TABLE configuracao_classificacao ADD COLUMN ultimo_ano_historico integer;

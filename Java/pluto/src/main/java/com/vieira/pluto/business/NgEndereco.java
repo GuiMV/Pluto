@@ -7,10 +7,17 @@ import com.vieira.pluto.entity.Municipio;
 import com.vieira.pluto.entity.Uf;
 import com.vieira.pluto.ws.client.ViaCEPClient;
 import com.vieira.pluto.ws.client.dto.EnderecoViaCEP;
+
+import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.Objects;
 
 public class NgEndereco implements Serializable{
+
+    @Inject
+    private MunicipioDao municipioDao;
+    @Inject
+    private UfDao ufDao;
 
     public Endereco buscarCEP(Endereco endereco) {
         return buscarCEP(endereco.getCep(), endereco);
@@ -22,14 +29,11 @@ public class NgEndereco implements Serializable{
 
     public Endereco buscarCEP(String cep, Endereco endereco) {
         EnderecoViaCEP enderecoViaCEP = ViaCEPClient.consultaCEP(cep);
-
-        MunicipioDao municipioDao = new MunicipioDao();
         final long codigoIbge = Long.parseLong(enderecoViaCEP.getIbge());
         Municipio municipio = municipioDao.get(codigoIbge);
         if (Objects.isNull(municipio)) {
             municipio = new Municipio(codigoIbge);
 
-            UfDao ufDao = new UfDao();
             Uf uf = ufDao.getByAbreviacao(enderecoViaCEP.getUf());
             municipio.setUf(uf);
         }

@@ -52,7 +52,7 @@ body {
     bottom: 0;
     overflow-x: hidden;
     padding-bottom: 40px;
-    margin: 0;
+    margin: 0 !important;
 }
 
 @media(min-width:768px) {
@@ -159,7 +159,7 @@ html {
     font: 14px/1.4 Sans-Serif;
 }
 
-.go-top input,.go-top select{
+.go-top input,.go-top select,.go-top textarea{
     top: 20px;
     border: 1px solid gray;
     background: none;
@@ -169,11 +169,11 @@ html {
     margin-bottom: 30px;
 }
 
-.go-top input:focus,.go-top select:focus {
+.go-top input:focus,.go-top select:focus,.go-top textarea:focus {
     border-color: #f06d06;
 }
 
-.go-top select + label,.go-top input + label {
+.go-top select + label,.go-top input + label,.go-top textarea + label {
     position: absolute;
     top: 0;
     left: 15px;
@@ -186,7 +186,7 @@ html {
     line-height: 16px !important;
 }
 
-.go-top select:focus + label,.go-top input:focus + label {
+.go-top select:focus + label,.go-top input:focus + label,.go-top textarea:focus + label {
     background: #f06d06;
 }
 
@@ -201,7 +201,7 @@ html {
 }
 
 .box-footer .btn{
-    margin-top: 5px;
+    margin: 5px;
     padding: 4px 8px;
 }
 
@@ -232,7 +232,7 @@ html {
     border-left: 1px solid #dbdee0;
 }
 
-.box-header .box-right,.box-header .box-left {
+.box-header .box-right,.box-header .box-left, .box-without-borders {
     height: 40px;
     width: 40px;
     display: inline-block;

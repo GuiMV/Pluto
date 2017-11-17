@@ -1,4 +1,5 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
                 template="/pages/templates/template.xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
@@ -22,15 +23,27 @@
                              paginatorAlwaysVisible="true"
                              paginatorPosition="bottom"
                              rows="10"
-                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             currentPageReportTemplate="{currentPage} de {totalPages}"                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                              rowsPerPageTemplate="10,25,50,100"
                              emptyMessage="Nenhum registro encontrado"
                              var="servico">
                     <p:column headerText="Nome">
-                        #{servico.nome}
+                        #{servico.nomeCompleto}
                     </p:column>
                     <p:column headerText="Valor de Venda">
-                        #{servico.valorVenda}
+                        <h:outputText value="#{servico.valorVenda}">
+                            <f:convertNumber pattern="#,##0.00" minFractionDigits="2"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="Ações" width="60" style="text-align: center;">
+                        <h:commandLink action="#{mbConsultaServico.editar(servico)}">
+                            <f:ajax execute="@this" render="messages"/>
+                            <i class="fa fa-pencil-square-o"></i>
+                        </h:commandLink>
+                        <h:commandLink action="#{mbConsultaServico.excluir(servico)}">
+                            <f:ajax execute="@this" render="servicos messages"/>
+                            <i class="fa fa-times-circle-o"></i>
+                        </h:commandLink>
                     </p:column>
                 </p:dataTable>
             </div>

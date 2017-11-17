@@ -1,63 +1,46 @@
 package com.vieira.pluto.persistence;
 
 import org.jinq.jpa.JinqJPAStreamProvider;
-import org.jinq.orm.stream.JinqStream;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.util.Objects;
 
-import static java.util.Objects.isNull;
+import java.io.Serializable;
+import java.util.HashMap;
 
-public final class PersistenceUtil {
-    
+@ApplicationScoped
+public class PersistenceUtil implements Serializable {
+
     private static final String UNIT_NAME = "plutoPU";
-    public static final ThreadLocal<EntityManager> SESSION = new ThreadLocal<>();  
-    protected static EntityManagerFactory emf;
-    protected static PersistenceUtil instance;
-    protected static JinqJPAStreamProvider streams;
+    private static HashMap<Integer, EntityManager> THREAD_LOCAL_EM = new HashMap<>();
+    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory(UNIT_NAME);
+    private static final JinqJPAStreamProvider STREAMS = new JinqJPAStreamProvider(emf);
 
     public static EntityManager getEntityManager() {
-         EntityManager em = (EntityManager) SESSION.get();  
-         if (em == null) {
+        EntityManager em = THREAD_LOCAL_EM.get(0);
+        if (em == null) {
             em = createEntityManager();
-         }
-         return em; 
-    } 
-    
-    private static EntityManager createEntityManager(){
-        loadInstance();  
-        EntityManager em = emf.createEntityManager();  
-        SESSION.set(em);
+            THREAD_LOCAL_EM.put(0, em);
+        }
         return em;
-        
     }
 
-    private static synchronized void loadInstance() {
-        if (emf == null) {
-            emf = Persistence.createEntityManagerFactory(UNIT_NAME);
+    public static EntityManager createEntityManager() {
+        return emf.createEntityManager();
+    }
+
+    public static void closeEntityManager() {
+        EntityManager entityManager = THREAD_LOCAL_EM.get(0);
+        if (entityManager != null && entityManager.isOpen()) {
+            entityManager.close();
         }
+        THREAD_LOCAL_EM.remove(0);
     }
-    
-    public static void closeEntityManager() {  
-         EntityManager entityManager = (EntityManager) SESSION.get();  
-          if (entityManager != null) {  
-              entityManager.close();  
-         }  
-         SESSION.set(null);  
-     }
 
-     public static JinqJPAStreamProvider getJinqHibernateStreamProvider(){
-        if (isNull(streams)){
-            streams = new JinqJPAStreamProvider(getEntityManager().getEntityManagerFactory());
-        }
-         return streams;
-     }
-
-
-    public static <Entity> JinqStream<Entity> getEntities(Class<Entity> entityClass) {
-        return getJinqHibernateStreamProvider().streamAll(getEntityManager(), entityClass);
+    public static JinqJPAStreamProvider getJinqHibernateStreamProvider() {
+        return STREAMS;
     }
-    
+
 }

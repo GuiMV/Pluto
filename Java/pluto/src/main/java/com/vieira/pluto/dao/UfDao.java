@@ -17,8 +17,6 @@ public class UfDao extends GenericDao<Uf>{
     
     
     public Uf getByAbreviacao(String abreviacao){
-        String sql = String.format("FROM Uf WHERE abreviacao = '%s'", abreviacao);
-        Query query = getEntityManager().createQuery(sql);
-        return Uf.class.cast(query.getSingleResult());
+        return getEntities().where(obj -> obj.getAbreviacao().equals(abreviacao)).findFirst().orElse(null);
     }
 }

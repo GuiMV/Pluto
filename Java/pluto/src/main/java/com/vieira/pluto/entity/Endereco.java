@@ -54,10 +54,10 @@ public class Endereco implements Serializable {
     @ManyToMany(mappedBy = "enderecoList", fetch = FetchType.LAZY)
     private List<Pessoa> pessoaList;
     @JoinColumn(name = "id_tipo_endereco", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private TipoEndereco tipoEndereco;
     @JoinColumn(name = "id_municipio", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Municipio municipio;
 
     public Endereco() {

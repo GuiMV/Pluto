@@ -26,7 +26,7 @@ public class Estabelecimento implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataExclusao;
     @JoinColumn(name = "id_pessoa", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Pessoa pessoa;
 
     public Estabelecimento() {

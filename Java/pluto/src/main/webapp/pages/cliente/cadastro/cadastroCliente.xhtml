@@ -21,9 +21,21 @@
                         <li class="previous"><a href="#"><i class="fa fa-arrow-left"/></a></li>
                     </ul>
                     <div class="tab-content">
-                        <h:inputHidden value="#{mbCadastroCliente.cliente.id}"/>
+                        <h:outputText value="#{mbCadastroCliente.cliente.toString()}" style="display: none"/>
                         <div class="tab-pane" id="tab1">
-                            <ui:include src="/pages/pessoa/principal.xhtml"/>                            
+                            <ui:include src="/pages/pessoa/principal.xhtml"/>
+                            <h:panelGroup layout="block" class="row" rendered="#{!mbCadastroCliente.cadastro}">
+                                <h:panelGroup layout="block" class="col-xs-12 col-md-2 go-top">
+                                    <h:inputText disabled="true"
+                                                 value="#{mbCadastroCliente.cliente.classificacao.nome}"
+                                                 class="col-xs-12"/>
+                                    <label>Classificação</label>
+                                </h:panelGroup>
+                            </h:panelGroup>
+                            <h:commandScript name="buscarCpfCnpj"
+                                             render="dadosPessoais endereco enderecos telefone telefones email emails messages veiculo veiculos"
+                                             actionListener="#{mbCadastroCliente.buscarCpfCnpj()}"
+                                             execute="cpfCnpj"/>
                         </div>
                         <h:panelGroup layout="block" class="tab-pane" id="tab2"> 
                             <ui:include src="/pages/pessoa/endereco.xhtml"/>  

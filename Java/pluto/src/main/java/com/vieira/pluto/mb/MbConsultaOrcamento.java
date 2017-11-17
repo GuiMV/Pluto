@@ -1,29 +1,44 @@
 package com.vieira.pluto.mb;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
+import com.vieira.pluto.dao.ClienteDao;
 import com.vieira.pluto.dao.OrcamentoDao;
+import com.vieira.pluto.dao.StatusOrcamentoDao;
 import com.vieira.pluto.dto.ConsultaOrcamentoDto;
+import com.vieira.pluto.entity.Cliente;
 import com.vieira.pluto.entity.Orcamento;
 import com.vieira.pluto.entity.StatusOrcamento;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.inject.Named;
+import org.omnifaces.cdi.ViewScoped;
+import javax.inject.Inject;
 import java.util.List;
 
-@ManagedBean
+@Named
 @ViewScoped
 public class MbConsultaOrcamento extends BasicMb{
 
-    private List<Orcamento> orcamentos;
+    @Inject
     private OrcamentoDao orcamentoDao;
+    @Inject
+    private StatusOrcamentoDao statusOrcamentoDao;
+    @Inject
+    private ClienteDao clienteDao;
+    private List<Orcamento> orcamentos;
+    private List<Cliente> clientes;
+    private List<StatusOrcamento> statusOrcamentos;
     private ConsultaOrcamentoDto consultaOrcamentoDto;
 
     @PostConstruct
     public void init(){
         consultaOrcamentoDto = new ConsultaOrcamentoDto();
-        orcamentoDao = new OrcamentoDao();
+        filtrar();
+        statusOrcamentos = statusOrcamentoDao.getAll();
+    }
+
+    public void filtrar() {
         orcamentos = orcamentoDao.filterOrcamento(consultaOrcamentoDto);
+        hideModal("filtroModal");
     }
 
     public void cancelar(Orcamento orcamento){
@@ -40,13 +55,6 @@ public class MbConsultaOrcamento extends BasicMb{
         addInfoMessage("Orçamento liberado com sucesso!");
     }
 
-    public void concluir(Orcamento orcamento){
-        orcamento.setStatusOrcamento(new StatusOrcamento(4L));
-        orcamentoDao.edit(orcamento);
-        orcamentos.remove(orcamento);
-        addInfoMessage("Orçamento concluído com sucesso!");
-    }
-
     public boolean renderLiberar(StatusOrcamento statusOrcamento){
         return (1L)==(statusOrcamento.getId());
     }
@@ -61,5 +69,29 @@ public class MbConsultaOrcamento extends BasicMb{
 
     public void setOrcamentos(List<Orcamento> orcamentos) {
         this.orcamentos = orcamentos;
+    }
+
+    public List<Cliente> getClientes() {
+        return clientes;
+    }
+
+    public void setClientes(List<Cliente> clientes) {
+        this.clientes = clientes;
+    }
+
+    public List<StatusOrcamento> getStatusOrcamentos() {
+        return statusOrcamentos;
+    }
+
+    public void setStatusOrcamentos(List<StatusOrcamento> statusOrcamentos) {
+        this.statusOrcamentos = statusOrcamentos;
+    }
+
+    public ConsultaOrcamentoDto getConsultaOrcamentoDto() {
+        return consultaOrcamentoDto;
+    }
+
+    public void setConsultaOrcamentoDto(ConsultaOrcamentoDto consultaOrcamentoDto) {
+        this.consultaOrcamentoDto = consultaOrcamentoDto;
     }
 }

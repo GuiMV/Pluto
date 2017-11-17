@@ -31,7 +31,6 @@ public class TipoTelefone implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
     @NotNull
     private Long id;
     @Basic(optional = false)
@@ -99,7 +98,6 @@ public class TipoTelefone implements Serializable {
 
     @Override
     public String toString() {
-        return "com.vieira.pluto.entity.TipoTelefone[ id=" + id + " ]";
+        return String.format("%s[id=%d]", getClass().getSimpleName(), getId());
     }
-    
 }

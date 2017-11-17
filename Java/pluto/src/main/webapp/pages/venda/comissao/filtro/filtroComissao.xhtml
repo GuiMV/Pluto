@@ -1,0 +1,66 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                template="/pages/templates/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:define name="conteudo">
+        <div class="box"> 
+            <div class="box-header">
+                <div class="box-left"><i class="fa fa-edit"></i></div><label>Filtro de Comissão</label>
+            </div>
+            <div class="box-content">
+                <div class="row">
+                    <h:panelGroup layout="block" class="col-xs-12 col-md-2 go-top">
+                        <h:inputText required="true"
+                                     requiredMessage="Campo Inicio é Obrigatório"
+                                     id="dataInicial"
+                                     class="col-xs-12"
+                                     value="#{mbFiltroComissao.consultaComissaoDto.dataInicial}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:inputText>
+                        <label>Inicio</label>
+                        <script>
+                            $(document).ready(function () {
+                                criarCalendario($('#dataInicial'));
+                            });
+                        </script>
+                    </h:panelGroup>
+                    <h:panelGroup layout="block" class="col-xs-12 col-md-2 go-top">
+                        <h:inputText required="true"
+                                     requiredMessage="Campo Fim é Obrigatório"
+                                     id="dataFinal"
+                                     class="col-xs-12"
+                                     value="#{mbFiltroComissao.consultaComissaoDto.dataFinal}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:inputText>
+                        <label>Fim</label>
+                        <script>
+                            $(document).ready(function () {
+                                criarCalendario($('#dataFinal'));
+                            });
+                        </script>
+                    </h:panelGroup>
+                    <h:panelGroup layout="block"
+                                  class="col-xs-12 col-md-2 col-lg-2 go-top">
+                        <h:selectOneMenu class="col-xs-12"
+                                         converter="omnifaces.SelectItemsConverter"
+                                         value="#{mbFiltroComissao.consultaComissaoDto.idFuncionario}">
+                            <f:selectItems value="#{mbFiltroComissao.funcionarios}"
+                                           var="func"
+                                           itemValue="#{func.id}"
+                                           itemLabel="#{func.pessoa.razaoSocial}"/>
+                        </h:selectOneMenu>
+                        <label>Funcionário</label>
+                    </h:panelGroup>
+                </div>
+            </div>
+            <div class="box-footer">
+                <h:commandButton value="Pesquisar"
+                                 action="#{mbFiltroComissao.pesquisasr()}"
+                                 class="btn btn-primary">
+                    <f:ajax execute="form" render="form messages"/>
+                </h:commandButton>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

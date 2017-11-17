@@ -1,4 +1,4 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
                 template="/pages/templates/template.xhtml"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
@@ -12,17 +12,29 @@
                 <div class="row">
                     <div class="col-xs-12 col-md-2  go-top">
                         <h:inputText class="col-xs-12"
+                                     required="true"
+                                     requiredMessage="Campo Nome é obrigatório"
+                                     pt:placeholder="Obrigatório"
                                      value="#{mbCadastroServico.servico.nome}"/>
                         <label>Nome</label>
                     </div>
                     <div class="col-xs-12 col-md-2  go-top">
                         <h:inputText class="col-xs-12"
+                                     required="true"
+                                     requiredMessage="Campo Apresentação é obrigatório"
+                                     pt:placeholder="Obrigatório"
                                      value="#{mbCadastroServico.servico.apresentacao}"/>
                         <label>Apresentação</label>
                     </div>
                     <div class="col-xs-12 col-md-2  go-top">
                         <h:inputText class="col-xs-12"
-                                     value="#{mbCadastroServico.servico.valorVenda}"/>
+                                     required="true"
+                                     requiredMessage="Campo Valor de Venda é obrigatório"
+                                     pt:placeholder="Obrigatório"
+                                     value="#{mbCadastroServico.servico.valorVenda}"
+                                     converterMessage="Valor de Venda deve ser no formato 0,00">
+                            <f:convertNumber pattern="#,##0.00" minFractionDigits="2"/>
+                        </h:inputText>
                         <label>Valor de Venda</label>
                     </div>
                 </div>

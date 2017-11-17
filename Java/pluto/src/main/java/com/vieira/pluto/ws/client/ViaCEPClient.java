@@ -9,13 +9,15 @@ import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.vieira.pluto.exception.HandledException;
 import com.vieira.pluto.util.Strings;
+
+import java.io.Serializable;
 import java.util.Objects;
 import javax.ws.rs.core.MediaType;
 
 /**
  * Classe para recuperar informações do WS do viacep.com.br
  */
-public class ViaCEPClient {
+public class ViaCEPClient implements Serializable {
     
     private static final String BASE_URI = "https://viacep.com.br/ws/";
     

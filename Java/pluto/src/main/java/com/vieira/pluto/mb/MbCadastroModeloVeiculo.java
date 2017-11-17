@@ -8,28 +8,44 @@ import com.vieira.pluto.entity.Fabricante;
 import com.vieira.pluto.entity.ModeloVeiculo;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.inject.Named;
+
+import com.vieira.pluto.enums.PROPERTY;
+import org.omnifaces.cdi.ViewScoped;
+import javax.inject.Inject;
 import java.util.List;
 
-@ManagedBean
+import static java.util.Objects.isNull;
+
+@Named
 @ViewScoped
 public class MbCadastroModeloVeiculo extends BasicMb {
 
+    @Inject
+    private FabricanteDao fabricanteDao;
+    @Inject
+    private ModeloVeiculoDao modeloVeiculoDao;
     private ModeloVeiculo modeloVeiculo;
     private List<Fabricante> fabricantes;
 
     @PostConstruct
-    public void init(){
-        modeloVeiculo = new ModeloVeiculo();
-        FabricanteDao fabricanteDao = new FabricanteDao();
+    public void init() {
+        Long idModeloVeiculo = getOnFlash(PROPERTY.MODELO_VEICULO_EDITAR.name(), Long.class);
+        if(isNull(idModeloVeiculo)){
+            novoModeloVeiculo();
+        } else {
+            modeloVeiculo = modeloVeiculoDao.get(idModeloVeiculo);
+        }
         fabricantes = fabricanteDao.getAllAtivos();
     }
 
-    public void salvar(){
-        ModeloVeiculoDao modeloVeiculoDao = new ModeloVeiculoDao();
-        modeloVeiculoDao.add(modeloVeiculo);
+    private void novoModeloVeiculo() {
         modeloVeiculo = new ModeloVeiculo();
+    }
+
+    public void salvar() {
+        modeloVeiculoDao.save(modeloVeiculo);
+        novoModeloVeiculo();
         addInfoMessage("Modelo de Veiculo salvo com sucesso!");
     }
 

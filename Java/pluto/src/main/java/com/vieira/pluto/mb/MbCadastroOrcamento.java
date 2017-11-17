@@ -4,19 +4,31 @@ import com.vieira.pluto.dao.*;
 import com.vieira.pluto.entity.*;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.inject.Named;
+
+import com.vieira.pluto.exception.HandledException;
+import org.omnifaces.cdi.ViewScoped;
 import javax.inject.Inject;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@ManagedBean
+@Named
 @ViewScoped
 public class MbCadastroOrcamento extends BasicMb {
 
+    @Inject
+    private OrcamentoDao orcamentoDao;
+    @Inject
+    private  ClienteDao clienteDao;
+    @Inject
+    private TipoItemComercializavelDao tipoItemComercializavelDao;
+    @Inject
+    private  FormaPagamentoDao formaPagamentoDao;
+    @Inject
+    private PessoaVeiculoDao pessoaVeiculoDao;
+    @Inject
+    private ItemComercializavelDao itemComercializavelDao;
     private Orcamento orcamento;
     private ItemOrcamento itemOrcamento;
     private TipoItemComercializavel tipoItemComercializavel;
@@ -32,21 +44,22 @@ public class MbCadastroOrcamento extends BasicMb {
     public void init(){
         decremental = 0L;
         tipoItemComercializavel = new TipoItemComercializavel(1L);
-        tiposItemComercializaveis = new TipoItemComercializavelDao().getAll();
-        itensComercializaveis = new ItemComercializavelDao().getsAtivos(tipoItemComercializavel.getId());
-        formasPagamento = new FormaPagamentoDao().getAll();
-        clientes = new ClienteDao().getAllAtivos();
+        tiposItemComercializaveis = tipoItemComercializavelDao.getAll();
+        itensComercializaveis = itemComercializavelDao.getsAtivos(tipoItemComercializavel.getId());
+        formasPagamento = formaPagamentoDao.getAll();
+        clientes = clienteDao.getAllAtivos();
         novoOrcamento();
     }
 
     private void novoOrcamento() {
         orcamento = new Orcamento();
         orcamento.setValorTotal(0d);
+        orcamento.setDescricao("Venda de serviço");
         orcamento.setItemOrcamentoList( new ArrayList<>());
         orcamento.setStatusOrcamento(new StatusOrcamento(1L));
         if (!clientes.isEmpty()){
             orcamento.setCliente(clientes.get(0));
-            pessoaVeiculos = new PessoaVeiculoDao().getPessoaVeiculos(orcamento.getCliente().getPessoa().getId());
+            pessoaVeiculos = pessoaVeiculoDao.getPessoaVeiculos(orcamento.getCliente().getPessoa().getId());
         }
         novoItem();
     }
@@ -56,6 +69,9 @@ public class MbCadastroOrcamento extends BasicMb {
     }
 
     public void adicionarItem(){
+        if(itemOrcamento.getQuantidade() < 1){
+            throw new HandledException("Campo Quantidade deve ser maior que 0");
+        }
         itemOrcamento.setValorVenda(itemOrcamento.getItemComercializavel().getValorVenda());
         itemOrcamento.setValorTotal(itemOrcamento.getValorVenda() * itemOrcamento.getQuantidade());
         orcamento.setValorTotal(orcamento.getValorTotal() + itemOrcamento.getValorTotal());
@@ -69,7 +85,6 @@ public class MbCadastroOrcamento extends BasicMb {
     }
 
     public void salvar(){
-        OrcamentoDao orcamentoDao = new OrcamentoDao();
         VeiculoOrcamento veiculoOrcamento = new VeiculoOrcamento();
         veiculoOrcamento.setCor(pessoaVeiculo.getCor());
         veiculoOrcamento.setModeloVeiculo(pessoaVeiculo.getModeloVeiculo());

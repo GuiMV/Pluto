@@ -1,0 +1,63 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                template="/pages/templates/template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="conteudo">
+        <div class="box">
+            <div class="box-header">
+                <div class="box-left"><i class="fa fa-edit"></i></div>
+                <label>Comissões</label>
+                <div class="pull-right">
+                </div>
+            </div>
+            <div class="box-content">
+                <p:dataTable value="#{mbConsultaComissao.comissoes}"
+                             id="comissoes"
+                             paginator="true"
+                             scrollable="false"
+                             paginatorAlwaysVisible="true"
+                             paginatorPosition="bottom"
+                             rows="10"
+                             currentPageReportTemplate="{currentPage} de {totalPages}"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="10,25,50,100"
+                             emptyMessage="Nenhum registro encontrado"
+                             var="comissao">
+                    <p:column headerText="Cliente">
+                        #{comissao.nomeCliente}
+                    </p:column>
+                    <p:column headerText="Veículo">
+                        #{comissao.nomeVeiculo}
+                    </p:column>
+                    <p:column headerText="Placa">
+                        #{comissao.placa}
+
+                        <f:facet name="footer">
+                            <span style="float: right;">Total:</span>
+                        </f:facet>
+                    </p:column>
+                    <p:column headerText="Comissao">
+                        <h:outputText value="#{comissao.comissao}">
+                            <f:convertNumber pattern="#,##0.00" minFractionDigits="2"/>
+                        </h:outputText>
+
+                        <f:facet name="footer">
+                            <h:outputText
+                                    style="float: left;"
+                                    value="#{mbConsultaComissao.comissoes.stream().map(comissao->comissao.comissao).sum()}">
+                                <f:convertNumber pattern="#,##0.00" minFractionDigits="2"/>
+                            </h:outputText>
+                        </f:facet>
+                    </p:column>
+                </p:dataTable>
+            </div>
+            <div class="box-footer">
+            </div>
+        </div>
+    </ui:define>
+    <ui:define name="scripts">
+    </ui:define>
+</ui:composition>

@@ -10,6 +10,7 @@ import com.vieira.pluto.entity.Usuario;
 import com.vieira.pluto.persistence.GenericDao;
 import org.jinq.orm.stream.JinqStream;
 
+import javax.inject.Inject;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,8 +20,9 @@ import java.util.Objects;
  */
 public class UsuarioDao extends GenericDao<Usuario> {
 
+    @Inject
+    private PessoaDao pessoaDao;
     public void save(Usuario usuario) {
-        PessoaDao pessoaDao = new PessoaDao();
         Pessoa pessoa = usuario.getPessoa();
         pessoaDao.save(pessoa);
         if (Objects.isNull(usuario.getId())) {
@@ -44,5 +46,9 @@ public class UsuarioDao extends GenericDao<Usuario> {
     public List<Usuario> getAllAtivos() {
         JinqStream<Usuario> select = getEntities().where(usuario -> usuario.getDataExclusao() == null);
         return select.toList();
+    }
+
+    public Usuario getByCpf(String cpf){
+        return getEntities().where(obj -> obj.getPessoa().getCpfCnpj().equals(cpf)).findFirst().orElse(null);
     }
 }

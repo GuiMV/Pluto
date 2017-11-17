@@ -1,45 +1,54 @@
 package com.vieira.pluto.filter;
 
 import com.vieira.pluto.persistence.PersistenceUtil;
-import java.io.IOException;
+
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 
-public class PersistenceFilter implements Filter{
-        
+public class PersistenceFilter implements Filter {
+
+    @Inject
+    private PersistenceUtil persistenceUtil;
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
     }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        EntityManager em = PersistenceUtil.getEntityManager();
-        EntityTransaction transaction = em.getTransaction();
-        if(!transaction.isActive()){
-            transaction.begin();
-        }
-        try {
+        HttpServletRequest req = (HttpServletRequest) request;
+        if (req.getRequestURI().startsWith(req.getContextPath() + "/resources/") || req.getRequestURI().startsWith(req.getContextPath() + "/javax.faces.resource/")) {
             chain.doFilter(request, response);
-            if(transaction.getRollbackOnly()){
+        } else {
+            EntityManager em = persistenceUtil.getEntityManager();
+            EntityTransaction transaction = em.getTransaction();
+            try {
+                if (!transaction.isActive()) {
+                    transaction.begin();
+                }
+                chain.doFilter(request, response);
+                if (transaction.getRollbackOnly()) {
+                    transaction.rollback();
+                } else {
+                    transaction.commit();
+                }
+            } catch (Exception e) {
                 transaction.rollback();
-            }else {
-                transaction.commit();
+                throw e;
+            } finally {
+                persistenceUtil.closeEntityManager();
             }
-        } catch (Exception e) {
-            transaction.rollback();
-            throw e;
-        }        
+        }
+
     }
 
     @Override
     public void destroy() {
-        PersistenceUtil.closeEntityManager();
+        persistenceUtil.closeEntityManager();
     }
 
 }

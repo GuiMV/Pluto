@@ -7,27 +7,30 @@ package com.vieira.pluto.mb;
 
 import com.vieira.pluto.dao.ClienteDao;
 import com.vieira.pluto.entity.Cliente;
-import com.vieira.pluto.entity.Usuario;
+
+import javax.annotation.PostConstruct;
+
+import com.vieira.pluto.enums.PROPERTY;
+import org.omnifaces.cdi.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 import java.util.Date;
 import java.util.List;
-import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 
 /**
  *
  * @author Guilherme
  */
-@ManagedBean
+@Named
 @ViewScoped
 public class MbConsultaCliente extends BasicMb{
-    
-    private List<Cliente> clientes;
+
+    @Inject
     private ClienteDao clienteDao;
+    private List<Cliente> clientes;
     
     @PostConstruct
     public void init(){
-        clienteDao = new ClienteDao();
         clientes = clienteDao.getAllAtivos();
     }
 
@@ -40,7 +43,7 @@ public class MbConsultaCliente extends BasicMb{
     }
     
     public void editar(Cliente cliente){
-        putOnSession("clienteEditar", cliente);
+        putOnSession(PROPERTY.CLIENTE_EDITAR.name(), cliente.getId());
         redirectOnContextPath("/pages/cliente/cadastro/cadastroCliente.xhtml");
     }
     

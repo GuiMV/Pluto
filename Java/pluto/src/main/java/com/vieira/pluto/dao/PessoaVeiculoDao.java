@@ -2,6 +2,7 @@ package com.vieira.pluto.dao;
 
 import com.vieira.pluto.entity.PessoaVeiculo;
 import com.vieira.pluto.persistence.GenericDao;
+import com.vieira.pluto.persistence.PersistenceUtil;
 
 import javax.persistence.Query;
 import java.util.List;

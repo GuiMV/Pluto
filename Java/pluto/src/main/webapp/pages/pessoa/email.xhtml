@@ -10,7 +10,10 @@
             <div class="row">
                 <div class="col-xs-12 col-md-2  go-top">
                     <h:inputText class="col-xs-12"
-                                 value="#{mbPessoa.email.endereco}"/>
+                                 validatorMessage="Email Inválido"
+                                 value="#{mbPessoa.email.endereco}">
+                        <!--<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />-->
+                    </h:inputText>
                     <label>Email</label>
                 </div>
                 <div class="col-xs-12 col-md-2  go-top">
@@ -42,7 +45,7 @@
                      paginatorAlwaysVisible="true"
                      paginatorPosition="bottom"
                      rows="10"
-                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     currentPageReportTemplate="{currentPage} de {totalPages}"                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                      rowsPerPageTemplate="10,25,50,100"
                      emptyMessage="Nenhum registro encontrado"
                      var="email">
@@ -55,7 +58,7 @@
             <p:column headerText="Principal">
                 #{mbPessoa.isEmailPrincipal(email) ? "Sim" : "Não"}
             </p:column>>
-            <p:column headerText="Ações">
+            <p:column headerText="Ações" width="60" style="text-align: center;">
                 <h:commandLink action="#{mbPessoa.editarEmail(email)}">
                     <f:ajax execute="@this" render="email messages"/>
                     <i class="fa fa-pencil-square-o"></i>

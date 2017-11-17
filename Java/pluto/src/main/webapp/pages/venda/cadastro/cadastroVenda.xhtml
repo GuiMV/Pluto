@@ -1,0 +1,316 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui" xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                template="/pages/templates/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:define name="conteudo">
+        <div class="box">
+            <div class="box-header">
+                <div class="box-left"><i class="fa fa-edit"></i></div>
+                <label>Cadastro de Venda</label>
+            </div>
+            <div class="box-content">
+                <div id="wizard">
+                    <ul class="wizard">
+                        <li><a href="#tab1" data-toggle="tab" class="tab-header">Dados Gerais</a></li>
+                        <li><a href="#tab2" data-toggle="tab" class="tab-header">Itens</a></li>
+                        <li><a href="#tab3" data-toggle="tab" class="tab-header">Conta</a></li>
+                        <li class="next"><a href="#"><i class="fa fa-arrow-right"/></a></li>
+                        <li class="previous"><a href="#"><i class="fa fa-arrow-left"/></a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane" id="tab1">
+                            <h:panelGroup layout="block" id="dadosPessoais">
+                                <div class="row">
+                                    <h:panelGroup layout="block" class="col-xs-12 col-md-4 go-top">
+                                        <h:selectOneMenu class="col-xs-12"
+                                                         value="#{mbCadastroVenda.venda.idOrcamento}">
+                                            <f:selectItem/>
+                                            <f:selectItems value="#{mbCadastroVenda.orcamentos}"
+                                                           var="orcamento"
+                                                           itemValue="#{orcamento.id}"
+                                                           itemLabel="#{orcamento.id} - #{orcamento.cliente.pessoa.nomeFantasia} - #{orcamento.veiculoOrcamento.modeloVeiculo.nome}"/>
+                                            <f:ajax execute="@this" render="@form"
+                                                    listener="#{mbCadastroVenda.selecionarOrcamento(orcamento.id)}"/>
+                                        </h:selectOneMenu>
+                                        <label>Orçamento</label>
+                                    </h:panelGroup>
+                                    <h:panelGroup layout="block" class="col-xs-12 col-md-2 go-top" id="cliente">
+                                        <h:selectOneMenu required="true"
+                                                         requiredMessage="Campo Cliente é obrigatório"
+                                                         pt:placeholder="Obrigatório"
+                                                         class="col-xs-12"
+                                                         converter="omnifaces.SelectItemsConverter"
+                                                         value="#{mbCadastroVenda.venda.cliente}"
+                                                         disabled="#{mbCadastroVenda.venda.idOrcamento != null}">
+                                            <f:selectItems value="#{mbCadastroVenda.clientes}"
+                                                           var="cliente"
+                                                           itemValue="#{cliente}"
+                                                           itemLabel="#{cliente.pessoa.nomeFantasia}"/>
+                                            <f:ajax execute="@this" render="veiculo classificacao"
+                                                    listener="#{mbCadastroVenda.alterarCliente()}"/>
+                                        </h:selectOneMenu>
+                                        <label>Cliente</label>
+                                    </h:panelGroup>
+                                    <h:panelGroup layout="block" class="col-xs-12 col-md-2 go-top" id="veiculo">
+                                        <h:selectOneMenu required="true"
+                                                         requiredMessage="Campo Veículo é obrigatório"
+                                                         pt:placeholder="Obrigatório"
+                                                         class="col-xs-12"
+                                                         converter="omnifaces.SelectItemsConverter"
+                                                         value="#{mbCadastroVenda.pessoaVeiculo}"
+                                                         disabled="#{mbCadastroVenda.venda.idOrcamento != null}">
+                                            <f:selectItems value="#{mbCadastroVenda.pessoaVeiculos}"
+                                                           var="pessoaVeiculo"
+                                                           itemValue="#{pessoaVeiculo}"
+                                                           itemLabel="#{pessoaVeiculo.modeloVeiculo.nome} - #{pessoaVeiculo.placa}"/>
+                                        </h:selectOneMenu>
+                                        <label>Veículo</label>
+                                    </h:panelGroup>
+                                    <h:panelGroup layout="block" class="col-xs-12 col-md-12  go-top">
+                                        <h:inputText required="true"
+                                                     requiredMessage="Campo Descrição é obrigatório"
+                                                     pt:placeholder="Obrigatório"
+                                                     id="descricao"
+                                                     class="col-xs-12"
+                                                     value="#{mbCadastroVenda.venda.descricao}">
+                                        </h:inputText>
+                                        <h:outputLabel value="Descrição"/>
+                                    </h:panelGroup>
+                                </div>
+                            </h:panelGroup>
+                        </div>
+                        <h:panelGroup layout="block" class="tab-pane" id="tab2">
+                            <f:validateBean disabled="true">
+                                <h:panelGroup layout="block" id="itemVenda">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-2 col-lg-2 go-top">
+                                            <h:selectOneMenu class="col-xs-12"
+                                                             id="tipoItem"
+                                                             converter="omnifaces.SelectItemsConverter"
+                                                             value="#{mbCadastroVenda.tipoItemComercializavel}">
+                                                <f:selectItems value="#{mbCadastroVenda.tiposItemComercializaveis}"
+                                                               var="tipoItem"
+                                                               itemValue="#{tipoItem}"
+                                                               itemLabel="#{tipoItem.nome}"/>
+                                                <f:ajax render="funcionario itemComercializavel"
+                                                        execute="@this tipoItem"
+                                                        listener="#{mbCadastroVenda.alterarTipoItemComercializavel()}"/>
+                                            </h:selectOneMenu>
+                                            <label>Tipo</label>
+                                        </div>
+                                        <div class="col-xs-12 col-md-2  go-top">
+                                            <h:selectOneMenu class="col-xs-12"
+                                                             converter="omnifaces.SelectItemsConverter"
+                                                             value="#{mbCadastroVenda.itemVenda.itemComercializavel}"
+                                                             id="itemComercializavel">
+                                                <f:selectItems value="#{mbCadastroVenda.itensComercializaveis}"
+                                                               var="itemComercializavel"
+                                                               itemValue="#{itemComercializavel}"
+                                                               itemLabel="#{itemComercializavel.nomeCompleto} - #{itemComercializavel.valorVenda}"/>
+                                            </h:selectOneMenu>
+                                            <label>Item</label>
+                                        </div>
+                                        <div class="col-xs-12 col-md-2  go-top">
+                                            <h:inputText value="#{mbCadastroVenda.itemVenda.quantidade}"
+                                                         class="col-xs-12"
+                                                         converterMessage="Quantidade deve ser no formato 0,000">
+                                                <f:convertNumber pattern="#,###0.000" minFractionDigits="3"/>
+                                            </h:inputText>
+                                            <label>Quantidade</label>
+                                        </div>
+                                        <h:panelGroup id="funcionario">
+                                            <h:panelGroup layout="block"
+                                                          class="col-xs-12 col-md-2 col-lg-2 go-top"
+                                                          rendered="#{mbCadastroVenda.itemTipoServico}">
+                                                <h:selectOneMenu class="col-xs-12"
+                                                                 required="true"
+                                                                 requiredMessage="Campo Funcionário é obrigatório"
+                                                                 pt:placeholder="Obrigatório"
+                                                                 converter="omnifaces.SelectItemsConverter"
+                                                                 value="#{mbCadastroVenda.itemVenda.funcionario}">
+                                                    <f:selectItems value="#{mbCadastroVenda.funcionarios}"
+                                                                   var="func"
+                                                                   itemValue="#{func}"
+                                                                   itemLabel="#{func.pessoa.razaoSocial}"/>
+                                                </h:selectOneMenu>
+                                                <label>Funcionário</label>
+                                            </h:panelGroup>
+                                        </h:panelGroup>
+                                    </div>
+                                </h:panelGroup>
+                                <div class="row">
+                                    <div class="col-xs-12" style="text-align: center;">
+                                        <h:commandButton value="Salvar"
+                                                         action="#{mbCadastroVenda.adicionarItem()}"
+                                                         class="btn btn-primary"
+                                                         style="margin-bottom: 10px;">
+                                            <f:ajax execute="itemVenda"
+                                                    render="itemVenda itensVenda valorTotal messages"/>
+                                        </h:commandButton>
+                                    </div>
+                                </div>
+                                <p:dataTable value="#{mbCadastroVenda.venda.itemVendaList}"
+                                             id="itensVenda"
+                                             paginator="true"
+                                             scrollable="false"
+                                             paginatorAlwaysVisible="true"
+                                             paginatorPosition="bottom"
+                                             rows="10"
+                                             currentPageReportTemplate="{currentPage} de {totalPages}"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="10,25,50,100"
+                                             emptyMessage="Nenhum registro encontrado"
+                                             var="itemVenda">
+                                    <f:facet name="header">
+                                        Itens
+                                    </f:facet>
+                                    <p:column headerText="Item">
+                                        #{itemVenda.itemComercializavel.nome}
+                                    </p:column>
+                                    <p:column headerText="Tipo">
+                                        #{itemVenda.itemComercializavel.tipoItemComercializavel.nome}
+                                    </p:column>
+                                    <p:column headerText="Quantidade">
+                                        <h:outputText value="#{itemVenda.quantidade}">
+                                            <f:convertNumber pattern="#,###0.000" minFractionDigits="3"/>
+                                        </h:outputText>
+
+                                        <f:facet name="footer">
+                                            <span style="float: right;">Total:</span>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column headerText="Valor Total">
+                                        <h:outputText value="#{itemVenda.valorTotal}">
+                                            <f:convertNumber pattern="#,##0.00" minFractionDigits="2"/>
+                                        </h:outputText>
+
+                                        <f:facet name="footer">
+                                            <h:outputText
+                                                    style="float: left;"
+                                                    value="#{mbCadastroVenda.venda.valorTotal}">
+                                                <f:convertNumber pattern="#,##0.00" minFractionDigits="2"/>
+                                            </h:outputText>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column headerText="Ações">
+                                        <h:commandLink action="#{mbCadastroVenda.excluirItem(itemVenda)}">
+                                            <f:ajax execute="@this" render="itensVenda messages"/>
+                                            <i class="fa fa-times-circle-o"></i>
+                                        </h:commandLink>
+                                    </p:column>
+                                </p:dataTable>
+                            </f:validateBean>
+                        </h:panelGroup>
+                        <h:panelGroup layout="block" class="tab-pane" id="tab3">
+                            <h:panelGroup layout="block" id="conta">
+                                <div class="row">
+                                    <h:panelGroup layout="block" class="col-xs-12 col-md-2 go-top" id="classificacao">
+                                        <h:inputText disabled="true"
+                                                     value="#{mbCadastroVenda.venda.cliente.classificacao.nome}"
+                                                     class="col-xs-12"/>
+                                        <label>Classificação</label>
+                                    </h:panelGroup>
+                                    <h:panelGroup layout="block" class="col-xs-12 col-md-2  go-top" id="valorTotal">
+                                        <h:inputText value="#{mbCadastroVenda.venda.valorTotal}"
+                                                     class="col-xs-12"
+                                                     disabled="true"
+                                                     converterMessage="Valor Total deve ser no formato 0,00">
+                                            <f:convertNumber pattern="#,##0.00" minFractionDigits="2"/>
+                                        </h:inputText>
+                                        <label>Valor Total</label>
+                                    </h:panelGroup>
+                                    <h:panelGroup layout="block" class="col-xs-12 col-md-2 go-top">
+                                        <h:selectOneMenu required="true"
+                                                         requiredMessage="Campo Parcelas é obrigatório"
+                                                         pt:placeholder="Obrigatório"
+                                                         class="col-xs-12"
+                                                         value="#{mbCadastroVenda.quantidadeParcelas}">
+                                            <f:selectItems value="#{mbCadastroVenda.parcelas}"
+                                                           var="parcela"
+                                                           itemValue="#{parcela.quantidade}"
+                                                           itemLabel="#{parcela.quantidade}"/>
+                                        </h:selectOneMenu>
+                                        <label>Parcelas</label>
+                                    </h:panelGroup>
+                                    <h:panelGroup layout="block" class="col-xs-12 col-md-2 go-top">
+                                        <h:inputText required="true"
+                                                     requiredMessage="Campo Primeiro Vencimento é obrigatório"
+                                                     pt:placeholder="Obrigatório"
+                                                     id="primeiroVencimento"
+                                                     class="col-xs-12"
+                                                     value="#{mbCadastroVenda.vencimento}">
+                                            <f:convertDateTime type="localDate" pattern="dd/MM/yyyy"/>
+                                        </h:inputText>
+                                        <label>Primeiro Vencimento</label>
+                                        <script>
+                                            $(document).ready(function () {
+                                                criarCalendario($('#primeiroVencimento'));
+                                            });
+                                        </script>
+                                    </h:panelGroup>
+                                    <h:panelGroup layout="block" class="col-xs-12 col-md-2 go-top">
+                                        <h:selectOneMenu required="true"
+                                                         requiredMessage="Campo Quitado é obrigatório"
+                                                         pt:placeholder="Obrigatório"
+                                                         class="col-xs-12"
+                                                         value="#{mbCadastroVenda.quitado}">
+                                            <f:selectItem itemLabel="Não" itemValue="#{false}"/>
+                                            <f:selectItem itemLabel="Sim" itemValue="#{true}"/>
+                                            <f:ajax execute="@this" render="dadosQuitacao"/>
+                                        </h:selectOneMenu>
+                                        <label>Quitado</label>
+                                    </h:panelGroup>
+                                </div>
+                                <div class="row">
+                                    <h:panelGroup id="dadosQuitacao">
+                                        <h:panelGroup layout="block" class="col-xs-12 col-md-2 go-top"
+                                                      rendered="#{mbCadastroVenda.quitado}">
+                                            <h:selectOneMenu required="true"
+                                                             requiredMessage="Campo Forma de Pagamento é obrigatório"
+                                                             pt:placeholder="Obrigatório"
+                                                             class="col-xs-12"
+                                                             value="#{mbCadastroVenda.idFormaPagamento}">
+                                                <f:selectItems value="#{mbCadastroVenda.formasPagamento}"
+                                                               var="formaPagamento"
+                                                               itemValue="#{formaPagamento.id}"
+                                                               itemLabel="#{formaPagamento.nome}"/>
+                                            </h:selectOneMenu>
+                                            <label>Forma de Pagamento</label>
+                                        </h:panelGroup>
+                                        <h:panelGroup layout="block" class="col-xs-12 col-md-2  go-top"
+                                                      rendered="#{mbCadastroVenda.quitado}">
+                                            <h:inputText required="true"
+                                                         requiredMessage="Campo Desconto Total é obrigatório"
+                                                         pt:placeholder="Obrigatório"
+                                                         value="#{mbCadastroVenda.desconto}"
+                                                         class="col-xs-12"
+                                                         converterMessage="Desconto Total deve ser no formato 0,00">
+                                                <f:convertNumber pattern="#,##0.00" minFractionDigits="2"/>
+                                            </h:inputText>
+                                            <label>Desconto Total</label>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+                                </div>
+                            </h:panelGroup>
+                        </h:panelGroup>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $('#wizard').bootstrapWizard();
+                    });
+
+                </script>
+            </div>
+            <div class="box-footer">
+                <h:commandButton value="Salvar"
+                                 action="#{mbCadastroVenda.salvar()}"
+                                 class="btn btn-primary">
+                    <f:ajax execute="form" render="form messages"/>
+                </h:commandButton>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

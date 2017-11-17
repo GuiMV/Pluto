@@ -34,8 +34,12 @@ public class Funcionario implements Serializable {
     @Column(name = "data_exclusao")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataExclusao;
+    @Column(name = "salario_fixo")
+    private Double salarioFixo;
+    @Column(name = "comissao")
+    private Double comissao;
     @JoinColumn(name = "id_pessoa", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Pessoa pessoa;
 
     public Funcionario() {
@@ -59,6 +63,22 @@ public class Funcionario implements Serializable {
 
     public void setDataExclusao(Date dataExclusao) {
         this.dataExclusao = dataExclusao;
+    }
+
+    public Double getSalarioFixo() {
+        return salarioFixo;
+    }
+
+    public void setSalarioFixo(Double salarioFixo) {
+        this.salarioFixo = salarioFixo;
+    }
+
+    public Double getComissao() {
+        return comissao;
+    }
+
+    public void setComissao(Double comissao) {
+        this.comissao = comissao;
     }
 
     public Pessoa getPessoa() {

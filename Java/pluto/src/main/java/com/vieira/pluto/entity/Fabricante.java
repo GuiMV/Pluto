@@ -27,7 +27,6 @@ public class Fabricante implements Serializable {
     @Id
     @GenericGenerator(name = "increment_Fabricante", strategy = "increment")
     @GeneratedValue(generator = "increment_Fabricante")
-    @Basic(optional = false)
     @NotNull
     @Column(name = "id")
     private Long id;
@@ -35,10 +34,8 @@ public class Fabricante implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataExclusao;
     @JoinColumn(name = "id_pessoa", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Pessoa pessoa;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fabricante", fetch = FetchType.LAZY)
-    private List<ModeloVeiculo> modeloVeiculoList;
 
     public Fabricante() {
     }
@@ -69,14 +66,6 @@ public class Fabricante implements Serializable {
 
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
-    }
-
-    public List<ModeloVeiculo> getModeloVeiculoList() {
-        return modeloVeiculoList;
-    }
-
-    public void setModeloVeiculoList(List<ModeloVeiculo> modeloVeiculoList) {
-        this.modeloVeiculoList = modeloVeiculoList;
     }
 
     @Override

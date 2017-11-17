@@ -81,27 +81,25 @@ public class Pessoa implements Serializable {
         @JoinColumn(name = "id_email", referencedColumnName = "id")})
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Email> emailList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoa", fetch = FetchType.LAZY)
-    private List<Usuario> usuarioList;
     @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY)
     private List<PessoaVeiculo> pessoaVeiculos;
     @JoinColumn(name = "id_tipo_pessoa", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private TipoPessoa tipoPessoa;
     @JoinColumn(name = "id_telefone", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Telefone telefone;
     @JoinColumn(name = "id_sexo", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Sexo sexo;
     @JoinColumn(name = "id_estado_civil", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private EstadoCivil estadoCivil;
     @JoinColumn(name = "id_endereco", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Endereco endereco;
     @JoinColumn(name = "id_email", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Email email;
 
     public Pessoa() {
@@ -128,6 +126,7 @@ public class Pessoa implements Serializable {
         enderecoList = new ArrayList<>();
         emailList = new ArrayList<>();
         telefoneList = new ArrayList<>();
+        pessoaVeiculos = new ArrayList<>();
     }
 
     public Pessoa(Long id, String razaoSocial, String nomeFantasia, String cpfCnpj, String rgIe) {
@@ -208,14 +207,6 @@ public class Pessoa implements Serializable {
 
     public void setEmailList(List<Email> emailList) {
         this.emailList = emailList;
-    }
-
-    public List<Usuario> getUsuarioList() {
-        return usuarioList;
-    }
-
-    public void setUsuarioList(List<Usuario> usuarioList) {
-        this.usuarioList = usuarioList;
     }
 
     public List<PessoaVeiculo> getPessoaVeiculos() {

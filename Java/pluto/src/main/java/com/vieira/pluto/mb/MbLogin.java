@@ -4,13 +4,16 @@ import com.vieira.pluto.dao.UsuarioDao;
 import com.vieira.pluto.entity.Usuario;
 
 import javax.enterprise.context.SessionScoped;
-import javax.faces.bean.ManagedBean;
+import javax.inject.Named;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
 @SessionScoped
 public class MbLogin extends BasicMb {
 
+    @Inject
+    private UsuarioDao usuarioDao;
     private Usuario usuario;
 
     public MbLogin() {
@@ -22,7 +25,6 @@ public class MbLogin extends BasicMb {
     }
 
     public void logon() {
-        UsuarioDao usuarioDao = new UsuarioDao();
         try {
             usuario = usuarioDao.logon(usuario);
         } catch (Exception e) {

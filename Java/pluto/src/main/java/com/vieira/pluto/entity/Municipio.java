@@ -39,7 +39,7 @@ public class Municipio implements Serializable {
     @Size(min = 1, max = 256)
     private String nome;
     @JoinColumn(name = "id_uf", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Uf uf;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "municipio", fetch = FetchType.LAZY)
     private List<Endereco> enderecoList;
@@ -89,28 +89,17 @@ public class Municipio implements Serializable {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Municipio municipio = (Municipio) o;
+
+        return id != null ? id.equals(municipio.id) : municipio.id == null;
+    }
+
+    @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+        return id != null ? id.hashCode() : 0;
     }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Municipio)) {
-            return false;
-        }
-        Municipio other = (Municipio) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.vieira.pluto.entity.Municipio[ id=" + id + " ]";
-    }
-    
 }

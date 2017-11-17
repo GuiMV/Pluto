@@ -1,0 +1,91 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                template="/pages/templates/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:define name="conteudo">
+        <div class="box">
+            <div class="box-header">
+                <div class="box-left"><i class="fa fa-edit"></i></div>
+                <label>Configuração de E-mail</label>
+            </div>
+            <div class="box-content">
+                <div class="row">
+                    <div class="col-xs-12 col-md-2  go-top">
+                        <h:inputText class="col-xs-12"
+                                     required="true"
+                                     requiredMessage="Campo Host Name é obrigatório"
+                                     value="#{mbCadastroConfiguracaoEmail.configuracaoEmail.hostName}"/>
+                        <label>Host Name</label>
+                    </div>
+                    <div class="col-xs-12 col-md-2  go-top">
+                        <h:inputText class="col-xs-12"
+                                     required="true"
+                                     requiredMessage="Campo Porta é obrigatório"
+                                     value="#{mbCadastroConfiguracaoEmail.configuracaoEmail.port}"/>
+                        <label>Porta</label>
+                    </div>
+                    <h:panelGroup layout="block" class="col-xs-12 col-md-2 go-top">
+                        <h:selectOneMenu required="true"
+                                         requiredMessage="Campo SSL é obrigatório"
+                                         class="col-xs-12"
+                                         value="#{mbCadastroConfiguracaoEmail.configuracaoEmail.ssl}">
+                            <f:selectItem itemLabel="Não" itemValue="#{false}"/>
+                            <f:selectItem itemLabel="Sim" itemValue="#{true}"/>
+                        </h:selectOneMenu>
+                        <label>SSL</label>
+                    </h:panelGroup>
+                    <div class="col-xs-12 col-md-2  go-top">
+                        <h:inputText class="col-xs-12"
+                                     required="true"
+                                     requiredMessage="Campo E-mail é obrigatório"
+                                     value="#{mbCadastroConfiguracaoEmail.configuracaoEmail.userName}"/>
+                        <label>E-mail</label>
+                    </div>
+                    <div class="col-xs-12 col-md-2  go-top">
+                        <h:inputSecret class="col-xs-12"
+                                       required="true"
+                                       redisplay="true"
+                                       requiredMessage="Campo Senha é obrigatório"
+                                       value="#{mbCadastroConfiguracaoEmail.configuracaoEmail.password}"/>
+                        <label>Senha</label>
+                    </div>
+                    <div class="col-xs-12 col-md-2  go-top">
+                        <h:inputText class="col-xs-12"
+                                     required="true"
+                                     requiredMessage="Campo Emitente é obrigatório"
+                                     value="#{mbCadastroConfiguracaoEmail.configuracaoEmail.emitter}"/>
+                        <label>Emitente</label>
+                    </div>
+                    <div class="col-xs-12 col-md-2  go-top">
+                        <h:inputText class="col-xs-12"
+                                     required="true"
+                                     requiredMessage="Campo Assunto é obrigatório"
+                                     value="#{mbCadastroConfiguracaoEmail.configuracaoEmail.subject}"/>
+                        <label>Assunto</label>
+                    </div>
+                    <div class="col-xs-12  go-top">
+                        <h:inputTextarea class="col-xs-12"
+                                         rows="10"
+                                         required="true"
+                                         requiredMessage="Campo Mensagem é obrigatório"
+                                         value="#{mbCadastroConfiguracaoEmail.configuracaoEmail.message}"/>
+                        <label>Mensagem</label>
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                <h:commandButton value="Testar"
+                                 action="#{mbCadastroConfiguracaoEmail.enviarEmailTeste()}"
+                                 class="btn btn-primary">
+                    <f:ajax execute="form" render="form messages"/>
+                </h:commandButton>
+                <h:commandButton value="Salvar"
+                                 action="#{mbCadastroConfiguracaoEmail.salvar()}"
+                                 class="btn btn-primary">
+                    <f:ajax execute="form" render="form messages"/>
+                </h:commandButton>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

@@ -4,21 +4,24 @@ import com.vieira.pluto.dao.FabricanteDao;
 import com.vieira.pluto.entity.Fabricante;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.inject.Named;
+
+import com.vieira.pluto.enums.PROPERTY;
+import org.omnifaces.cdi.ViewScoped;
+import javax.inject.Inject;
 import java.util.Date;
 import java.util.List;
 
-@ManagedBean
+@Named
 @ViewScoped
 public class MbConsultaFabricante extends BasicMb{
-    
-    private List<Fabricante> fabricantes;
+
+    @Inject
     private FabricanteDao fabricanteDao;
+    private List<Fabricante> fabricantes;
     
     @PostConstruct
     public void init(){
-        fabricanteDao = new FabricanteDao();
         fabricantes = fabricanteDao.getAllAtivos();
     }
 
@@ -31,7 +34,7 @@ public class MbConsultaFabricante extends BasicMb{
     }
     
     public void editar(Fabricante fabricante){
-        putOnSession("fabricanteEditar", fabricante);
+        putOnSession(PROPERTY.FABRICANTE_EDITAR.name(), fabricante.getId());
         redirectOnContextPath("/pages/fabricante/cadastro/cadastroFabricante.xhtml");
     }
     

@@ -8,6 +8,7 @@ import org.jinq.orm.stream.JinqStream;
 import java.util.List;
 
 import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
 
 public class ItemComercializavelDao extends GenericDao<ItemComercializavel> {
 
@@ -31,5 +32,23 @@ public class ItemComercializavelDao extends GenericDao<ItemComercializavel> {
         }  else  {
             edit(itemComercializavel);
         }
+    }
+
+    public ItemComercializavel getByCean(String cean){
+        if(isNull(cean)){
+            return null;
+        }
+        return getEntities().where(obj -> obj.getCean().equals(cean)).findFirst().orElse(null);
+    }
+
+    public ItemComercializavel getByCean(ItemComercializavel itemComercializavel){
+        ItemComercializavel newItemComercializavel = getByCean(itemComercializavel.getCean());
+        if (nonNull(newItemComercializavel)) {
+            return newItemComercializavel;
+        }
+        if (isNull(itemComercializavel.getId())) {
+            return itemComercializavel;
+        }
+        return new ItemComercializavel(itemComercializavel.getCean(), itemComercializavel.getTipoItemComercializavel());
     }
 }

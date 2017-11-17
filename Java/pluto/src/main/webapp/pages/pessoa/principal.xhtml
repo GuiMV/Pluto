@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:o="http://omnifaces.org/ui"
                 xmlns:p="http://primefaces.org/ui">
     <h:panelGroup layout="block" id="dadosPessoais">
         <div class="row">
             <h:panelGroup layout="block" class="col-xs-12 col-md-2 go-top" rendered="#{mbPessoa.renderTipoPessoa}">
                 <h:selectOneMenu required="true"
+                                 requiredMessage="Campo Pessoa é obrigatório"
+                                 pt:placeholder="Obrigatório"
+                                 id="tipoPessoa"
                                  class="col-xs-12"
                                  converter="omnifaces.SelectItemsConverter"
                                  value="#{mbPessoa.pessoa.tipoPessoa}">
@@ -22,21 +26,21 @@
             </h:panelGroup>
             <h:panelGroup layout="block" class="col-xs-12 col-md-2  go-top">
                 <h:inputText required="true"
-                             requiredMessage="CPF/CNPJ obrigatório"
+                             requiredMessage="Campo CPF/CNPJ é obrigatório"
+                             pt:placeholder="Obrigatório"
                              id="cpfCnpj"
                              class="col-xs-12"
                              converter="converter.CpfCnpjConverter"
-                             value="#{mbPessoa.pessoa.cpfCnpj}">
-                    <f:ajax event="blur"
-                            listener="#{mbPessoa.buscarCpfCnpj()}"
-                            execute="cpfCnpj"
-                            render="dadosPessoais endereco enderecos telefone telefones email emails messages"/>
+                             value="#{mbPessoa.pessoa.cpfCnpj}"
+                             onchange="buscarCpfCnpj()">
                 </h:inputText>
                 <h:outputLabel rendered="#{mbPessoa.renderCpf}" value="CPF"/>
                 <h:outputLabel rendered="#{mbPessoa.renderCnpj}" value="CNPJ"/>
             </h:panelGroup>
             <h:panelGroup layout="block" class="col-xs-12 col-md-4  go-top">
-                <h:inputText required="true" 
+                <h:inputText required="true"
+                             requiredMessage="Campo Nome/Razão Social é obrigatório"
+                             pt:placeholder="Obrigatório"
                              class="col-xs-12"
                              onblur="if ($('#apelido').val() == '') {
                                      $('#apelido').val(this.value);
@@ -46,7 +50,9 @@
                 <h:outputLabel rendered="#{mbPessoa.renderCnpj}" value="Razão Social"/>
             </h:panelGroup>
             <h:panelGroup layout="block" class="col-xs-12 col-md-4 go-top">
-                <h:inputText required="true" 
+                <h:inputText required="true"
+                             requiredMessage="Campo Apelido/Nome Fantasia é obrigatório"
+                             pt:placeholder="Obrigatório"
                              id="apelido"
                              class="col-xs-12"
                              value="#{mbPessoa.pessoa.nomeFantasia}"/>
@@ -60,7 +66,9 @@
                 <h:outputLabel rendered="#{mbPessoa.renderCnpj}" value="IE"/>
             </h:panelGroup>
             <h:panelGroup layout="block" rendered="#{mbPessoa.renderCpf}" class="col-xs-12 col-md-2 go-top">
-                <h:inputText required="true" 
+                <h:inputText required="true"
+                             requiredMessage="Campo Data de Nascimento é obrigatório"
+                             pt:placeholder="Obrigatório"
                              id="dataNascimento"
                              class="col-xs-12"
                              value="#{mbPessoa.pessoa.dataNascimento}">
@@ -71,10 +79,12 @@
                     $(document).ready(function () {
                         criarCalendario($('#dataNascimento'));
                     });
-                </script>  
+                </script>
             </h:panelGroup>
             <h:panelGroup layout="block" rendered="#{mbPessoa.renderCpf}" class="col-xs-12 col-md-2 go-top">
-                <h:selectOneMenu required="true" 
+                <h:selectOneMenu required="true"
+                                 requiredMessage="Campo Sexo é obrigatório"
+                                 pt:placeholder="Obrigatório"
                                  class="col-xs-12"
                                  converter="omnifaces.SelectItemsConverter"
                                  value="#{mbPessoa.pessoa.sexo}">
@@ -98,4 +108,8 @@
             </h:panelGroup>
         </div>
     </h:panelGroup>
+    <h:commandScript name="buscarCpfCnpj"
+                     render="dadosPessoais endereco enderecos telefone telefones email emails messages veiculo veiculos"
+                     actionListener="#{mbPessoa.buscarCpfCnpj()}"
+                     execute="cpfCnpj"/>
 </ui:composition>

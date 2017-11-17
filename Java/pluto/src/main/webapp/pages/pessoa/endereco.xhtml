@@ -9,7 +9,10 @@
     <h:panelGroup layout="block" id="endereco"> 
         <div class="row">
             <div class="col-xs-8 col-md-2 col-lg-2 go-top">
-                <h:inputText class="col-xs-12" id="cep" value="#{mbPessoa.endereco.cep}" converter="converter.CepConverter"/>
+                <h:inputText class="col-xs-12"
+                             id="cep"
+                             value="#{mbPessoa.endereco.cep}"
+                             converter="converter.CepConverter"/>
                 <label>CEP</label>
             </div>
             <div class="col-xs-4 col-md-2 col-lg-2">
@@ -70,9 +73,9 @@
                 <h:selectOneMenu class="col-xs-12"
                                  value="#{mbPessoa.enderecoPrincipal}">
                     <f:selectItems value="#{mbPessoa.simNao}"
-                                   var="cor"
-                                   itemValue="#{cor.value}"
-                                   itemLabel="#{cor.label}"/>
+                                   var="simNao"
+                                   itemValue="#{simNao.value}"
+                                   itemLabel="#{simNao.label}"/>
                 </h:selectOneMenu>
                 <label>Principal</label>
             </div>
@@ -106,7 +109,7 @@
                  paginatorAlwaysVisible="true"
                  paginatorPosition="bottom"
                  rows="10"
-                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                 currentPageReportTemplate="{currentPage} de {totalPages}"                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                  rowsPerPageTemplate="10,25,50,100"
                  emptyMessage="Nenhum registro encontrado"
                  var="endereco">
@@ -129,7 +132,7 @@
         <p:column headerText="Principal">
             #{mbPessoa.isEnderecoPrincipal(endereco) ? "Sim" : "Não"}
         </p:column>
-        <p:column headerText="Ações">
+        <p:column headerText="Ações" width="60" style="text-align: center;">
             <h:commandLink action="#{mbPessoa.editarEndereco(endereco)}">
                 <f:ajax execute="@this" render="endereco messages"/>
                 <i class="fa fa-pencil-square-o"></i>

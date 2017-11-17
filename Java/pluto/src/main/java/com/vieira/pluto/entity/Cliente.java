@@ -27,16 +27,21 @@ public class Cliente implements Serializable {
     @Id
     @GenericGenerator(name = "increment_Cliente", strategy = "increment")
     @GeneratedValue(generator = "increment_Cliente")
-    @Basic(optional = false)
     @NotNull
     @Column(name = "id")
     private Long id;
     @Column(name = "data_exclusao")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataExclusao;
+    @NotNull
+    @Column(name = "id_classificacao")
+    private Long idClassificacao;
     @JoinColumn(name = "id_pessoa", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Pessoa pessoa;
+    @JoinColumn(name = "id_classificacao", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private Classificacao classificacao;
 
     public Cliente() {
     }
@@ -61,12 +66,28 @@ public class Cliente implements Serializable {
         this.dataExclusao = dataExclusao;
     }
 
+    public Long getIdClassificacao() {
+        return idClassificacao;
+    }
+
+    public void setIdClassificacao(Long idClassificacao) {
+        this.idClassificacao = idClassificacao;
+    }
+
     public Pessoa getPessoa() {
         return pessoa;
     }
 
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
+    }
+
+    public Classificacao getClassificacao() {
+        return classificacao;
+    }
+
+    public void setClassificacao(Classificacao classificacao) {
+        this.classificacao = classificacao;
     }
 
     @Override

@@ -4,25 +4,40 @@ import com.vieira.pluto.dao.CorDao;
 import com.vieira.pluto.entity.Cor;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.inject.Named;
 
-@ManagedBean
+import com.vieira.pluto.enums.PROPERTY;
+import org.omnifaces.cdi.ViewScoped;
+import javax.inject.Inject;
+
+import static java.util.Objects.isNull;
+
+@Named
 @ViewScoped
 public class MbCadastroCor extends BasicMb {
 
+    @Inject
+    private CorDao corDao;
     private Cor cor;
 
     @PostConstruct
     public void init(){
+        Long idCor = getOnFlash(PROPERTY.COR_EDITAR.name(), Long.class);
+        if(isNull(idCor)){
+            novaCor();
+        } else {
+            cor = corDao.get(idCor);
+        }
+    }
+
+    private void novaCor() {
         cor = new Cor();
     }
 
     public void salvar(){
-        CorDao corDao = new CorDao();
         cor.setNome(cor.getNome().toUpperCase() );
-        corDao.add(cor);
-        cor = new Cor();
+        corDao.save(cor);
+        novaCor();
         addInfoMessage("Cor salva com sucesso!");
     }
 

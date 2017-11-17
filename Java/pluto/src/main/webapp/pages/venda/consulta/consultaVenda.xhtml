@@ -1,0 +1,135 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                template="/pages/templates/template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="conteudo">
+        <div class="box"> 
+            <div class="box-header">
+                <div class="box-left"><i class="fa fa-edit"></i></div><label>Vendas</label>
+                <div class="pull-right">
+                    <div class="box-right">
+                        <h:outputLink value="#" onclick="$('#filtroModal').modal('show');"><i
+                                class="fa fa-search"></i></h:outputLink>
+                    </div>
+                    <div class="box-right">
+                        <h:outputLink value="/pluto/pages/venda/cadastro/cadastroVenda.xhtml"><i class="fa fa-plus"></i></h:outputLink>
+                    </div>
+                </div>
+            </div>
+            <div class="box-content">
+                <p:dataTable value="#{mbConsultaVenda.vendas}"
+                             id="vendas"
+                             paginator="true"
+                             scrollable="false"
+                             paginatorAlwaysVisible="true"
+                             paginatorPosition="bottom"
+                             rows="10"
+                             currentPageReportTemplate="{currentPage} de {totalPages}"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="10,25,50,100"
+                             emptyMessage="Nenhum registro encontrado"
+                             var="venda">
+                    <p:column headerText="Nome">
+                        #{venda.cliente.pessoa.nomeFantasia}
+                    </p:column>
+                    <p:column headerText="Veículo">
+                        #{venda.veiculoVenda.modeloVeiculo.nome}
+
+                        <f:facet name="footer">
+                            <span style="float: right;">Total:</span>
+                        </f:facet>
+                    </p:column>
+                    <p:column headerText="Valor">
+                        <h:outputText value="#{venda.valorTotal}">
+                            <f:convertNumber pattern="#,##0.00" minFractionDigits="2"/>
+                        </h:outputText>
+
+                        <f:facet name="footer">
+                            <h:outputText
+                                    style="float: left;"
+                                    value="#{mbConsultaVenda.vendas.stream().map(venda->venda.valorTotal).sum()}">
+                                <f:convertNumber pattern="#,##0.00" minFractionDigits="2"/>
+                            </h:outputText>
+                        </f:facet>
+                    </p:column>
+                </p:dataTable>
+            </div>
+            <div class="box-footer">
+            </div>
+        </div>
+    </ui:define>
+    <ui:define name="modals">
+        <!-- Modal -->
+        <div class="modal fade" id="filtroModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="box-header">
+                        <div class="box-left"><i class="fa fa-edit"></i></div>
+                        <label>Filtro</label>
+                    </div>
+                    <h:panelGroup layout="block" class="box-content" id="filtro">
+                        <div class="row">
+                            <h:panelGroup layout="block" class="col-xs-12 col-md-6 go-top">
+                                <h:selectOneMenu class="col-xs-12"
+                                                 value="#{mbConsultaVenda.consultaOrcamentoDto.idCliente}">
+                                    <f:selectItem/>
+                                    <f:selectItems value="#{mbConsultaVenda.clientes}"
+                                                   var="cliente"
+                                                   itemValue="#{cliente.id}"
+                                                   itemLabel="#{cliente.pessoa.nomeFantasia}"/>
+                                </h:selectOneMenu>
+                                <label>Cliente</label>
+                            </h:panelGroup>
+                        </div>
+                        <div class="row">
+                            <h:panelGroup layout="block" class="col-xs-12 col-md-6 go-top">
+                                <h:inputText id="dataInicio"
+                                             class="col-xs-12"
+                                             value="#{mbConsultaVenda.consultaOrcamentoDto.dataInicio}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </h:inputText>
+                                <label>Data Inicio</label>
+                                <script>
+                                    $(document).ready(function () {
+                                        criarCalendario($('#dataInicio'));
+                                    });
+                                </script>
+                            </h:panelGroup>
+                        </div>
+                        <div class="row">
+                            <h:panelGroup layout="block" class="col-xs-12 col-md-6 go-top">
+                                <h:inputText id="dataFim"
+                                             class="col-xs-12"
+                                             value="#{mbConsultaVenda.consultaOrcamentoDto.dataFim}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </h:inputText>
+                                <label>Data Fim</label>
+                                <script>
+                                    $(document).ready(function () {
+                                        criarCalendario($('#dataFim'));
+                                    });
+                                </script>
+                            </h:panelGroup>
+                        </div>
+                    </h:panelGroup>
+                    <div class="box-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+                        <h:commandButton value="Filtrar"
+                                         action="#{mbConsultaVenda.filtrar()}"
+                                         class="btn btn-primary">
+                            <f:ajax execute="filtro" render="vendas messages"/>
+                        </h:commandButton>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </ui:define>
+    <ui:define name="scripts">       
+    </ui:define>
+</ui:composition>

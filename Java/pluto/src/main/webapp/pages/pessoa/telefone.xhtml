@@ -16,7 +16,7 @@
                 </div>
                 <div class="col-xs-12 col-md-2 col-lg-2 go-top">
                     <h:selectOneMenu class="col-xs-12"
-                                     converter="omnifaces.SelectItemsConverter"
+                                     converter="omnifaces.SelectItemsIndexConverter"
                                      value="#{mbPessoa.telefone.tipoTelefone}">
                         <f:selectItems value="#{mbPessoa.tiposTelefone}"
                                        var="tipoTelefone"
@@ -54,7 +54,7 @@
                      paginatorAlwaysVisible="true"
                      paginatorPosition="bottom"
                      rows="10"
-                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     currentPageReportTemplate="{currentPage} de {totalPages}"                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                      rowsPerPageTemplate="10,25,50,100"
                      emptyMessage="Nenhum registro encontrado"
                      var="telefone">
@@ -67,7 +67,7 @@
             <p:column headerText="Principal">
                 #{mbPessoa.isTelefonePrincipal(telefone) ? "Sim" : "Não"}
             </p:column>>
-            <p:column headerText="Ações">
+            <p:column headerText="Ações" width="60" style="text-align: center;">
                 <h:commandLink action="#{mbPessoa.editarTelefone(telefone)}">
                     <f:ajax execute="@this" render="telefone messages"/>
                     <i class="fa fa-pencil-square-o"></i>

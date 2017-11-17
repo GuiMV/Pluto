@@ -26,7 +26,6 @@ public class ModeloVeiculo implements Serializable {
     @Id
     @GenericGenerator(name = "increment_ModeloVeiculo", strategy = "increment")
     @GeneratedValue(generator = "increment_ModeloVeiculo")
-    @Basic(optional = false)
     @NotNull
     @Column(name = "id")
     private Long id;
@@ -36,7 +35,7 @@ public class ModeloVeiculo implements Serializable {
     @Column(name = "nome")
     private String nome;
     @JoinColumn(name = "id_fabricante", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Fabricante fabricante;
 
     public ModeloVeiculo() {
@@ -76,28 +75,24 @@ public class ModeloVeiculo implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ModeloVeiculo that = (ModeloVeiculo) o;
+
+        return id != null ? id.equals(that.id) : that.id == null;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ModeloVeiculo)) {
-            return false;
-        }
-        ModeloVeiculo other = (ModeloVeiculo) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 
     @Override
     public String toString() {
-        return "com.vieira.pluto.entity.ModeloVeiculo[ id=" + id + " ]";
+        return "ModeloVeiculo{" +
+                "id=" + id +
+                '}';
     }
-    
 }

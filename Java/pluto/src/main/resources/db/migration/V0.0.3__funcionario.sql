@@ -5,7 +5,9 @@
 CREATE TABLE funcionario (
     id bigint NOT NULL,
     id_pessoa bigint NOT NULL,
-    data_exclusao timestamp with time zone
+    data_exclusao timestamp with time zone,
+    salario_fixo double precision NOT NULL,
+    comissao double precision NOT NULL
 );
 
 

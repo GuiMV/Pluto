@@ -18,8 +18,6 @@ public class MunicipioDao extends GenericDao<Municipio>{
     
     @SuppressWarnings("unchecked")
     public List<Municipio> getByIdUf(Long idUf){
-        String sql = String.format("FROM Municipio WHERE uf.id = %d", idUf);
-        Query query = getEntityManager().createQuery(sql);
-        return query.getResultList();
+        return getEntities().where(obj -> obj.getUf().getId() == idUf).toList();
     }
 }

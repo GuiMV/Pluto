@@ -5,6 +5,7 @@ import com.vieira.pluto.entity.Funcionario;
 import com.vieira.pluto.entity.Pessoa;
 import com.vieira.pluto.persistence.GenericDao;
 
+import javax.inject.Inject;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -14,8 +15,10 @@ import java.util.Objects;
 
 public class FabricanteDao extends GenericDao<Fabricante> {
 
+    @Inject
+    private PessoaDao pessoaDao;
+
     public void save(Fabricante fabricante) {
-        PessoaDao pessoaDao = new PessoaDao();
         Pessoa pessoa = fabricante.getPessoa();
         pessoaDao.save(pessoa);
         if (Objects.isNull(fabricante.getId())) {
@@ -27,12 +30,10 @@ public class FabricanteDao extends GenericDao<Fabricante> {
 
     @SuppressWarnings("unchecked")
     public List<Fabricante> getAllAtivos() {
-        CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
-        CriteriaQuery cq = cb.createQuery();
-        Root<Fabricante> fabricante = cq.from(Fabricante.class);
-        cq.select(cq.from(entityClass));
-        cq.where(fabricante.get("dataExclusao").isNull());
-        Query query = getEntityManager().createQuery(cq);
-        return query.getResultList();
+        return getEntities().where(obj -> obj.getDataExclusao() == null).toList();
+    }
+
+    public Fabricante getByCpfCnpj(String cpfCnpj){
+        return getEntities().where(obj -> obj.getPessoa().getCpfCnpj().equals(cpfCnpj)).findFirst().orElse(null);
     }
 }

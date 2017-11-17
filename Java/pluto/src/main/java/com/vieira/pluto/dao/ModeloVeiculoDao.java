@@ -6,12 +6,21 @@ import com.vieira.pluto.persistence.GenericDao;
 import javax.persistence.Query;
 import java.util.List;
 
+import static java.util.Objects.isNull;
+
 public class ModeloVeiculoDao extends GenericDao<ModeloVeiculo> {
 
     @SuppressWarnings("unchecked")
     public List<ModeloVeiculo> getByIdFabricante(Long idFabricante) {
-        String sql = String.format("FROM ModeloVeiculo WHERE fabricante.id = %d", idFabricante);
-        Query query = getEntityManager().createQuery(sql);
-        return query.getResultList();
+        return getEntities().where(obj -> obj.getFabricante().getId() == idFabricante).toList();
     }
+
+    public void save(ModeloVeiculo modeloVeiculo){
+        if (isNull(modeloVeiculo.getId())){
+            add(modeloVeiculo);
+        } else {
+            edit(modeloVeiculo);
+        }
+    }
+
 }

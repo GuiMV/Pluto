@@ -13,18 +13,18 @@ import java.util.Objects;
 
 @Named
 @ViewScoped
-public class MbCadastroEstabelecimento extends BasicMb implements Serializable{
+public class MbCadastroEstabelecimento extends BasicMb{
 
-    private Estabelecimento estabelecimento;
+    @Inject
     private EstabelecimentoDao estabelecimentoDao;
+    private Estabelecimento estabelecimento;
     @Inject
     private MbPessoa mbPessoa;
 
     @PostConstruct
     public void init() {
-        estabelecimentoDao = new EstabelecimentoDao();
         mbPessoa.setTipoPessoa(new TipoPessoa(2L));
-        estabelecimento = estabelecimentoDao.get(1L);
+        estabelecimento = estabelecimentoDao.getEstabelecimento();
         mbPessoa.setPessoaCompleta(estabelecimento.getPessoa());
     }
     

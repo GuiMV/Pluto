@@ -4,6 +4,8 @@ import com.vieira.pluto.persistence.PersistenceUtil;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
+import javax.enterprise.context.SessionScoped;
+import javax.enterprise.inject.spi.CDI;
 import javax.faces.FacesException;
 import javax.faces.application.FacesMessage;
 import javax.faces.application.NavigationHandler;
@@ -12,10 +14,13 @@ import javax.faces.context.ExceptionHandlerWrapper;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ExceptionQueuedEvent;
 import javax.faces.event.ExceptionQueuedEventContext;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 public class CustomExceptionHandler extends ExceptionHandlerWrapper {
 
+
+    private final PersistenceUtil persistenceUtil;
     private final ExceptionHandler wrapped;
 
     //Obtém uma instância do FacesContext
@@ -30,6 +35,7 @@ public class CustomExceptionHandler extends ExceptionHandlerWrapper {
     //Declara o construtor que recebe uma exceptio do tipo ExceptionHandler como parâmetro
     CustomExceptionHandler(ExceptionHandler exception) {
         this.wrapped = exception;
+        this.persistenceUtil = CDI.current().select(PersistenceUtil.class).get();
     }
 
     //Sobrescreve o método ExceptionHandler que retorna a "pilha" de exceções
@@ -52,7 +58,7 @@ public class CustomExceptionHandler extends ExceptionHandlerWrapper {
 
             // Aqui tentamos tratar a exeção
             try {
-                EntityManager entityManager = PersistenceUtil.getEntityManager();
+                EntityManager entityManager = persistenceUtil.getEntityManager();
                 entityManager.getTransaction().setRollbackOnly();
 
                 exception.printStackTrace();

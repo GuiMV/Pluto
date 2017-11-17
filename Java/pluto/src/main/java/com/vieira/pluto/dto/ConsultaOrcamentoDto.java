@@ -3,9 +3,6 @@ package com.vieira.pluto.dto;
 import com.vieira.pluto.entity.StatusOrcamento;
 import com.vieira.pluto.util.Dates;
 
-import java.math.BigInteger;
-import java.time.LocalDateTime;
-import java.util.Calendar;
 import java.util.Date;
 
 public class ConsultaOrcamentoDto {
@@ -16,8 +13,8 @@ public class ConsultaOrcamentoDto {
     private Long idCliente;
 
     public ConsultaOrcamentoDto() {
-        this.dataInicio = Dates.getLocalDateTimeInMidnight(Dates.minusDays(new Date(),7));
-        this.dataFim = Dates.getLocalDateTimeInLastTimeOfDay(new Date());
+        this.dataInicio = Dates.getDateInMidnight(Dates.minusDays(new Date(),7));
+        this.dataFim = Dates.getDateInLastTimeOfDay(new Date());
         this.statusOrcamento = new StatusOrcamento(1L);
     }
 

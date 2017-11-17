@@ -1,0 +1,134 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui" xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                template="/pages/templates/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:define name="conteudo">
+        <div class="box">
+            <div class="box-header">
+                <div class="box-left"><i class="fa fa-edit"></i></div>
+                <label>Cadastro de Conta a Pagar</label>
+            </div>
+            <div class="box-content">
+                <div id="wizard">
+                    <ul class="wizard">
+                        <li><a href="#tab1" data-toggle="tab" class="tab-header">Dados Gerais</a></li>
+                        <li class="next"><a href="#"><i class="fa fa-arrow-right"/></a></li>
+                        <li class="previous"><a href="#"><i class="fa fa-arrow-left"/></a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane" id="tab1">
+                            <h:panelGroup layout="block">
+                                <div class="row">
+                                    <h:panelGroup layout="block" class="col-xs-12 col-md-2 go-top">
+                                        <h:selectOneMenu required="true"
+                                                         requiredMessage="Campo Pessoa é obrigatório"
+                                                         pt:placeholder="Obrigatório"
+                                                         class="col-xs-12"
+                                                         converter="omnifaces.SelectItemsConverter"
+                                                         value="#{mbCadastroContaPagar.contaPagar.pessoa}">
+                                            <f:selectItems value="#{mbCadastroContaPagar.pessoas}"
+                                                           var="pessoa"
+                                                           itemValue="#{pessoa}"
+                                                           itemLabel="#{pessoa.nomeFantasia}"/>
+                                        </h:selectOneMenu>
+                                        <label>Pessoa</label>
+                                    </h:panelGroup>
+                                    <div class="col-xs-12 col-md-2  go-top">
+                                        <h:inputText value="#{mbCadastroContaPagar.contaPagar.valorTotal}"
+                                                     class="col-xs-12"
+                                                     converterMessage="Valor deve ser no formato 0,00">
+                                            <f:convertNumber pattern="#,##0.00" minFractionDigits="2"/>
+                                        </h:inputText>
+                                        <label>Valor</label>
+                                    </div>
+                                    <h:panelGroup layout="block" class="col-xs-12 col-md-2 go-top">
+                                        <h:selectOneMenu required="true"
+                                                         requiredMessage="Campo Parcelas é obrigatório"
+                                                         pt:placeholder="Obrigatório"
+                                                         class="col-xs-12"
+                                                         value="#{mbCadastroContaPagar.quantidadeParcelas}">
+                                            <f:selectItems value="#{mbCadastroContaPagar.parcelas}"
+                                                           var="parcela"
+                                                           itemValue="#{parcela.quantidade}"
+                                                           itemLabel="#{parcela.quantidade}"/>
+                                        </h:selectOneMenu>
+                                        <label>Parcelas</label>
+                                    </h:panelGroup>
+                                    <h:panelGroup layout="block" class="col-xs-12 col-md-2 go-top">
+                                        <h:inputText required="true"
+                                                     requiredMessage="Campo Primeiro Vencimento é obrigatório"
+                                                     pt:placeholder="Obrigatório"
+                                                     id="primeiroVencimento"
+                                                     class="col-xs-12"
+                                                     value="#{mbCadastroContaPagar.vencimento}">
+                                            <f:convertDateTime type="localDate" pattern="dd/MM/yyyy"/>
+                                        </h:inputText>
+                                        <label>Primeiro Vencimento</label>
+                                        <script>
+                                            $(document).ready(function () {
+                                                criarCalendario($('#primeiroVencimento'));
+                                            });
+                                        </script>
+                                    </h:panelGroup>
+                                    <h:panelGroup layout="block" class="col-xs-12 col-md-2 go-top">
+                                        <h:selectOneMenu required="true"
+                                                         requiredMessage="Campo Quitado é obrigatório"
+                                                         pt:placeholder="Obrigatório"
+                                                         class="col-xs-12"
+                                                         value="#{mbCadastroContaPagar.quitado}">
+                                            <f:selectItem itemLabel="Não" itemValue="#{false}"/>
+                                            <f:selectItem itemLabel="Sim" itemValue="#{true}"/>
+                                        </h:selectOneMenu>
+                                        <label>Quitado</label>
+                                    </h:panelGroup>
+                                    <h:panelGroup layout="block" class="col-xs-12 col-md-2 go-top">
+                                        <h:selectOneMenu class="col-xs-12"
+                                                         required="true"
+                                                         requiredMessage="Campo Forma de Pagamento é obrigatório"
+                                                         pt:placeholder="Obrigatório"
+                                                         rendered="#{mbCadastroContaPagar.quitado}"
+                                                         value="#{mbCadastroContaPagar.idFormaPagamento}">
+                                            <f:selectItem/>
+                                            <f:selectItems value="#{mbCadastroContaPagar.formasPagamento}"
+                                                           var="formaPagamento"
+                                                           itemValue="#{formaPagamento.id}"
+                                                           itemLabel="#{formaPagamento.nome}"/>
+                                        </h:selectOneMenu>
+                                        <h:outputLabel rendered="#{mbCadastroContaPagar.quitado}">Forma de Pagamento</h:outputLabel>
+                                    </h:panelGroup>
+                                    <h:panelGroup layout="block" class="col-xs-12 col-md-2  go-top" id="descontoTotal">
+                                        <h:inputText required="true"
+                                                     requiredMessage="Campo Desconto Total é obrigatório"
+                                                     pt:placeholder="Obrigatório"
+                                                     value="#{mbCadastroContaPagar.descontoTotal}"
+                                                     class="col-xs-12"
+                                                     rendered="#{mbCadastroContaPagar.quitado}"
+                                                     converterMessage="Desconto Total deve ser no formato 0,00">
+                                            <f:convertNumber pattern="#,##0.00" minFractionDigits="2"/>
+                                        </h:inputText>
+                                        <h:outputLabel rendered="#{mbCadastroContaPagar.quitado}">Desconto Total</h:outputLabel>
+                                    </h:panelGroup>
+                                </div>
+                            </h:panelGroup>
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $('#wizard').bootstrapWizard();
+                    });
+
+                </script>
+            </div>
+            <div class="box-footer">
+                <h:commandButton value="Salvar"
+                                 action="#{mbCadastroContaPagar.salvar()}"
+                                 class="btn btn-primary">
+                    <f:ajax execute="form" render="form messages"/>
+                </h:commandButton>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

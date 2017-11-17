@@ -6,15 +6,19 @@
 package com.vieira.pluto.dao;
 
 import com.vieira.pluto.entity.*;
+import com.vieira.pluto.exception.HandledException;
 import com.vieira.pluto.persistence.GenericDao;
 import org.jinq.orm.stream.JinqStream;
 
 import java.util.List;
 import java.util.Objects;
+import javax.inject.Inject;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+
+import static java.util.Objects.isNull;
 
 /**
  *
@@ -22,11 +26,30 @@ import javax.persistence.criteria.Root;
  */
 public class PessoaDao extends GenericDao<Pessoa> {
 
+    @Inject
+    private EnderecoDao enderecoDao;
+    @Inject
+    private EmailDao emailDao;
+    @Inject
+    private TelefoneDao telefoneDao;
+    @Inject
+    private PessoaVeiculoDao pessoaVeiculoDao;
+
     public void save(Pessoa pessoa) {
+        List<Endereco> enderecos = pessoa.getEnderecoList();
+        List<Email> emails = pessoa.getEmailList();
+        List<Telefone> telefones = pessoa.getTelefoneList();
+        if (enderecos.isEmpty()){
+            throw new HandledException("Deve ser inserido ao menos um Endereço");
+        }
+        if (emails.isEmpty()){
+            throw new HandledException("Deve ser inserido ao menos um E-mail");
+        }
+        if (telefones.isEmpty()){
+            throw new HandledException("Deve ser inserido ao menos um Telefone");
+        }
         Boolean isPrincipal = false;
 
-        EnderecoDao enderecoDao = new EnderecoDao();
-        List<Endereco> enderecos = pessoa.getEnderecoList();
         for (Endereco endereco : enderecos) {
             isPrincipal = Objects.equals(endereco, pessoa.getEndereco());
             enderecoDao.save(endereco);
@@ -35,8 +58,6 @@ public class PessoaDao extends GenericDao<Pessoa> {
             }
         }
 
-        EmailDao emailDao = new EmailDao();
-        List<Email> emails = pessoa.getEmailList();
         for (Email email : emails) {
             isPrincipal = Objects.equals(email, pessoa.getEmail());
             emailDao.save(email);
@@ -44,9 +65,7 @@ public class PessoaDao extends GenericDao<Pessoa> {
                 pessoa.setEmail(email);
             }
         }
-        
-        TelefoneDao telefoneDao = new TelefoneDao();
-        List<Telefone> telefones = pessoa.getTelefoneList();
+
         for (Telefone telefone : telefones) {
             isPrincipal = Objects.equals(telefone, pessoa.getTelefone());
             telefoneDao.save(telefone);
@@ -57,17 +76,18 @@ public class PessoaDao extends GenericDao<Pessoa> {
 
         List<PessoaVeiculo> pessoaVeiculos = pessoa.getPessoaVeiculos();
         pessoa.setPessoaVeiculos(null);
-        if (Objects.isNull(pessoa.getId()) || pessoa.getId() <= 0) {
+        if (isNull(pessoa.getId()) || pessoa.getId() <= 0) {
             pessoa.setId(null);
             add(pessoa);
         } else {
             edit(pessoa);
         }
 
-        PessoaVeiculoDao pessoaVeiculoDao = new PessoaVeiculoDao();
         pessoaVeiculoDao.removerVeiculosForaLista(pessoa.getId(), pessoaVeiculos);
         for (PessoaVeiculo pessoaVeiculo : pessoaVeiculos) {
-            pessoaVeiculo.setPessoa(pessoa);
+            if (isNull(pessoaVeiculo.getIdPessoa())) {
+                pessoaVeiculo.setIdPessoa(pessoa.getId());
+            }
             pessoaVeiculoDao.save(pessoaVeiculo);
         }
         pessoa.setPessoaVeiculos(pessoaVeiculos);
@@ -75,16 +95,6 @@ public class PessoaDao extends GenericDao<Pessoa> {
 
     @SuppressWarnings("unchecked")
     public Pessoa getByCpfCnpj(String cpfCnpj){
-        /*CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
-        CriteriaQuery cq = cb.createQuery();
-        Root<Pessoa> root = cq.from(Pessoa.class);
-        cq.select(cq.from(entityClass));
-        cq.where(cb.equal(root.get("cpfCnpj"), cpfCnpj));
-        Query query = getEntityManager().createQuery(cq);
-        if (query.getResultList().isEmpty()) {
-            return null;
-        }
-        return Pessoa.class.cast(query.getSingleResult());*/
         JinqStream<Pessoa> select = getEntities().where(pessoa -> pessoa.getCpfCnpj().equals(cpfCnpj));
         return select.findFirst().orElse(null);
     }
@@ -94,7 +104,7 @@ public class PessoaDao extends GenericDao<Pessoa> {
         if (Objects.nonNull(newPessoa)) {
             return newPessoa;
         }
-        if (Objects.isNull(pessoa.getId())) {
+        if (isNull(pessoa.getId())) {
             return pessoa;
         }
         return new Pessoa(pessoa.getCpfCnpj(), pessoa.getTipoPessoa());

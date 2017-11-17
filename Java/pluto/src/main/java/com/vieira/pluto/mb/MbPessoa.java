@@ -10,18 +10,18 @@ import com.vieira.pluto.dao.*;
 import com.vieira.pluto.entity.*;
 import com.vieira.pluto.enums.SimNao;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.vieira.pluto.exception.HandledException;
 import com.vieira.pluto.util.Strings;
+import org.hibernate.Hibernate;
 import org.omnifaces.cdi.ViewScoped;
 
-import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 /**
@@ -29,8 +29,32 @@ import static java.util.Objects.nonNull;
  */
 @Named
 @ViewScoped
-public class MbPessoa extends BasicMb implements Serializable {
+public class MbPessoa extends BasicMb {
 
+    @Inject
+    private NgEndereco ngEndereco;
+    @Inject
+    private UfDao ufDao;
+    @Inject
+    private FabricanteDao fabricanteDao;
+    @Inject
+    private ModeloVeiculoDao modeloVeiculoDao;
+    @Inject
+    private CorDao corDao;
+    @Inject
+    private MunicipioDao municipioDao;
+    @Inject
+    private SexoDao sexoDao;
+    @Inject
+    private EstadoCivilDao estadoCivilDao;
+    @Inject
+    private TipoEnderecoDao tipoEnderecoDao;
+    @Inject
+    private TipoTelefoneDao tipoTelefoneDao;
+    @Inject
+    private TipoPessoaDao tipoPessoaDao;
+    @Inject
+    private PessoaDao pessoaDao;
     private Pessoa pessoa;
     private Endereco endereco;
     private Email email;
@@ -57,35 +81,11 @@ public class MbPessoa extends BasicMb implements Serializable {
     private List<Cor> cores;
     private List<PessoaVeiculo> pessoaVeiculos;
     private SimNao[] simNao;
-    private NgEndereco ngEndereco;
-    private UfDao ufDao;
-    private FabricanteDao fabricanteDao;
-    private ModeloVeiculoDao modeloVeiculoDao;
-    private CorDao corDao;
-    private MunicipioDao municipioDao;
-    private SexoDao sexoDao;
-    private EstadoCivilDao estadoCivilDao;
-    private TipoEnderecoDao tipoEnderecoDao;
-    private TipoTelefoneDao tipoTelefoneDao;
-    private TipoPessoaDao tipoPessoaDao;
-    private PessoaDao pessoaDao;
     private TipoPessoa tipoPessoa;
     private Boolean renderTipoPessoa;
 
     @PostConstruct
     public void init() {
-        ngEndereco = new NgEndereco();
-        ufDao = new UfDao();
-        municipioDao = new MunicipioDao();
-        sexoDao = new SexoDao();
-        estadoCivilDao = new EstadoCivilDao();
-        tipoEnderecoDao = new TipoEnderecoDao();
-        tipoTelefoneDao = new TipoTelefoneDao();
-        tipoPessoaDao = new TipoPessoaDao();
-        pessoaDao = new PessoaDao();
-        fabricanteDao = new FabricanteDao();
-        modeloVeiculoDao = new ModeloVeiculoDao();
-        corDao = new CorDao();
         idUf = 42L;
         decremental = 0L;
         renderTipoPessoa = true;
@@ -180,6 +180,7 @@ public class MbPessoa extends BasicMb implements Serializable {
     }
 
     public void editarEndereco(Endereco endereco) {
+        endereco = Endereco.class.cast(Hibernate.unproxy(endereco));
         idUf = endereco.getMunicipio().getUf().getId();
         enderecoPrincipal = isEnderecoPrincipal(endereco);
         setEndereco(endereco);
@@ -191,6 +192,13 @@ public class MbPessoa extends BasicMb implements Serializable {
     }
 
     public void salvarEndereco() {
+        if (Strings.isNullOrEmpty(endereco.getCep())){
+            throw new HandledException("Campo CEP é obriatório");
+        }
+        if (Objects.isNull(endereco.getMunicipio())){
+            throw new HandledException("Campo Município é obriatório");
+        }
+
         if (enderecos.isEmpty() || enderecoPrincipal) {
             pessoa.setEndereco(endereco);
         }
@@ -200,6 +208,7 @@ public class MbPessoa extends BasicMb implements Serializable {
     }
 
     public void editarEmail(Email email) {
+        email = Email.class.cast(Hibernate.unproxy(email));
         setEmail(email);
         emailPrincipal = isEmailPrincipal(email);
     }
@@ -209,6 +218,10 @@ public class MbPessoa extends BasicMb implements Serializable {
     }
 
     public void salvarEmail() {
+        if (Strings.isNullOrEmpty(email.getEndereco())){
+            throw new HandledException("Campo Email é obriatório");
+        }
+
         if (emails.isEmpty() || emailPrincipal) {
             pessoa.setEmail(email);
         }
@@ -218,6 +231,7 @@ public class MbPessoa extends BasicMb implements Serializable {
     }
 
     public void editarTelefone(Telefone telefone) {
+        telefone = Telefone.class.cast(Hibernate.unproxy(telefone));
         setTelefone(telefone);
         telefonePrincipal = isTelefonePrincipal(telefone);
     }
@@ -227,6 +241,10 @@ public class MbPessoa extends BasicMb implements Serializable {
     }
 
     public void salvarTelefone() {
+        if (Strings.isNullOrEmpty(telefone.getNumero())){
+            throw new HandledException("Campo Numero é obriatório");
+        }
+
         if (telefones.isEmpty() || telefonePrincipal) {
             pessoa.setTelefone(telefone);
         }
@@ -236,6 +254,7 @@ public class MbPessoa extends BasicMb implements Serializable {
     }
 
     public void editarPessoaVeiculo(PessoaVeiculo pessoaVeiculo) {
+        pessoaVeiculo = PessoaVeiculo.class.cast(Hibernate.unproxy(pessoaVeiculo));
         setPessoaVeiculo(pessoaVeiculo);
     }
 
@@ -244,6 +263,16 @@ public class MbPessoa extends BasicMb implements Serializable {
     }
 
     public void salvarPessoaVeiculo() {
+        if (Strings.isNullOrEmpty(pessoaVeiculo.getPlaca())){
+            throw new HandledException("Campo Placa é obriatório");
+        }
+        if (Objects.isNull(pessoaVeiculo.getModeloVeiculo())){
+            throw new HandledException("Campo Modelo é obriatório");
+        }
+        if (Objects.isNull(pessoaVeiculo.getCor())){
+            throw new HandledException("Campo Cor é obriatório");
+        }
+
         pessoaVeiculos.remove(pessoaVeiculo);
         pessoaVeiculos.add(pessoaVeiculo);
         novaPessoaVeiculo();
@@ -258,11 +287,17 @@ public class MbPessoa extends BasicMb implements Serializable {
     }
 
     public void setPessoaCompleta(Pessoa pessoa) {
-        this.pessoa = pessoa;
-        this.enderecos = pessoa.getEnderecoList();
-        this.telefones = pessoa.getTelefoneList();
-        this.emails = pessoa.getEmailList();
-        this.pessoaVeiculos = pessoa.getPessoaVeiculos();
+        this.pessoa = Pessoa.class.cast(Hibernate.unproxy(pessoa));
+
+        Hibernate.initialize(this.pessoa.getEnderecoList());
+        Hibernate.initialize(this.pessoa.getTelefoneList());
+        Hibernate.initialize(this.pessoa.getEmailList());
+        Hibernate.initialize(this.pessoa.getPessoaVeiculos());
+
+        this.enderecos = this.pessoa.getEnderecoList();
+        this.telefones = this.pessoa.getTelefoneList();
+        this.emails = this.pessoa.getEmailList();
+        this.pessoaVeiculos = this.pessoa.getPessoaVeiculos();
     }
 
     public void setTipoPessoa(TipoPessoa tipoPessoa) {

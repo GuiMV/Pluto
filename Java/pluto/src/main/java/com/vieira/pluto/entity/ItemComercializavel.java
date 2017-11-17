@@ -27,7 +27,6 @@ public class ItemComercializavel implements Serializable {
     @Id
     @GenericGenerator(name = "increment_ItemComercializavel", strategy = "increment")
     @GeneratedValue(generator = "increment_ItemComercializavel")
-    @Basic(optional = false)
     @NotNull
     @Column(name = "id")
     private Long id;
@@ -48,10 +47,6 @@ public class ItemComercializavel implements Serializable {
     private String nomeCompleto;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "margem_lucro")
-    private double margemLucro;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "valor_venda")
     private double valorVenda;
     @Size(max = 14)
@@ -61,10 +56,10 @@ public class ItemComercializavel implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dataExclusao;
     @JoinColumn(name = "id_tipo_item_comercializavel", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private TipoItemComercializavel tipoItemComercializavel;
     @JoinColumn(name = "id_fabricante", referencedColumnName = "id")
-    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @ManyToOne(optional = true, fetch = FetchType.EAGER)
     private Fabricante fabricante;
 
     public ItemComercializavel() {
@@ -74,12 +69,16 @@ public class ItemComercializavel implements Serializable {
         this.id = id;
     }
 
-    public ItemComercializavel(Long id, String nome, String apresentacao, String nomeCompleto, double margemLucro, double valorVenda) {
+    public ItemComercializavel(@Size(max = 14) String cean, TipoItemComercializavel tipoItemComercializavel) {
+        this.cean = cean;
+        this.tipoItemComercializavel = tipoItemComercializavel;
+    }
+
+    public ItemComercializavel(Long id, String nome, String apresentacao, String nomeCompleto, double valorVenda) {
         this.id = id;
         this.nome = nome;
         this.apresentacao = apresentacao;
         this.nomeCompleto = nomeCompleto;
-        this.margemLucro = margemLucro;
         this.valorVenda = valorVenda;
     }
 
@@ -113,14 +112,6 @@ public class ItemComercializavel implements Serializable {
 
     public void setNomeCompleto(String nomeCompleto) {
         this.nomeCompleto = nomeCompleto;
-    }
-
-    public double getMargemLucro() {
-        return margemLucro;
-    }
-
-    public void setMargemLucro(double margemLucro) {
-        this.margemLucro = margemLucro;
     }
 
     public double getValorVenda() {

@@ -1,5 +1,5 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:p="http://primefaces.org/ui"
+                xmlns:p="http://primefaces.org/ui" xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
                 template="/pages/templates/template.xhtml"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
@@ -23,6 +23,8 @@
                                 <div class="row">
                                     <h:panelGroup layout="block" class="col-xs-12 col-md-2 go-top">
                                         <h:selectOneMenu required="true"
+                                                         requiredMessage="Campo Cliente é obrigatório"
+                                                         pt:placeholder="Obrigatório"
                                                          class="col-xs-12"
                                                          converter="omnifaces.SelectItemsConverter"
                                                          value="#{mbCadastroOrcamento.orcamento.cliente}">
@@ -30,12 +32,20 @@
                                                            var="cliente"
                                                            itemValue="#{cliente}"
                                                            itemLabel="#{cliente.pessoa.nomeFantasia}"/>
-                                            <f:ajax execute="@this" render="veiculo"/>
+                                            <f:ajax execute="@this" render="veiculo classificacao"/>
                                         </h:selectOneMenu>
                                         <label>Cliente</label>
                                     </h:panelGroup>
+                                    <h:panelGroup layout="block" class="col-xs-12 col-md-2 go-top" id="classificacao">
+                                        <h:inputText disabled="true"
+                                                     value="#{mbCadastroOrcamento.orcamento.cliente.classificacao.nome}"
+                                                     class="col-xs-12"/>
+                                        <label>Classificação</label>
+                                    </h:panelGroup>
                                     <h:panelGroup layout="block" class="col-xs-12 col-md-2 go-top" id="veiculo">
                                         <h:selectOneMenu required="true"
+                                                         requiredMessage="Campo Veículo é obrigatório"
+                                                         pt:placeholder="Obrigatório"
                                                          class="col-xs-12"
                                                          converter="omnifaces.SelectItemsConverter"
                                                          value="#{mbCadastroOrcamento.pessoaVeiculo}">
@@ -48,6 +58,8 @@
                                     </h:panelGroup>
                                     <h:panelGroup layout="block" class="col-xs-12 col-md-2 go-top">
                                         <h:selectOneMenu required="true"
+                                                         requiredMessage="Campo Forma de Pagamento é obrigatório"
+                                                         pt:placeholder="Obrigatório"
                                                          class="col-xs-12"
                                                          converter="omnifaces.SelectItemsConverter"
                                                          value="#{mbCadastroOrcamento.orcamento.formaPagamento}">
@@ -60,7 +72,8 @@
                                     </h:panelGroup>
                                     <h:panelGroup layout="block" class="col-xs-12 col-md-12  go-top">
                                         <h:inputText required="true"
-                                                     requiredMessage="Descrição obrigatória"
+                                                     requiredMessage="Campo Descrição é obrigatório"
+                                                     pt:placeholder="Obrigatório"
                                                      id="descricao"
                                                      class="col-xs-12"
                                                      value="#{mbCadastroOrcamento.orcamento.descricao}">
@@ -98,8 +111,10 @@
                                         </div>
                                         <div class="col-xs-12 col-md-2  go-top">
                                             <h:inputText value="#{mbCadastroOrcamento.itemOrcamento.quantidade}"
-                                                         converter="javax.faces.Double"
-                                                         class="col-xs-12"/>
+                                                         class="col-xs-12"
+                                                         converterMessage="Quantidade deve ser no formato 0,000">
+                                                <f:convertNumber pattern="#,###0.000" minFractionDigits="3"/>
+                                            </h:inputText>
                                             <label>Quantidade</label>
                                         </div>
                                     </div>
@@ -121,6 +136,7 @@
                                              paginatorAlwaysVisible="true"
                                              paginatorPosition="bottom"
                                              rows="10"
+                                             currentPageReportTemplate="{currentPage} de {totalPages}"
                                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                              rowsPerPageTemplate="10,25,50,100"
                                              emptyMessage="Nenhum registro encontrado"
@@ -135,10 +151,26 @@
                                         #{itemOrcamento.itemComercializavel.tipoItemComercializavel.nome}
                                     </p:column>
                                     <p:column headerText="Quantidade">
-                                        #{itemOrcamento.quantidade}
+                                        <h:outputText value="#{itemOrcamento.quantidade}">
+                                            <f:convertNumber pattern="#,###0.000" minFractionDigits="3"/>
+                                        </h:outputText>
+
+                                        <f:facet name="footer">
+                                            <span style="float: right;">Total:</span>
+                                        </f:facet>
                                     </p:column>
                                     <p:column headerText="Valor Total">
-                                        #{itemOrcamento.valorTotal}
+                                        <h:outputText value="#{itemOrcamento.valorTotal}">
+                                            <f:convertNumber pattern="#,##0.00" minFractionDigits="2"/>
+                                        </h:outputText>
+
+                                        <f:facet name="footer">
+                                            <h:outputText
+                                                    style="float: left;"
+                                                    value="#{mbCadastroOrcamento.orcamento.valorTotal}">
+                                                <f:convertNumber pattern="#,##0.00" minFractionDigits="2"/>
+                                            </h:outputText>
+                                        </f:facet>
                                     </p:column>
                                     <p:column headerText="Ações">
                                         <h:commandLink action="#{mbCadastroOrcamento.excluirItem(itemOrcamento)}">

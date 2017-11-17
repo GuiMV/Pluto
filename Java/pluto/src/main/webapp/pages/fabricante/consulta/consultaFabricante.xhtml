@@ -24,7 +24,7 @@
                              paginatorAlwaysVisible="true"
                              paginatorPosition="bottom"
                              rows="10"
-                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             currentPageReportTemplate="{currentPage} de {totalPages}"                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                              rowsPerPageTemplate="10,25,50,100"
                              emptyMessage="Nenhum registro encontrado"
                              var="fabricante">
@@ -34,7 +34,7 @@
                     <p:column headerText="Pessoa">
                         #{fabricante.pessoa.nomeFantasia}
                     </p:column>
-                    <p:column headerText="Ações">
+                    <p:column headerText="Ações" width="60" style="text-align: center;">
                         <h:commandLink action="#{mbConsultaFabricante.editar(fabricante)}">
                             <f:ajax execute="@this" render="messages"/>
                             <i class="fa fa-pencil-square-o"></i>

@@ -1,40 +1,63 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
                 template="/pages/templates/template.xhtml"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <ui:define name="conteudo">
-        <div class="box"> 
+        <div class="box">
             <div class="box-header">
-                <div class="box-left"><i class="fa fa-edit"></i></div><label>Cadastro de Produto</label>
+                <div class="box-left"><i class="fa fa-edit"></i></div>
+                <label>Cadastro de Produto</label>
             </div>
             <div class="box-content">
-                <div class="row">
+                <h:panelGroup layout="block" class="row" id="produto">
                     <div class="col-xs-12 col-md-2  go-top">
                         <h:inputText class="col-xs-12"
+                                     id="cean"
+                                     maxlength="14"
+                                     required="true"
+                                     requiredMessage="Campo CEAN é obrigatório"
+                                     pt:placeholder="Obrigatório"
+                                     value="#{mbCadastroProduto.produto.cean}">
+                            <f:ajax render="produto"
+                                    listener="#{mbCadastroProduto.buscarCean()}"
+                                    execute="cean"/>
+                        </h:inputText>
+                        <label>CEAN</label>
+                    </div>
+                    <div class="col-xs-12 col-md-2  go-top">
+                        <h:inputText class="col-xs-12"
+                                     required="true"
+                                     requiredMessage="Campo Nome é obrigatório"
+                                     pt:placeholder="Obrigatório"
                                      value="#{mbCadastroProduto.produto.nome}"/>
                         <label>Nome</label>
                     </div>
                     <div class="col-xs-12 col-md-2  go-top">
                         <h:inputText class="col-xs-12"
+                                     required="true"
+                                     requiredMessage="Campo Apresentação é obrigatório"
+                                     pt:placeholder="Obrigatório"
                                      value="#{mbCadastroProduto.produto.apresentacao}"/>
                         <label>Apresentação</label>
                     </div>
                     <div class="col-xs-12 col-md-2  go-top">
                         <h:inputText class="col-xs-12"
-                                     value="#{mbCadastroProduto.produto.cean}"/>
-                        <label>CEAN</label>
-                    </div>
-                    <div class="col-xs-12 col-md-2  go-top">
-                        <h:inputText class="col-xs-12"
-                                     value="#{mbCadastroProduto.produto.valorVenda}"/>
+                                     required="true"
+                                     requiredMessage="Campo Valor de Venda é obrigatório"
+                                     pt:placeholder="Obrigatório"
+                                     value="#{mbCadastroProduto.produto.valorVenda}"
+                                     converterMessage="Valor de Venda deve ser no formato 0,00">
+                            <f:convertNumber pattern="#,##0.00" minFractionDigits="2"/>
+                        </h:inputText>
                         <label>Valor de Venda</label>
                     </div>
                     <div class="col-xs-12 col-md-2  go-top">
                         <h:selectOneMenu class="col-xs-12"
                                          id="fabricante"
                                          required="true"
-                                         requiredMessage="Fabricante obrigatório"
+                                         requiredMessage="Campo Fabricante é obrigatório"
+                                         pt:placeholder="Obrigatório"
                                          value="#{mbCadastroProduto.produto.fabricante}"
                                          converter="omnifaces.SelectItemsConverter">
                             <f:selectItems value="#{mbCadastroProduto.fabricantes}"
@@ -44,7 +67,7 @@
                         </h:selectOneMenu>
                         <label>Fabricante</label>
                     </div>
-                </div>
+                </h:panelGroup>
             </div>
             <div class="box-footer">
                 <h:commandButton value="Salvar"

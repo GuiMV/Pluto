@@ -21,9 +21,13 @@
                         <li class="previous"><a href="#"><i class="fa fa-arrow-left"/></a></li>
                     </ul>
                     <div class="tab-content">
-                        <h:inputHidden value="#{mbCadastroEmpresa.empresa.id}"/>
+                        <h:outputText value="#{mbCadastroEmpresa.empresa.toString()}" style="display: none"/>
                         <div class="tab-pane" id="tab1">
-                            <ui:include src="/pages/pessoa/principal.xhtml"/>                            
+                            <ui:include src="/pages/pessoa/principal.xhtml"/>
+                            <h:commandScript name="buscarCpfCnpj"
+                                             render="dadosPessoais endereco enderecos telefone telefones email emails messages veiculo veiculos"
+                                             actionListener="#{mbCadastroEmpresa.buscarCpfCnpj()}"
+                                             execute="cpfCnpj"/>
                         </div>
                         <h:panelGroup layout="block" class="tab-pane" id="tab2"> 
                             <ui:include src="/pages/pessoa/endereco.xhtml"/>  

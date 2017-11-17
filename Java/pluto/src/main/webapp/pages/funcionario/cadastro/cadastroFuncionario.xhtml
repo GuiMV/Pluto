@@ -1,13 +1,14 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
                 template="/pages/templates/template.xhtml"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 >
     <ui:define name="conteudo">
-        <div class="box"> 
+        <div class="box">
             <div class="box-header">
-                <div class="box-left"><i class="fa fa-edit"></i></div><label>Cadastro de Funcionario</label>
+                <div class="box-left"><i class="fa fa-edit"></i></div>
+                <label>Cadastro de Funcionário</label>
             </div>
             <div class="box-content">
                 <div id="wizard">
@@ -16,22 +17,53 @@
                         <li><a href="#tab2" data-toggle="tab" class="tab-header">Endereço</a></li>
                         <li><a href="#tab3" data-toggle="tab" class="tab-header">E-mail</a></li>
                         <li><a href="#tab4" data-toggle="tab" class="tab-header">Telefone</a></li>
+                        <li><a href="#tab5" data-toggle="tab" class="tab-header">Funcionário</a></li>
                         <li class="next"><a href="#"><i class="fa fa-arrow-right"/></a></li>
                         <li class="previous"><a href="#"><i class="fa fa-arrow-left"/></a></li>
                     </ul>
                     <div class="tab-content">
-                        <h:inputHidden value="#{mbCadastroFuncionario.funcionario.id}"/>
+                        <h:outputText value="#{mbCadastroFuncionario.funcionario.toString()}" style="display: none"/>
                         <div class="tab-pane" id="tab1">
-                            <ui:include src="/pages/pessoa/principal.xhtml"/>                            
+                            <ui:include src="/pages/pessoa/principal.xhtml"/>
+                            <h:commandScript name="buscarCpfCnpj"
+                                             render="dadosPessoais endereco enderecos telefone telefones email emails messages funcionario"
+                                             actionListener="#{mbCadastroFuncionario.buscarCpfCnpj()}"
+                                             execute="cpfCnpj"/>
                         </div>
-                        <h:panelGroup layout="block" class="tab-pane" id="tab2"> 
-                            <ui:include src="/pages/pessoa/endereco.xhtml"/>  
+                        <h:panelGroup layout="block" class="tab-pane" id="tab2">
+                            <ui:include src="/pages/pessoa/endereco.xhtml"/>
                         </h:panelGroup>
                         <div class="tab-pane" id="tab3">
-                            <ui:include src="/pages/pessoa/email.xhtml"/>  
+                            <ui:include src="/pages/pessoa/email.xhtml"/>
                         </div>
                         <div class="tab-pane" id="tab4">
-                            <ui:include src="/pages/pessoa/telefone.xhtml"/>  
+                            <ui:include src="/pages/pessoa/telefone.xhtml"/>
+                        </div>
+                        <div class="tab-pane" id="tab5">
+                            <h:panelGroup layout="block" class="row" id="funcionario">
+                                <div class="col-xs-12 col-md-2  go-top">
+                                    <h:inputText required="true"
+                                                 requiredMessage="Campo Salário Fixo é obrigatório"
+                                                 pt:placeholder="Obrigatório"
+                                                 class="col-xs-12"
+                                                 value="#{mbCadastroFuncionario.funcionario.salarioFixo}"
+                                                 converterMessage="Salário Fixo deve ser no formato 0,00">
+                                        <f:convertNumber pattern="#,##0.00" minFractionDigits="2"/>
+                                    </h:inputText>
+                                    <label>Salário Fixo</label>
+                                </div>
+                                <div class="col-xs-12 col-md-2  go-top">
+                                    <h:inputText required="true"
+                                                 requiredMessage="Campo Comissão é obrigatório"
+                                                 pt:placeholder="Obrigatório"
+                                                 class="col-xs-12"
+                                                 value="#{mbCadastroFuncionario.funcionario.comissao}"
+                                                 converterMessage="Comissão deve ser no formato 0,00">
+                                        <f:convertNumber pattern="#,##0.00" minFractionDigits="2"/>
+                                    </h:inputText>
+                                    <label>Comissão</label>
+                                </div>
+                            </h:panelGroup>
                         </div>
                     </div>
                 </div>
@@ -40,7 +72,7 @@
                         $('#wizard').bootstrapWizard();
                     });
 
-                </script>   
+                </script>
             </div>
             <div class="box-footer">
                 <h:commandButton value="Salvar"

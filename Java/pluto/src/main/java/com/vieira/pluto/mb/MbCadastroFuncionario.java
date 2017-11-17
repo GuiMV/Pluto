@@ -7,7 +7,11 @@ package com.vieira.pluto.mb;
 
 import com.vieira.pluto.dao.FuncionarioDao;
 import com.vieira.pluto.entity.Funcionario;
+import com.vieira.pluto.entity.Pessoa;
 import com.vieira.pluto.entity.TipoPessoa;
+import com.vieira.pluto.enums.PROPERTY;
+import com.vieira.pluto.util.Strings;
+import org.hibernate.Hibernate;
 import org.omnifaces.cdi.ViewScoped;
 
 import javax.annotation.PostConstruct;
@@ -15,6 +19,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.Objects;
+
+import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
 
 /**
  *
@@ -24,30 +31,53 @@ import java.util.Objects;
 @ViewScoped
 public class MbCadastroFuncionario extends BasicMb implements Serializable{
 
-    private Funcionario funcionario;
+    @Inject
     private FuncionarioDao funcionarioDao;
     @Inject
     private MbPessoa mbPessoa;
+    private Funcionario funcionario;
 
     @PostConstruct
     public void init() {
-        funcionarioDao = new FuncionarioDao();
         mbPessoa.setTipoPessoa(new TipoPessoa(1L));
-        funcionario = getOnSession("funcionarioEditar", Funcionario.class);
-        if (Objects.isNull(funcionario)) {
+        Long idFuncionario = getOnSession(PROPERTY.FUNCIONARIO_EDITAR.name(), Long.class);
+        removeFromSession(PROPERTY.FUNCIONARIO_EDITAR.name());
+        if (isNull(idFuncionario)) {
            novoFuncionario(); 
         } else {
+            funcionario = funcionarioDao.get(idFuncionario);
             mbPessoa.setPessoaCompleta(funcionario.getPessoa());
         }
-        removeFromSession("funcionarioEditar");
     }
 
     private void novoFuncionario() {
         funcionario = new Funcionario();
     }
+
+    public void buscarCpfCnpj() {
+        Pessoa pessoa = mbPessoa.getPessoa();
+        String cpfCnpj = Strings.apenasNumeros(pessoa.getCpfCnpj());
+        if (cpfCnpj.length() != 11) {
+            pessoa.setCpfCnpj("");
+            return;
+        }
+        Funcionario funcionarioDb = funcionarioDao.getByCpf(cpfCnpj);
+        if (isNull(funcionarioDb)) {
+            mbPessoa.buscarCpfCnpj();
+        } else {
+            funcionario = Funcionario.class.cast(Hibernate.unproxy(funcionarioDb));
+            mbPessoa.setPessoaCompleta(funcionario.getPessoa());
+            if (nonNull(funcionario.getDataExclusao())){
+                addWarnMessage("Funcionário inativado com este CPF, ao salvar ele será ativado");
+            } else {
+                addInfoMessage("Funcionário já cadastrado com este CPF, será realizada a edição");
+            }
+        }
+    }
     
     public void salvar(){
         funcionario.setPessoa(mbPessoa.getPessoaCompleta());
+        funcionario.setDataExclusao(null);
         funcionarioDao.save(funcionario);
         novoFuncionario();
         mbPessoa.novaPessoa();

@@ -10,8 +10,11 @@ import com.vieira.pluto.entity.Funcionario;
 import com.vieira.pluto.entity.Usuario;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.inject.Named;
+
+import com.vieira.pluto.enums.PROPERTY;
+import org.omnifaces.cdi.ViewScoped;
+import javax.inject.Inject;
 import java.util.Date;
 import java.util.List;
 
@@ -19,16 +22,16 @@ import java.util.List;
  *
  * @author Guilherme
  */
-@ManagedBean
+@Named
 @ViewScoped
 public class MbConsultaFuncionario extends BasicMb{
-    
-    private List<Funcionario> funcionarios;
+
+    @Inject
     private FuncionarioDao funcionarioDao;
+    private List<Funcionario> funcionarios;
     
     @PostConstruct
     public void init(){
-        funcionarioDao = new FuncionarioDao();
         funcionarios = funcionarioDao.getAllAtivos();
     }
 
@@ -41,7 +44,7 @@ public class MbConsultaFuncionario extends BasicMb{
     }
     
     public void editar(Funcionario funcionario){
-        putOnSession("funcionarioEditar", funcionario);
+        putOnSession(PROPERTY.FUNCIONARIO_EDITAR.name(), funcionario.getId());
         redirectOnContextPath("/pages/funcionario/cadastro/cadastroFuncionario.xhtml");
     }
     

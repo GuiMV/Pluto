@@ -5787,7 +5787,7 @@ INSERT INTO municipio (id, nome, id_uf) VALUES (5300108, 'Brasília', 53);
 -- Data for Name: pessoa; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO pessoa (id, razao_social, nome_fantasia, data_nascimento, cpf_cnpj, rg_ie, id_sexo, id_estado_civil, id_endereco, id_email, id_telefone, id_tipo_pessoa) VALUES (1, 'Guilherme', 'Guilherme', '1994-08-01', '08463142907', '6136768', 1, 2, 1, 1, 1, 1);
+INSERT INTO pessoa (id, razao_social, nome_fantasia, data_nascimento, cpf_cnpj, rg_ie, id_sexo, id_estado_civil, id_endereco, id_email, id_telefone, id_tipo_pessoa) VALUES (1, 'Guilherme', 'Guilherme', '1994-08-02', '08463142907', '6136768', 1, 2, 1, 1, 1, 1);
 
 
 --

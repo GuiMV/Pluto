@@ -27,18 +27,21 @@ public class PessoaVeiculo implements Serializable {
     @Id
     @GenericGenerator(name = "increment_PessoaVeiculo", strategy = "increment")
     @GeneratedValue(generator = "increment_PessoaVeiculo")
-    @Basic(optional = false)
     @NotNull
     @Column(name = "id")
     private Long id;
-    @JoinColumn(name = "id_pessoa", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "id_pessoa")
+    private Long idPessoa;
+    @JoinColumn(name = "id_pessoa", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Pessoa pessoa;
     @JoinColumn(name = "id_modelo_veiculo", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private ModeloVeiculo modeloVeiculo;
     @JoinColumn(name = "id_cor", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Cor cor;
     @Basic(optional = false)
     @NotNull
@@ -51,6 +54,14 @@ public class PessoaVeiculo implements Serializable {
 
     public PessoaVeiculo(Long id) {
         this.id = id;
+    }
+
+    public Long getIdPessoa() {
+        return idPessoa;
+    }
+
+    public void setIdPessoa(Long idPessoa) {
+        this.idPessoa = idPessoa;
     }
 
     public Pessoa getPessoa() {
@@ -94,28 +105,24 @@ public class PessoaVeiculo implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PessoaVeiculo that = (PessoaVeiculo) o;
+
+        return id != null ? id.equals(that.id) : that.id == null;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PessoaVeiculo)) {
-            return false;
-        }
-        PessoaVeiculo other = (PessoaVeiculo) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 
     @Override
     public String toString() {
-        return "com.vieira.pluto.entity.PessoaVeiculo[ id=" + id + " ]";
+        return "PessoaVeiculo{" +
+                "id=" + id +
+                '}';
     }
-    
 }
