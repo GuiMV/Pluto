@@ -55,7 +55,7 @@ public class InitializerListener implements ServletContextListener {
                     classificacaoThread.run();
                     cancelamentoOrcamentoThread.run();
                 }
-            }, 60 * 1000);
+            }, 5 * 60 * 1000);
 
         } catch (Exception e) {
             System.out.println("Erro ao inicializar threads!");

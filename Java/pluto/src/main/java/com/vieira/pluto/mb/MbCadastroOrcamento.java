@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static java.util.Objects.nonNull;
+
 @Named
 @ViewScoped
 public class MbCadastroOrcamento extends BasicMb {
@@ -29,6 +31,8 @@ public class MbCadastroOrcamento extends BasicMb {
     private PessoaVeiculoDao pessoaVeiculoDao;
     @Inject
     private ItemComercializavelDao itemComercializavelDao;
+    @Inject
+    private FuncionarioDao funcionarioDao;
     private Orcamento orcamento;
     private ItemOrcamento itemOrcamento;
     private TipoItemComercializavel tipoItemComercializavel;
@@ -39,16 +43,22 @@ public class MbCadastroOrcamento extends BasicMb {
     private List<FormaPagamento> formasPagamento;
     private List<TipoItemComercializavel> tiposItemComercializaveis;
     private List<ItemComercializavel> itensComercializaveis;
+    private List<Funcionario> funcionarios;
 
     @PostConstruct
     public void init(){
         decremental = 0L;
         tipoItemComercializavel = new TipoItemComercializavel(1L);
         tiposItemComercializaveis = tipoItemComercializavelDao.getAll();
-        itensComercializaveis = itemComercializavelDao.getsAtivos(tipoItemComercializavel.getId());
+        alterarTipoItemComercializavel();
         formasPagamento = formaPagamentoDao.getAll();
         clientes = clienteDao.getAllAtivos();
+        funcionarios = funcionarioDao.getAllAtivos();
         novoOrcamento();
+    }
+
+    public void alterarTipoItemComercializavel() {
+        itensComercializaveis = itemComercializavelDao.getsAtivos(tipoItemComercializavel.getId());
     }
 
     private void novoOrcamento() {
@@ -59,11 +69,18 @@ public class MbCadastroOrcamento extends BasicMb {
         orcamento.setStatusOrcamento(new StatusOrcamento(1L));
         if (!clientes.isEmpty()){
             orcamento.setCliente(clientes.get(0));
-            pessoaVeiculos = pessoaVeiculoDao.getPessoaVeiculos(orcamento.getCliente().getPessoa().getId());
         }
+        alterarCliente();
         novoItem();
     }
 
+    public void alterarCliente() {
+        if (nonNull(orcamento.getCliente())) {
+            pessoaVeiculos = pessoaVeiculoDao.getPessoaVeiculos(orcamento.getCliente().getPessoa().getId());
+        } else {
+            pessoaVeiculos = null;
+        }
+    }
     private void novoItem() {
         itemOrcamento = new ItemOrcamento(--decremental);
     }
@@ -95,6 +112,10 @@ public class MbCadastroOrcamento extends BasicMb {
         orcamentoDao.save(orcamento);
         novoOrcamento();
         addInfoMessage("Orcamento salvo com sucesso!");
+    }
+
+    public boolean isItemTipoServico() {
+        return 2 == tipoItemComercializavel.getId();
     }
 
     public Orcamento getOrcamento() {
@@ -167,5 +188,13 @@ public class MbCadastroOrcamento extends BasicMb {
 
     public void setItensComercializaveis(List<ItemComercializavel> itensComercializaveis) {
         this.itensComercializaveis = itensComercializaveis;
+    }
+
+    public List<Funcionario> getFuncionarios() {
+        return funcionarios;
+    }
+
+    public void setFuncionarios(List<Funcionario> funcionarios) {
+        this.funcionarios = funcionarios;
     }
 }

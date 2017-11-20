@@ -2,189 +2,18 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="pluto:war exploded" />
+      <artifact name="pluto:war" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7f82d1c1-d9bb-4edc-8d9c-ee39f345a953" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources/0a613582-5ba4-4ab5-ad0d-1c062fb57841/_metadata_/metadata" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources/0a613582-5ba4-4ab5-ad0d-1c062fb57841/_metadata_/metadata.keystream" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources/0a613582-5ba4-4ab5-ad0d-1c062fb57841/_metadata_/metadata.keystream.len" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources/0a613582-5ba4-4ab5-ad0d-1c062fb57841/_metadata_/metadata.len" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources/0a613582-5ba4-4ab5-ad0d-1c062fb57841/_metadata_/metadata.values.at" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources/0a613582-5ba4-4ab5-ad0d-1c062fb57841/_metadata_/metadata_i" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources/0a613582-5ba4-4ab5-ad0d-1c062fb57841/_metadata_/metadata_i.len" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources/b8ba2044-5ddf-415c-bf5f-c6f7bc35b88e/_metadata_/metadata" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources/b8ba2044-5ddf-415c-bf5f-c6f7bc35b88e/_metadata_/metadata.keystream" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources/b8ba2044-5ddf-415c-bf5f-c6f7bc35b88e/_metadata_/metadata.keystream.len" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources/b8ba2044-5ddf-415c-bf5f-c6f7bc35b88e/_metadata_/metadata.len" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources/b8ba2044-5ddf-415c-bf5f-c6f7bc35b88e/_metadata_/metadata.values.at" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources/b8ba2044-5ddf-415c-bf5f-c6f7bc35b88e/_metadata_/metadata_i" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources/b8ba2044-5ddf-415c-bf5f-c6f7bc35b88e/_metadata_/metadata_i.len" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/pluto_war.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/pluto_war_exploded.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources/0a613582-5ba4-4ab5-ad0d-1c062fb57841.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources/0a613582-5ba4-4ab5-ad0d-1c062fb57841/storage.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources/b8ba2044-5ddf-415c-bf5f-c6f7bc35b88e.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources/b8ba2044-5ddf-415c-bf5f-c6f7bc35b88e/storage.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__antlr_antlr_2_7_7.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_classmate_1_3_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_6_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_6_3.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_6_3.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_jaxrs_jackson_jaxrs_base_2_6_3.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_jaxrs_jackson_jaxrs_json_provider_2_6_3.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_jaxb_annotations_2_6_3.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_jersey_jersey_client_1_18_6.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_jersey_jersey_core_1_18_6.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__dom4j_dom4j_1_6_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_annotation_javax_annotation_api_1_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_ws_rs_javax_ws_rs_api_2_0_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_12.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_flywaydb_flyway_core_4_2_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_hk2_external_aopalliance_repackaged_2_5_0_b30.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_hk2_external_javax_inject_2_5_0_b30.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_hk2_hk2_api_2_5_0_b30.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_hk2_hk2_locator_2_5_0_b30.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_hk2_hk2_utils_2_5_0_b30.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_hk2_osgi_resource_locator_1_0_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_jersey_bundles_repackaged_jersey_guava_2_25.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_jersey_core_jersey_common_2_25.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_common_hibernate_commons_annotations_5_0_1_Final.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_javax_persistence_hibernate_jpa_2_1_api_1_0_0_Final.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_javassist_javassist_3_20_0_GA.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_jandex_1_2_4_Final.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_3_0_Final.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_weld_servlet_weld_servlet_2_4_5_Final.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jinq_analysis_1_8_21.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jinq_api_1_8_21.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jinq_jinq_asm_rebased_1_8_21.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jinq_jinq_jpa_1_8_21.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jinq_jinq_jpa_scala_1_8_21.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_omnifaces_omnifaces_2_5_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_primefaces_primefaces_6_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__postgresql_postgresql_9_1_901_1_jdbc4.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/META-INF/beans.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/business/NgEndereco.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/business/NgEndereco.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/ClienteDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/ClienteDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/CorDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/CorDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/EmpresaDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/EmpresaDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/EstabelecimentoDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/EstabelecimentoDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/FabricanteDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/FabricanteDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/FormaPagamentoDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/FormaPagamentoDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/FuncionarioDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/FuncionarioDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/ItemComercializavelDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/ItemComercializavelDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/ModeloVeiculoDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/ModeloVeiculoDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/MunicipioDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/MunicipioDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/OrcamentoDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/OrcamentoDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/PessoaDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/PessoaDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/PessoaVeiculoDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/PessoaVeiculoDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/TipoTelefoneDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/TipoTelefoneDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/UfDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/UfDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/UsuarioDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/UsuarioDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dto/ConsultaOrcamentoDto.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dto/ConsultaOrcamentoDto.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/Cliente.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/Cliente.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/Cor.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/Cor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/Empresa.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/Empresa.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/Endereco.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/Endereco.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/Estabelecimento.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/Estabelecimento.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/Fabricante.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/Fabricante.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/Funcionario.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/Funcionario.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/ItemComercializavel.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/ItemComercializavel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/ItemOrcamento.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/ItemOrcamento.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/ModeloVeiculo.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/ModeloVeiculo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/Municipio.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/Municipio.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/Orcamento.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/Orcamento.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/Pessoa.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/Pessoa.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/PessoaVeiculo.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/PessoaVeiculo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/TipoEndereco.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/TipoEndereco.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/TipoTelefone.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/TipoTelefone.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/Usuario.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/Usuario.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/exception/CustomExceptionHandler.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/exception/CustomExceptionHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/exception/CustomExceptionHandlerFactory.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/exception/CustomExceptionHandlerFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/exception/HandledException.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/exception/HandledException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/filter/PersistenceFilter.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/filter/PersistenceFilter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/listener/InitializerListener.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/listener/InitializerListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/BasicMb.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/BasicMb.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroCliente.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroCliente.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroCor.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroCor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroEmpresa.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroEmpresa.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroEstabelecimento.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroEstabelecimento.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroFabricante.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroFabricante.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroFormaPagamento.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroFormaPagamento.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroFuncionario.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroFuncionario.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroModeloVeiculo.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroModeloVeiculo.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroOrcamento.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroOrcamento.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroProduto.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroProduto.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroServico.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroServico.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroUsuario.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroUsuario.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbConsultaCliente.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbConsultaCliente.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbConsultaCor.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbConsultaCor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbConsultaEmpresa.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbConsultaEmpresa.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbConsultaFabricante.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbConsultaFabricante.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbConsultaFormaPagamento.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbConsultaFormaPagamento.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbConsultaFuncionario.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbConsultaFuncionario.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbConsultaModeloVeiculo.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbConsultaModeloVeiculo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbConsultaOrcamento.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbConsultaOrcamento.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbConsultaProduto.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbConsultaProduto.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbConsultaServico.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbConsultaServico.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbConsultaUsuario.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbConsultaUsuario.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbLogin.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbLogin.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbPessoa.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbPessoa.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/persistence/GenericDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/persistence/GenericDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/persistence/PersistenceUtil.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/persistence/PersistenceUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/util/Dates.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/util/Dates.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/util/NotyMessagesRenderer.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/util/NotyMessagesRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/util/Strings.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/util/Strings.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/ws/client/ViaCEPClient.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/ws/client/ViaCEPClient.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V0.0.0__usuario.sql" afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V0.0.0__usuario.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V0.0.3__funcionario.sql" afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V0.0.3__funcionario.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V0.0.7__item_comercializavel.sql" afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V0.0.7__item_comercializavel.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V0.0.8__orcamento.sql" afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V0.0.8__orcamento.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/faces-config.xml" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/faces-config.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/login.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/login.xhtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/cliente/cadastro/cadastroCliente.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/cliente/cadastro/cadastroCliente.xhtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/cliente/consulta/consultaCliente.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/cliente/consulta/consultaCliente.xhtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/cor/consulta/consultaCor.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/cor/consulta/consultaCor.xhtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/empresa/cadastro/cadastroEmpresa.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/empresa/cadastro/cadastroEmpresa.xhtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/empresa/consulta/consultaEmpresa.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/empresa/consulta/consultaEmpresa.xhtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/estabelecimento/cadastro/cadastroEstabelecimento.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/estabelecimento/cadastro/cadastroEstabelecimento.xhtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/fabricante/cadastro/cadastroFabricante.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/fabricante/cadastro/cadastroFabricante.xhtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/fabricante/consulta/consultaFabricante.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/fabricante/consulta/consultaFabricante.xhtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/formaPagamento/consulta/consultaFormaPagamento.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/formaPagamento/consulta/consultaFormaPagamento.xhtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/funcionario/cadastro/cadastroFuncionario.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/funcionario/cadastro/cadastroFuncionario.xhtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/funcionario/consulta/consultaFuncionario.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/funcionario/consulta/consultaFuncionario.xhtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/modeloVeiculo/consulta/consultaModeloVeiculo.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/modeloVeiculo/consulta/consultaModeloVeiculo.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroVenda.java" afterPath="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroVenda.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/cliente/classificacao/consulta/consultaHistoricoClassificacao.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/cliente/classificacao/consulta/consultaHistoricoClassificacao.xhtml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/orcamento/cadastro/cadastroOrcamento.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/orcamento/cadastro/cadastroOrcamento.xhtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/orcamento/consulta/consultaOrcamento.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/orcamento/consulta/consultaOrcamento.xhtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/pessoa/email.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/pessoa/email.xhtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/pessoa/endereco.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/pessoa/endereco.xhtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/pessoa/principal.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/pessoa/principal.xhtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/pessoa/telefone.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/pessoa/telefone.xhtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/pessoa/veiculo.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/pessoa/veiculo.xhtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/produto/cadastro/cadastroProduto.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/produto/cadastro/cadastroProduto.xhtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/produto/consulta/consultaProduto.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/produto/consulta/consultaProduto.xhtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/servico/cadastro/cadastroServico.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/servico/cadastro/cadastroServico.xhtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/servico/consulta/consultaServico.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/servico/consulta/consultaServico.xhtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/templates/template.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/templates/template.xhtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/usuario/cadastro/cadastroUsuario.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/usuario/cadastro/cadastroUsuario.xhtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/usuario/consulta/consultaUsuario.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/usuario/consulta/consultaUsuario.xhtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/template.css" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/template.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V0.0.1__cliente.sql" afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V0.0.2__cliente.sql" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V0.0.2__empresa.sql" afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V0.0.14__empresa.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/venda/cadastro/cadastroVenda.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/pages/venda/cadastro/cadastroVenda.xhtml" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -221,31 +50,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RecenciaClienteDto.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/query/RecenciaClienteDto.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-              <folding>
-                <element signature="e#474#475#0" expanded="true" />
-                <element signature="e#593#594#0" expanded="true" />
-                <element signature="e#620#621#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InitializerListener.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/vieira/pluto/listener/InitializerListener.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="966">
-              <caret line="57" column="15" lean-forward="false" selection-start-line="57" selection-start-column="15" selection-end-line="57" selection-end-column="15" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="console.sql" pinned="false" current-in-tab="true">
+      <file leaf-file-name="console.sql" pinned="false" current-in-tab="false">
         <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/b8ba2044-5ddf-415c-bf5f-c6f7bc35b88e/console.sql">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
@@ -255,11 +60,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ContaReceberDao.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/ContaReceberDao.java">
+      <file leaf-file-name="cadastroVenda.xhtml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/venda/cadastro/cadastroVenda.xhtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2352">
-              <caret line="128" column="0" lean-forward="false" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
+            <state relative-caret-position="588">
+              <caret line="28" column="81" lean-forward="false" selection-start-line="28" selection-start-column="66" selection-end-line="28" selection-end-column="81" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MbCadastroVenda.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroVenda.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="21">
+              <caret line="130" column="44" lean-forward="false" selection-start-line="130" selection-start-column="44" selection-end-line="130" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -366,9 +181,7 @@
         <option value="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroCor.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/pages/produto/consulta/consultaProduto.xhtml" />
         <option value="$PROJECT_DIR$/src/main/webapp/pages/venda/comissao/consulta/consultaComissao.xhtml" />
-        <option value="$PROJECT_DIR$/src/main/webapp/pages/orcamento/cadastro/cadastroOrcamento.xhtml" />
         <option value="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroContaReceber.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/pages/venda/cadastro/cadastroVenda.xhtml" />
         <option value="$PROJECT_DIR$/src/main/webapp/pages/conta/receber/cadastro/cadastroContaReceber.xhtml" />
         <option value="$PROJECT_DIR$/src/main/webapp/pages/conta/pagar/cadastro/cadastroContaPagar.xhtml" />
         <option value="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/ContaPagarDao.java" />
@@ -381,8 +194,6 @@
         <option value="$PROJECT_DIR$/src/main/webapp/pages/conta/pagar/consulta/consultaContaPagar.xhtml" />
         <option value="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/OrcamentoDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/VendaDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroOrcamento.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroVenda.java" />
         <option value="$PROJECT_DIR$/src/main/resources/db/migration/V0.0.16__data_historico_classificacao.sql" />
         <option value="$PROJECT_DIR$/src/main/java/com/vieira/pluto/util/Dates.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/HistoricoClassificacao.java" />
@@ -400,10 +211,14 @@
         <option value="$PROJECT_DIR$/src/main/java/com/vieira/pluto/enums/Mes.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/query/RecenciaClienteDto.java" />
         <option value="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/vieira/pluto/listener/InitializerListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/vieira/pluto/business/NgClassificacao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/ContaReceberDao.java" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/b8ba2044-5ddf-415c-bf5f-c6f7bc35b88e/console.sql" />
+        <option value="$PROJECT_DIR$/src/main/java/com/vieira/pluto/listener/InitializerListener.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroOrcamento.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/pages/orcamento/cadastro/cadastroOrcamento.xhtml" />
+        <option value="$PROJECT_DIR$/src/main/webapp/pages/venda/cadastro/cadastroVenda.xhtml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroVenda.java" />
       </list>
     </option>
   </component>
@@ -440,7 +255,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="1" />
     <option name="y" value="1" />
     <option name="width" value="1376" />
@@ -464,8 +279,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -477,8 +292,8 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -870,7 +685,11 @@
       <workItem from="1510669697288" duration="297000" />
       <workItem from="1510749964195" duration="14741000" />
       <workItem from="1510877115890" duration="147000" />
-      <workItem from="1510877578335" duration="79000" />
+      <workItem from="1510877578335" duration="754000" />
+      <workItem from="1510878800351" duration="47000" />
+      <workItem from="1510930582332" duration="704000" />
+      <workItem from="1510951553079" duration="921000" />
+      <workItem from="1511112002894" duration="1191000" />
     </task>
     <servers />
   </component>
@@ -895,7 +714,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="417234000" />
+    <option name="totallyTimeSpent" value="420772000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -907,7 +726,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1064" extended-state="6" />
+    <frame x="-9" y="-9" width="1378" height="752" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -922,9 +741,8 @@
       <window_info id="JSF" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32814178" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973147" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.41" sideWeight="0.5198711" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41" sideWeight="0.5198711" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3288889" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32222223" sideWeight="0.4935553" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3259177" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -945,6 +763,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2489339" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="JPA Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3288889" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32222223" sideWeight="0.4935553" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.58954394" sideWeight="0.49570355" order="9" side_tool="false" content_ui="tabs" />
@@ -1000,7 +819,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="290" />
+      <option name="time" value="293" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1028,41 +847,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/PessoaDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="26" column="13" lean-forward="false" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/vieira/pluto/dao/OrcamentoDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="50" column="87" lean-forward="false" selection-start-line="50" selection-start-column="87" selection-end-line="50" selection-end-column="87" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroOrcamento.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="70" column="32" lean-forward="true" selection-start-line="70" selection-start-column="32" selection-end-line="73" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroVenda.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="107" column="20" lean-forward="false" selection-start-line="107" selection-start-column="20" selection-end-line="107" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/db/migration/V0.0.16__data_historico_classificacao.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="70" lean-forward="false" selection-start-line="2" selection-start-column="50" selection-end-line="2" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_101/src.zip!/java/util/Calendar.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-719">
@@ -5672,23 +5456,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/vieira/pluto/listener/InitializerListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="966">
-          <caret line="57" column="15" lean-forward="false" selection-start-line="57" selection-start-column="15" selection-end-line="57" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/query/RecenciaClienteDto.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
           <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding>
-            <element signature="e#474#475#0" expanded="true" />
-            <element signature="e#593#594#0" expanded="true" />
-            <element signature="e#620#621#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -5704,6 +5475,34 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2352">
           <caret line="128" column="0" lean-forward="false" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/vieira/pluto/listener/InitializerListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="699">
+          <caret line="57" column="17" lean-forward="false" selection-start-line="57" selection-start-column="17" selection-end-line="57" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroOrcamento.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="192" column="48" lean-forward="false" selection-start-line="192" selection-start-column="48" selection-end-line="192" selection-end-column="48" />
+          <folding>
+            <element signature="e#4172#4173#0" expanded="false" />
+            <element signature="e#4231#4232#0" expanded="false" />
+            <element signature="e#6336#6337#0" expanded="false" />
+            <element signature="e#6403#6404#0" expanded="false" />
+            <element signature="e#6451#6452#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/orcamento/cadastro/cadastroOrcamento.xhtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="419">
+          <caret line="24" column="48" lean-forward="true" selection-start-line="24" selection-start-column="48" selection-end-line="24" selection-end-column="48" />
           <folding />
         </state>
       </provider>
@@ -5712,6 +5511,29 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/vieira/pluto/entity/Orcamento.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="85" column="16" lean-forward="false" selection-start-line="85" selection-start-column="16" selection-end-line="85" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/venda/cadastro/cadastroVenda.xhtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="588">
+          <caret line="28" column="81" lean-forward="false" selection-start-line="28" selection-start-column="66" selection-end-line="28" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/vieira/pluto/mb/MbCadastroVenda.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="130" column="44" lean-forward="false" selection-start-line="130" selection-start-column="44" selection-end-line="130" selection-end-column="44" />
           <folding />
         </state>
       </provider>

@@ -32,7 +32,8 @@
                                                            var="cliente"
                                                            itemValue="#{cliente}"
                                                            itemLabel="#{cliente.pessoa.nomeFantasia}"/>
-                                            <f:ajax execute="@this" render="veiculo classificacao"/>
+                                            <f:ajax execute="@this" render="veiculo classificacao"
+                                                    listener="#{mbCadastroOrcamento.alterarCliente()}"/>
                                         </h:selectOneMenu>
                                         <label>Cliente</label>
                                     </h:panelGroup>
@@ -89,19 +90,24 @@
                                     <div class="row">
                                         <div class="col-xs-12 col-md-2 col-lg-2 go-top">
                                             <h:selectOneMenu class="col-xs-12"
+                                                             id="tipoItem"
                                                              converter="omnifaces.SelectItemsConverter"
                                                              value="#{mbCadastroOrcamento.tipoItemComercializavel}">
                                                 <f:selectItems value="#{mbCadastroOrcamento.tiposItemComercializaveis}"
                                                                var="tipoItem"
                                                                itemValue="#{tipoItem}"
                                                                itemLabel="#{tipoItem.nome}"/>
+                                                <f:ajax render="funcionario itemComercializavel"
+                                                        execute="@this tipoItem"
+                                                        listener="#{mbCadastroOrcamento.alterarTipoItemComercializavel()}"/>
                                             </h:selectOneMenu>
                                             <label>Tipo</label>
                                         </div>
                                         <div class="col-xs-12 col-md-2  go-top">
                                             <h:selectOneMenu class="col-xs-12"
                                                              converter="omnifaces.SelectItemsConverter"
-                                                             value="#{mbCadastroOrcamento.itemOrcamento.itemComercializavel}">
+                                                             value="#{mbCadastroOrcamento.itemOrcamento.itemComercializavel}"
+                                                             id="itemComercializavel">
                                                 <f:selectItems value="#{mbCadastroOrcamento.itensComercializaveis}"
                                                                var="itemComercializavel"
                                                                itemValue="#{itemComercializavel}"
@@ -117,6 +123,24 @@
                                             </h:inputText>
                                             <label>Quantidade</label>
                                         </div>
+                                        <h:panelGroup id="funcionario">
+                                            <h:panelGroup layout="block"
+                                                          class="col-xs-12 col-md-2 col-lg-2 go-top"
+                                                          rendered="#{mbCadastroOrcamento.itemTipoServico}">
+                                                <h:selectOneMenu class="col-xs-12"
+                                                                 required="true"
+                                                                 requiredMessage="Campo Funcionário é obrigatório"
+                                                                 pt:placeholder="Obrigatório"
+                                                                 converter="omnifaces.SelectItemsConverter"
+                                                                 value="#{mbCadastroOrcamento.itemOrcamento.funcionario}">
+                                                    <f:selectItems value="#{mbCadastroOrcamento.funcionarios}"
+                                                                   var="func"
+                                                                   itemValue="#{func}"
+                                                                   itemLabel="#{func.pessoa.razaoSocial}"/>
+                                                </h:selectOneMenu>
+                                                <label>Funcionário</label>
+                                            </h:panelGroup>
+                                        </h:panelGroup>
                                     </div>
                                 </h:panelGroup>
                                 <div class="row">

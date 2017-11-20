@@ -25,14 +25,15 @@
                                 <div class="row">
                                     <h:panelGroup layout="block" class="col-xs-12 col-md-4 go-top">
                                         <h:selectOneMenu class="col-xs-12"
+                                                         id="orcamento"
                                                          value="#{mbCadastroVenda.venda.idOrcamento}">
                                             <f:selectItem/>
                                             <f:selectItems value="#{mbCadastroVenda.orcamentos}"
                                                            var="orcamento"
                                                            itemValue="#{orcamento.id}"
                                                            itemLabel="#{orcamento.id} - #{orcamento.cliente.pessoa.nomeFantasia} - #{orcamento.veiculoOrcamento.modeloVeiculo.nome}"/>
-                                            <f:ajax execute="@this" render="@form"
-                                                    listener="#{mbCadastroVenda.selecionarOrcamento(orcamento.id)}"/>
+                                            <f:ajax execute="@this orcamento" render="@form"
+                                                    listener="#{mbCadastroVenda.selecionarOrcamento()}"/>
                                         </h:selectOneMenu>
                                         <label>Orçamento</label>
                                     </h:panelGroup>

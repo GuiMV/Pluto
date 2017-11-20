@@ -123,10 +123,12 @@ public class MbCadastroVenda extends BasicMb {
         venda.getItemVendaList().remove(itemOrcamentoDelete);
     }
 
-    public void selecionarOrcamento(Long idOrcamento) {
+    public void selecionarOrcamento() {
+        Long idOrcamento = venda.getIdOrcamento();
         novaVenda();
         if(nonNull(idOrcamento)){
             Orcamento orcamento = orcamentoDao.get(idOrcamento);
+            venda.setIdOrcamento(idOrcamento);
             venda.setCliente(orcamento.getCliente());
             venda.setDescricao(orcamento.getDescricao());
 
