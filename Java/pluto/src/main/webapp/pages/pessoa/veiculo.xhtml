@@ -8,7 +8,7 @@
     <f:validateBean disabled="true">
         <h:panelGroup layout="block" id="veiculo">
             <div class="row">
-                <div class="col-xs-12 col-md-2 col-lg-2 go-top">
+                <div class="col-xs-12 col-md-4 col-lg-2 go-top">
                     <h:selectOneMenu class="col-xs-12"
                                      id="fabricante"
                                      value="#{mbPessoa.idFabricante}">
@@ -20,7 +20,7 @@
                     </h:selectOneMenu>
                     <label>Fabricante</label>
                 </div>
-                <div class="col-xs-12 col-md-2 col-lg-5 go-top">
+                <div class="col-xs-12 col-md-3 col-lg-3 go-top">
                     <h:selectOneMenu class="col-xs-12"
                                      id="modelo"
                                      value="#{mbPessoa.pessoaVeiculo.modeloVeiculo}"
@@ -32,7 +32,7 @@
                     </h:selectOneMenu>
                     <label>Modelo</label>
                 </div>
-                <div class="col-xs-12 col-md-2 col-lg-2 go-top">
+                <div class="col-xs-12 col-md-3 col-lg-2 go-top">
                     <h:selectOneMenu class="col-xs-12"
                                      converter="omnifaces.SelectItemsConverter"
                                      value="#{mbPessoa.pessoaVeiculo.cor}">

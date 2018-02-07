@@ -8,10 +8,11 @@ public class CustomExceptionHandlerFactory extends ExceptionHandlerFactory {
 
     private final ExceptionHandlerFactory parent;
 
-    public CustomExceptionHandlerFactory(ExceptionHandlerFactory parent) {
-        this.parent = parent;
+    public CustomExceptionHandlerFactory(ExceptionHandlerFactory wrapped) {
+        super(wrapped);
+        parent = wrapped;
     }
- 
+
     @Override
     public ExceptionHandler getExceptionHandler() {
         return new CustomExceptionHandler(parent.getExceptionHandler());

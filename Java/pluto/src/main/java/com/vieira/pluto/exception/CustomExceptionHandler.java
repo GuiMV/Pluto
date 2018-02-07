@@ -33,8 +33,11 @@ public class CustomExceptionHandler extends ExceptionHandlerWrapper {
     final NavigationHandler navigationHandler = facesContext.getApplication().getNavigationHandler();
 
     //Declara o construtor que recebe uma exceptio do tipo ExceptionHandler como parâmetro
-    CustomExceptionHandler(ExceptionHandler exception) {
-        this.wrapped = exception;
+
+
+    public CustomExceptionHandler(ExceptionHandler wrapped) {
+        super(wrapped);
+        this.wrapped = wrapped;
         this.persistenceUtil = CDI.current().select(PersistenceUtil.class).get();
     }
 
